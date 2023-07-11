@@ -1,3 +1,1 @@
-export const Setting = {
-  PlaceCardNumber: 5
-};
+export const PLACE_CARD_NUMBER = 5;
