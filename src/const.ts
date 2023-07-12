@@ -8,4 +8,10 @@ const AppPaths = {
   NotFound: '*',
 } as const;
 
-export {PLACE_CARD_NUMBER, AppPaths};
+const AuthorisationStatus = {
+  Auth: 'AUTH',
+  NoAuth: 'NO_AUTH',
+  Unknown: 'UNKNOWN'
+} as const;
+
+export {PLACE_CARD_NUMBER, AppPaths, AuthorisationStatus};
