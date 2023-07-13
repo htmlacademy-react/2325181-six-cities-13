@@ -34,7 +34,7 @@ export default function App ({placeCardNumber}: AppProps): JSX.Element {
         />
         <Route
           path={AppPaths.Offer}
-          element={<OfferPage />}
+          element={<OfferPage authorisationStatus={AuthorisationStatus.Auth} />}
         />
         <Route
           path={AppPaths.NotFound}
