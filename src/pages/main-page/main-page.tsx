@@ -39,7 +39,7 @@ export default function MainPage({placeCardNumber}: MainPageProps): JSX.Element 
               <b className="places__found">{placeCardNumber} places to stay in Amsterdam</b>
               <Sort />
               <div className="cities__places-list places__list tabs__content">
-                {[...Array(placeCardNumber).keys()].map((placeCard) => <PlaceCard key={placeCard}></PlaceCard>
+                {[...Array(placeCardNumber).keys()].map((placeCard) => <PlaceCard key={placeCard} />
                 )}
 
               </div>
