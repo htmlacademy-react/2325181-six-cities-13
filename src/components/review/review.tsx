@@ -2,9 +2,10 @@ import { Fragment } from 'react';
 import {StarRating} from '../../const';
 
 type RatingDiagramProps = {
-  star: string;
-  description: string;
+  star: typeof StarRating[number]['star'];
+  description: typeof StarRating[number]['description'];
 }
+
 
 function RatingDiagram ({star, description}: RatingDiagramProps): JSX.Element {
   return (
