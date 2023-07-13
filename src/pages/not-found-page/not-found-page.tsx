@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import { Fragment } from 'react';
+import { AppPaths } from '../../const';
 
 export default function NotFoundPage (): JSX.Element {
   return (
@@ -9,7 +10,7 @@ export default function NotFoundPage (): JSX.Element {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Link className="header__logo-link" to="/">
+                <Link className="header__logo-link" to={AppPaths.Main}>
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
                 </Link>
               </div>
@@ -20,7 +21,7 @@ export default function NotFoundPage (): JSX.Element {
       </div>
       <main className="page__main">
         <h1>404.Страница которую вы запрашиваете не найдена.</h1>
-        <Link to='/'>Вернуться на главную страницу</Link>
+        <Link to={AppPaths.Main}>Вернуться на главную страницу</Link>
       </main>
     </Fragment>
   );
