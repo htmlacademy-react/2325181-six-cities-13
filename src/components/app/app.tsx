@@ -10,9 +10,11 @@ import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   placeCardNumber: number;
+
 }
 
 export default function App ({placeCardNumber}: AppProps): JSX.Element {
+  const authorisationStatus = AuthorisationStatus.NoAuth;
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +25,7 @@ export default function App ({placeCardNumber}: AppProps): JSX.Element {
         <Route
           path={AppPaths.Favorites}
           element={
-            <PrivateRoute authorisationStatus={AuthorisationStatus.NoAuth}>
+            <PrivateRoute authorisationStatus={authorisationStatus}>
               <FavoritesPage />
             </PrivateRoute>
           }
@@ -34,7 +36,7 @@ export default function App ({placeCardNumber}: AppProps): JSX.Element {
         />
         <Route
           path={AppPaths.Offer}
-          element={<OfferPage authorisationStatus={AuthorisationStatus.Auth} />}
+          element={<OfferPage authorisationStatus={authorisationStatus} />}
         />
         <Route
           path={AppPaths.NotFound}

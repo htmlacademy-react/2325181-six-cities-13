@@ -1,37 +1,23 @@
 import { Fragment } from 'react';
 import {StarRating} from '../../const';
 
-type RatingDiagramProps = {
-  star: typeof StarRating[number]['star'];
-  description: typeof StarRating[number]['description'];
-}
-
-
-function RatingDiagram ({star, description}: RatingDiagramProps): JSX.Element {
-  return (
-    <Fragment>
-      <input className="form__rating-input visually-hidden" name="rating" value={star} id={star.concat('-stars')} type="radio"/>
-      <label htmlFor={star.concat('-stars')} className="reviews__rating-label form__rating-label" title={description}>
-        <svg className="form__star-image" width="37" height="33">
-          <use xlinkHref="#icon-star"></use>
-        </svg>
-      </label>
-    </Fragment>
-  );
-}
-
 export default function Review ():JSX.Element {
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {StarRating.map((rate) => (
-          <RatingDiagram
-            star={rate.star}
-            description={rate.description}
-            key={rate.star}
-          />
-        ))}
+        {StarRating.map(
+          ({star, description}) => (
+            <Fragment key={star}>
+              <input className="form__rating-input visually-hidden" name="rating" value={star} id={star.concat('-stars')} type="radio"/>
+              <label htmlFor={star.concat('-stars')} className="reviews__rating-label form__rating-label" title={description}>
+                <svg className="form__star-image" width="37" height="33">
+                  <use xlinkHref="#icon-star"></use>
+                </svg>
+              </label>
+            </Fragment>
+          )
+        )}
       </div>
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
       <div className="reviews__button-wrapper">
