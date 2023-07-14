@@ -10,7 +10,6 @@ import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   placeCardNumber: number;
-
 }
 
 export default function App ({placeCardNumber}: AppProps): JSX.Element {
