@@ -17,7 +17,13 @@ export default function MainPage({placeCardNumber}: MainPageProps): JSX.Element 
           <div className="header__wrapper">
             <div className="header__left">
               <a className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                <img
+                  className="header__logo"
+                  src="img/logo.svg"
+                  alt="6 cities logo"
+                  width="81"
+                  height="41"
+                />
               </a>
             </div>
             <SignIn />
@@ -39,7 +45,7 @@ export default function MainPage({placeCardNumber}: MainPageProps): JSX.Element 
               <b className="places__found">{placeCardNumber} places to stay in Amsterdam</b>
               <Sort />
               <div className="cities__places-list places__list tabs__content">
-                {[...Array(placeCardNumber).keys()].map((placeCard) => <PlaceCard key={placeCard}></PlaceCard>
+                {[...Array(placeCardNumber).keys()].map((placeCard) => <PlaceCard key={placeCard} />
                 )}
 
               </div>
