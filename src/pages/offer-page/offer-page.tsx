@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
-import { AppPaths, AuthorisationStatus } from '../../const';
+import { AppPath, AuthorisationStatus } from '../../const';
 import Review from '../../components/review/review';
 
 type OfferPageProps = {
   authorisationStatus: typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 }
 
-export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.Element {
+export default function OfferPage({ authorisationStatus }: OfferPageProps): JSX.Element {
 
   return (
     <div className="page">
@@ -15,8 +15,14 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className="header__logo-link" to={AppPaths.Main}>
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+              <Link className="header__logo-link" to={AppPath.Main}>
+                <img
+                  className="header__logo"
+                  src="img/logo.svg"
+                  alt="6 cities logo"
+                  width="81"
+                  height="41"
+                />
               </Link>
             </div>
             <SignIn />
@@ -29,22 +35,22 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/room.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio" />
               </div>
               <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
+                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
               </div>
             </div>
           </div>
@@ -66,7 +72,7 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{ width: '80%' }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">4.8</span>
@@ -125,7 +131,13 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                    <img
+                      className="offer__avatar user__avatar"
+                      src="img/avatar-angelina.jpg"
+                      width="74"
+                      height="74"
+                      alt="Host avatar"
+                    />
                   </div>
                   <span className="offer__user-name">
                     Angelina
@@ -149,7 +161,13 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
                   <li className="reviews__item">
                     <div className="reviews__user user">
                       <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
+                        <img
+                          className="reviews__avatar user__avatar"
+                          src="img/avatar-max.jpg"
+                          width="54"
+                          height="54"
+                          alt="Reviews avatar"
+                        />
                       </div>
                       <span className="reviews__user-name">
                         Max
@@ -158,7 +176,7 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}></span>
+                          <span style={{ width: '80%' }}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -182,7 +200,13 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
+                    <img
+                      className="place-card__image"
+                      src="img/room.jpg"
+                      width="260"
+                      height="200"
+                      alt="Place image"
+                    />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -200,7 +224,7 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
+                      <span style={{ width: '80%' }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -214,7 +238,7 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
+                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -232,7 +256,7 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
+                      <span style={{ width: '80%' }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -249,7 +273,13 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
                 </div>
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
+                    <img
+                      className="place-card__image"
+                      src="img/apartment-03.jpg"
+                      width="260"
+                      height="200"
+                      alt="Place image"
+                    />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -267,7 +297,7 @@ export default function OfferPage ({authorisationStatus}: OfferPageProps): JSX.E
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '100%'}}></span>
+                      <span style={{ width: '100%' }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>

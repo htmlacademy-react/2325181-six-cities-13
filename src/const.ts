@@ -1,6 +1,6 @@
 const PLACE_CARD_NUMBER = 5;
 
-const AppPaths = {
+const AppPath = {
   Main: '/',
   Login: '/login',
   Favorites: '/favorites',
@@ -14,7 +14,7 @@ const AuthorisationStatus = {
   Unknown: 'UNKNOWN'
 } as const;
 
-const StarRating = [
+const StarRatings = [
   {
     star: '5',
     description: 'perfect'
@@ -37,4 +37,4 @@ const StarRating = [
   },
 ] as const;
 
-export {PLACE_CARD_NUMBER, AppPaths, AuthorisationStatus, StarRating};
+export {PLACE_CARD_NUMBER, AppPath, AuthorisationStatus, StarRatings};

@@ -1,6 +1,6 @@
 import MainPage from '../../pages/main-page/main-page';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import { AppPaths, AuthorisationStatus } from '../../const';
+import { AppPath, AuthorisationStatus } from '../../const';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
@@ -19,11 +19,11 @@ export default function App ({placeCardNumber}: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route
-          path={AppPaths.Main}
+          path={AppPath.Main}
           element={<MainPage placeCardNumber={placeCardNumber} />}
         />
         <Route
-          path={AppPaths.Favorites}
+          path={AppPath.Favorites}
           element={
             <PrivateRoute authorisationStatus={authorisationStatus}>
               <FavoritesPage />
@@ -31,15 +31,15 @@ export default function App ({placeCardNumber}: AppProps): JSX.Element {
           }
         />
         <Route
-          path={AppPaths.Login}
+          path={AppPath.Login}
           element={<LoginPage />}
         />
         <Route
-          path={AppPaths.Offer}
+          path={AppPath.Offer}
           element={<OfferPage authorisationStatus={authorisationStatus} />}
         />
         <Route
-          path={AppPaths.NotFound}
+          path={AppPath.NotFound}
           element={<NotFoundPage />}
         />
 

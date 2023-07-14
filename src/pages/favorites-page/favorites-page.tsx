@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
-import { AppPaths } from '../../const';
+import { AppPath } from '../../const';
 
 export default function FavoritesPage (): JSX.Element {
   return (
@@ -9,8 +9,14 @@ export default function FavoritesPage (): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className="header__logo-link" to={AppPaths.Main}>
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+              <Link className="header__logo-link" to={AppPath.Main}>
+                <img
+                  className="header__logo"
+                  src="img/logo.svg"
+                  alt="6 cities logo"
+                  width="81"
+                  height="41"
+                />
               </Link>
             </div>
             <SignIn />
@@ -70,7 +76,13 @@ export default function FavoritesPage (): JSX.Element {
                   <article className="favorites__card place-card">
                     <div className="favorites__image-wrapper place-card__image-wrapper">
                       <a href="#">
-                        <img className="place-card__image" src="img/room-small.jpg" width="150" height="110" alt="Place image"/>
+                        <img
+                          className="place-card__image"
+                          src="img/room-small.jpg"
+                          width="150"
+                          height="110"
+                          alt="Place image"
+                        />
                       </a>
                     </div>
                     <div className="favorites__card-info place-card__info">
@@ -113,7 +125,13 @@ export default function FavoritesPage (): JSX.Element {
                   <article className="favorites__card place-card">
                     <div className="favorites__image-wrapper place-card__image-wrapper">
                       <a href="#">
-                        <img className="place-card__image" src="img/apartment-small-04.jpg" width="150" height="110" alt="Place image"/>
+                        <img
+                          className="place-card__image"
+                          src="img/apartment-small-04.jpg"
+                          width="150"
+                          height="110"
+                          alt="Place image"
+                        />
                       </a>
                     </div>
                     <div className="favorites__card-info place-card__info">
@@ -148,8 +166,14 @@ export default function FavoritesPage (): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <Link className="footer__logo-link" to={AppPaths.Main}>
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
+        <Link className="footer__logo-link" to={AppPath.Main}>
+          <img
+            className="footer__logo"
+            src="img/logo.svg"
+            alt="6 cities logo"
+            width="64"
+            height="33"
+          />
         </Link>
       </footer>
     </div>
