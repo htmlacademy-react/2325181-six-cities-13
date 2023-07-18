@@ -1,17 +1,21 @@
 import { Navigate } from 'react-router-dom';
-import { ReactNode } from 'react';
-import { AppPath, AuthorisationStatus } from '../../const';
-import type { AuthorisationStatusType} from '../../types/types';
+import { ReactNode, PropsWithChildren } from 'react';
+import { AppPath, AuthorisationStatus, RequestPage } from '../../const';
+import type { AuthorisationStatusType, RequestPageType} from '../../types/types';
 
-type PrivateRouteProps = {
+type PrivateRouteProps = PropsWithChildren<{
   authorisationStatus: AuthorisationStatusType;
-  children: ReactNode;
-}
+  requestPage: RequestPageType;
+}>
 
-export default function PrivateRoute ({authorisationStatus, children}: PrivateRouteProps): ReactNode {
+export default function PrivateRoute ({authorisationStatus, requestPage, children}: PrivateRouteProps): ReactNode {
+  const isAuthorised = authorisationStatus === AuthorisationStatus.Auth;
+  const isFavoritesRequested = requestPage === RequestPage.Favorites;
   return (
-    authorisationStatus === AuthorisationStatus.Auth
+    isAuthorised && isFavoritesRequested ||
+    !isAuthorised && !isFavoritesRequested
       ? children
-      : <Navigate to={AppPath.Login}></Navigate>
+      : !isAuthorised && <Navigate to={AppPath.Login}></Navigate> ||
+        isAuthorised && <Navigate to={AppPath.Main}></Navigate>
   );
 }

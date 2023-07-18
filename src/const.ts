@@ -81,4 +81,9 @@ const PremiumPrefix = {
 
 const REVIEW_TEXT_MIN_LENGTH = 50;
 
-export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, CardFormat, PremiumPrefix, REVIEW_TEXT_MIN_LENGTH };
+const RequestPage = {
+  Favorites: 'favorites',
+  Login: 'login'
+} as const;
+
+export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, CardFormat, PremiumPrefix, REVIEW_TEXT_MIN_LENGTH, RequestPage };
