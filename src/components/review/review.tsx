@@ -1,8 +1,9 @@
-import { Fragment } from 'react';
-import {StarRatings} from '../../const';
+import { Fragment, useState } from 'react';
+import {REVIEW_TEXT_MIN_LENGTH, StarRatings} from '../../const';
+
 
 export default function Review ():JSX.Element {
-
+  const [reviewText, setReviewText] = useState('');
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -23,7 +24,15 @@ export default function Review ():JSX.Element {
           }
         )}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea
+        className="reviews__textarea form__textarea"
+        id="review" value={reviewText}
+        onChange={(evt) => setReviewText(evt.target.value)}
+        name="review"
+        placeholder="Tell how was your stay, what you like and what can be improved"
+        minLength={REVIEW_TEXT_MIN_LENGTH}
+      >
+      </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.

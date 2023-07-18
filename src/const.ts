@@ -79,5 +79,6 @@ const PremiumPrefix = {
   PlaceCard: 'place-card'
 } as const;
 
+const REVIEW_TEXT_MIN_LENGTH = 50;
 
-export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, CardFormat, PremiumPrefix };
+export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, CardFormat, PremiumPrefix, REVIEW_TEXT_MIN_LENGTH };
