@@ -1,12 +1,13 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
+import Logo from '../../components/logo/logo';
 import Location from '../../components/location/location';
 import Sort from '../../components/sort/sort';
 import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
 import { OffersType } from '../../types/types';
-import { Link } from 'react-router-dom';
 import { AppPath } from '../../const';
-import { useState } from 'react';
 
 
 type MainPageProps = {
@@ -27,13 +28,7 @@ export default function MainPage({offers}: MainPageProps): JSX.Element {
                 onMouseLeave={() => setActiveLogo('--active')}
                 to={AppPath.Main}
               >
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width="81"
-                  height="41"
-                />
+                <Logo />
               </Link>
             </div>
             <SignIn />

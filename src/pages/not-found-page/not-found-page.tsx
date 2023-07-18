@@ -1,5 +1,6 @@
 import {Link, NavLink} from 'react-router-dom';
 import { AppPath } from '../../const';
+import Logo from '../../components/logo/logo';
 
 export default function NotFoundPage (): JSX.Element {
   return (
@@ -10,13 +11,7 @@ export default function NotFoundPage (): JSX.Element {
             <div className="header__wrapper">
               <div className="header__left">
                 <NavLink className="header__logo-link" to={AppPath.Main}>
-                  <img
-                    className="header__logo"
-                    src="img/logo.svg"
-                    alt="6 cities logo"
-                    width="81"
-                    height="41"
-                  />
+                  <Logo />
                 </NavLink>
               </div>
             </div>

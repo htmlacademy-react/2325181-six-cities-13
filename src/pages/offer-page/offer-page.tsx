@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
 import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
+import Logo from '../../components/logo/logo';
 import { AppPath, AuthorisationStatus, PremiumPrefix } from '../../const';
 import { AuthorisationStatusType, OffersType, ReviewsType } from '../../types/types';
 import { getRatingWidth } from '../../helper';
@@ -25,13 +26,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
             <div className="header__wrapper">
               <div className="header__left">
                 <Link className="header__logo-link" to={AppPath.Main}>
-                  <img
-                    className="header__logo"
-                    src="img/logo.svg"
-                    alt="6 cities logo"
-                    width="81"
-                    height="41"
-                  />
+                  <Logo />
                 </Link>
               </div>
               <SignIn />
@@ -204,7 +199,13 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                 <article className="near-places__card place-card">
                   <div className="near-places__image-wrapper place-card__image-wrapper">
                     <a href="#">
-                      <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
+                      <img
+                        className="place-card__image"
+                        src="img/apartment-02.jpg"
+                        width="260"
+                        height="200"
+                        alt="Place image"
+                      />
                     </a>
                   </div>
                   <div className="place-card__info">

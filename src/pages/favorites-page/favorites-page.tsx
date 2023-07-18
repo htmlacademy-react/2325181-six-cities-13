@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
 import PlaceCard from '../../components/place-card/place-card';
+import Logo from '../../components/logo/logo';
 import { AppPath, CardFormat } from '../../const';
 import { OffersType } from '../../types/types';
 
@@ -16,13 +17,7 @@ export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Elemen
           <div className="header__wrapper">
             <div className="header__left">
               <Link className="header__logo-link" to={AppPath.Main}>
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width="81"
-                  height="41"
-                />
+                <Logo />
               </Link>
             </div>
             <SignIn />
@@ -55,13 +50,7 @@ export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Elemen
       </main>
       <footer className="footer container">
         <Link className="footer__logo-link" to={AppPath.Main}>
-          <img
-            className="footer__logo"
-            src="img/logo.svg"
-            alt="6 cities logo"
-            width="64"
-            height="33"
-          />
+          <Logo isFooterLogo />
         </Link>
       </footer>
     </div>
