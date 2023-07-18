@@ -6,26 +6,28 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
+import {Offers, Reviews} from '../../types/types';
 
 
 type AppProps = {
-  placeCardNumber: number;
+  offers: Offers;
+  reviews: Reviews;
 }
 
-export default function App ({placeCardNumber}: AppProps): JSX.Element {
-  const authorisationStatus = AuthorisationStatus.NoAuth;
+export default function App ({ offers, reviews}: AppProps): JSX.Element {
+  const authorisationStatus = AuthorisationStatus.Auth;
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppPath.Main}
-          element={<MainPage placeCardNumber={placeCardNumber} />}
+          element={<MainPage offers={offers} />}
         />
         <Route
           path={AppPath.Favorites}
           element={
             <PrivateRoute authorisationStatus={authorisationStatus}>
-              <FavoritesPage />
+              <FavoritesPage offers={offers} />
             </PrivateRoute>
           }
         />

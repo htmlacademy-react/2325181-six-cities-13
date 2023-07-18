@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
 import { AppPath, AuthorisationStatus } from '../../const';
 import Review from '../../components/review/review';
+import { AuthorisationStatusType } from '../../types/types';
 
-type OfferPageProps = {
-  authorisationStatus: typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
-}
+type OfferPageProps = AuthorisationStatusType;
 
 export default function OfferPage({ authorisationStatus }: OfferPageProps): JSX.Element {
 

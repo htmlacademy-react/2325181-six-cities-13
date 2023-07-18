@@ -1,15 +1,16 @@
-import PlaceCard from '../../components/place-card/place-card';
 import SignIn from '../../components/sign-in/sign-in';
 import Location from '../../components/location/location';
 import Sort from '../../components/sort/sort';
 import Map from '../../components/map/map';
+import CardList from '../../components/card-list/card-list';
+import { Offers } from '../../types/types';
 
 
 type MainPageProps = {
-  placeCardNumber: number;
+  offers: Offers;
 }
 
-export default function MainPage({placeCardNumber}: MainPageProps): JSX.Element {
+export default function MainPage({offers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -42,12 +43,10 @@ export default function MainPage({placeCardNumber}: MainPageProps): JSX.Element 
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placeCardNumber} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sort />
               <div className="cities__places-list places__list tabs__content">
-                {[...Array(placeCardNumber).keys()].map((placeCard) => <PlaceCard key={placeCard} />
-                )}
-
+                <CardList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">

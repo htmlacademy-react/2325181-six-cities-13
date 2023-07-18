@@ -1,5 +1,3 @@
-const PLACE_CARD_NUMBER = 5;
-
 const AppPath = {
   Main: '/',
   Login: '/login',
@@ -37,4 +35,14 @@ const StarRatings = [
   },
 ] as const;
 
-export {PLACE_CARD_NUMBER, AppPath, AuthorisationStatus, StarRatings};
+const AVATAR_URL = 'https://i.pravatar.cc/128';
+
+const Locations = [
+  'Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'
+] as const;
+
+const OfferTypes = [
+  'room', 'apartment', 'house', 'hotel'
+] as const;
+
+export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, OfferTypes };
