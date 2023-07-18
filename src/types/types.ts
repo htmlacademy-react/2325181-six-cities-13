@@ -1,27 +1,23 @@
-import { AuthorisationStatus, Locations, OfferTypes } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds } from '../const';
 
 export type AuthorisationStatusType = {
   authorisationStatus: typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 };
 
-export type Locations = Location[];
+export type LocationType = typeof Locations[keyof typeof Locations];
 
-export type Location = typeof Locations[number];
+export type LodgingType = typeof LodgingKinds[keyof typeof LodgingKinds];
 
-export type OfferTypes = OfferType[];
+export type OffersType = OfferType[];
 
-export type OfferType = typeof OfferTypes[number];
-
-export type Offers = Offer[];
-
-export type Offer = {
+export type OfferType = {
   id: string;
   title: string;
-  type: OfferType;
+  type: LodgingType;
   price: number;
   previewImage: string;
   city: {
-    name: Location;
+    name: LocationType;
     location: {
       latitude: number;
       longitude: number;
@@ -48,7 +44,7 @@ export type Offer = {
   maxAdults: number;
 };
 
-export type Review = {
+export type ReviewType = {
   id: string;
   comment: string;
   date: string;
@@ -60,4 +56,4 @@ export type Review = {
   };
 }
 
-export type Reviews = Review [];
+export type ReviewsType = ReviewType [];

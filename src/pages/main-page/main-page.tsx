@@ -3,11 +3,11 @@ import Location from '../../components/location/location';
 import Sort from '../../components/sort/sort';
 import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
-import { Offers } from '../../types/types';
+import { OffersType } from '../../types/types';
 
 
 type MainPageProps = {
-  offers: Offers;
+  offers: OffersType;
 }
 
 export default function MainPage({offers}: MainPageProps): JSX.Element {

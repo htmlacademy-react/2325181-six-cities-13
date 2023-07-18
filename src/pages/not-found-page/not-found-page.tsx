@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import { AppPath } from '../../const';
 
 export default function NotFoundPage (): JSX.Element {
@@ -9,7 +9,7 @@ export default function NotFoundPage (): JSX.Element {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Link className="header__logo-link" to={AppPath.Main}>
+                <NavLink className="header__logo-link" to={AppPath.Main}>
                   <img
                     className="header__logo"
                     src="img/logo.svg"
@@ -17,7 +17,7 @@ export default function NotFoundPage (): JSX.Element {
                     width="81"
                     height="41"
                   />
-                </Link>
+                </NavLink>
               </div>
             </div>
           </div>

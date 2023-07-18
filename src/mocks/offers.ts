@@ -1,15 +1,15 @@
-import { AVATAR_URL } from '../const';
-import { Offers } from '../types/types';
+import { AVATAR_URL, Locations, LodgingKinds } from '../const';
+import { OffersType } from '../types/types';
 
-const Offers: Offers = [
+const Offers: OffersType = [
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Beautiful & luxurious studio at great location',
-    type: 'apartment',
+    type: LodgingKinds.Aparment,
     price: 120,
     previewImage: 'https://13.design.pages.academy/static/hotel/12.jpg',
     city: {
-      name: 'Paris',
+      name: Locations.Paris,
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -42,11 +42,11 @@ const Offers: Offers = [
   {
     id: '34f50f68-803c-43a9-8d59-9556fb9c0eaa',
     title: 'The house among olive ',
-    type: 'hotel',
+    type: LodgingKinds.Hotel,
     price: 197,
     previewImage: 'https://13.design.pages.academy/static/hotel/10.jpg',
     city: {
-      name: 'Paris',
+      name: Locations.Paris,
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -79,11 +79,11 @@ const Offers: Offers = [
   {
     id: '4b658388-7118-4e47-806a-fa5b0d41e8b0',
     title: 'Amazing and Extremely Central Flat',
-    type: 'apartment',
+    type: LodgingKinds.Aparment,
     price: 174,
     previewImage: 'https://13.design.pages.academy/static/hotel/18.jpg',
     city: {
-      name: 'Paris',
+      name: Locations.Paris,
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -96,7 +96,7 @@ const Offers: Offers = [
       zoom: 16
     },
     isFavorite: false,
-    isPremium: true,
+    isPremium: false,
     rating: 1.5,
     description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
     bedrooms: 2,
@@ -116,11 +116,11 @@ const Offers: Offers = [
   {
     id: 'c99c9239-7836-4115-a767-ee81c4b835ad',
     title: 'Amazing and Extremely Central Flat',
-    type: 'room',
+    type: LodgingKinds.Room,
     price: 224,
     previewImage: 'https://13.design.pages.academy/static/hotel/3.jpg',
     city: {
-      name: 'Paris',
+      name: Locations.Paris,
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -133,7 +133,7 @@ const Offers: Offers = [
       zoom: 16
     },
     isFavorite: true,
-    isPremium: false,
+    isPremium: true,
     rating: 2.7,
     description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     bedrooms: 1,

@@ -4,7 +4,9 @@ import { AppPath, AuthorisationStatus } from '../../const';
 import Review from '../../components/review/review';
 import { AuthorisationStatusType } from '../../types/types';
 
-type OfferPageProps = AuthorisationStatusType;
+type OfferPageProps = {
+  authorisationStatus: AuthorisationStatusType;
+};
 
 export default function OfferPage({ authorisationStatus }: OfferPageProps): JSX.Element {
 

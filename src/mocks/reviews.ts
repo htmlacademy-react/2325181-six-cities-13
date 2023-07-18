@@ -1,6 +1,6 @@
-import { Reviews } from '../types/types';
+import { ReviewsType } from '../types/types';
 
-const Reviews: Reviews = [
+const Reviews: ReviewsType = [
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
     comment: 'We loved it so much, the house, the veiw, the location just great.. Highly reccomend :)',

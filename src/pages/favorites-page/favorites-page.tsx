@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
 import PlaceCard from '../../components/place-card/place-card';
-import { AppPath } from '../../const';
-import { Offers } from '../../types/types';
+import { AppPath, CardFormat } from '../../const';
+import { OffersType } from '../../types/types';
 
 type FavoritesPageProps = {
-  offers: Offers;
+  offers: OffersType;
 }
 
 export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Element {
@@ -46,7 +46,7 @@ export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Elemen
                 <div className="favorites__places">
                   {offers
                     .filter((offer) => offer.isFavorite)
-                    .map((offer) => <PlaceCard key={offer.id} offer={offer} isFavoritePage />)}
+                    .map((offer) => <PlaceCard key={offer.id} offer={offer} cardFormat={CardFormat.favorites} />)}
                 </div>
               </li>
             </ul>

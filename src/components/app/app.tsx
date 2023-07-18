@@ -6,12 +6,12 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
-import {Offers, Reviews} from '../../types/types';
+import {OffersType, ReviewsType} from '../../types/types';
 
 
 type AppProps = {
-  offers: Offers;
-  reviews: Reviews;
+  offers: OffersType;
+  reviews: ReviewsType;
 }
 
 export default function App ({ offers, reviews}: AppProps): JSX.Element {

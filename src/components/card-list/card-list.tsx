@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Offers } from '../../types/types';
+import { OffersType } from '../../types/types';
+import { CardFormat } from '../../const';
 import PlaceCard from '../place-card/place-card';
 
 type CardListProps = {
-  offers: Offers;
+  offers: OffersType;
 }
 
 export default function CardList({offers}: CardListProps): JSX.Element {
@@ -12,7 +13,7 @@ export default function CardList({offers}: CardListProps): JSX.Element {
   return (
     <>
       {offers.map(
-        (offer) => <PlaceCard key={offer.id} offer={offer} isFavoritePage={false} onCardHover={() => setOfferId(offer.id)} onCardLeave={() => setOfferId('')} />
+        (offer) => <PlaceCard key={offer.id} offer={offer} cardFormat={CardFormat.cities} onCardHover={() => setOfferId(offer.id)} onCardLeave={() => setOfferId('')} />
       )}
     </>
   );
