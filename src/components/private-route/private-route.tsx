@@ -1,9 +1,12 @@
 import { Navigate } from 'react-router-dom';
-import { PropsWithChildren, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { AppPath, AuthorisationStatus } from '../../const';
 import type { AuthorisationStatusType} from '../../types/types';
 
-type PrivateRouteProps = PropsWithChildren<AuthorisationStatusType>
+type PrivateRouteProps = {
+  authorisationStatus: AuthorisationStatusType;
+  children: ReactNode;
+}
 
 export default function PrivateRoute ({authorisationStatus, children}: PrivateRouteProps): ReactNode {
   return (

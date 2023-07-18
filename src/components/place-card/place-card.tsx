@@ -1,31 +1,25 @@
 import { Link } from 'react-router-dom';
-import { AppPath, PlaceCardDesign, CardFormat} from '../../const';
+import PremiumTag from '../premium-tag/premium-tag';
+import { AppPath, PlaceCardDesign, CardFormat, PremiumPrefix} from '../../const';
 import { OfferType } from '../../types/types';
+import { getRatingWidth } from '../../helper';
+
 
 type PlaceCardProps = {
   offer: OfferType;
-  cardFormat: keyof typeof CardFormat;
+  cardFormat: typeof CardFormat[keyof typeof CardFormat];
   onCardHover?: () => void;
   onCardLeave?: () => void;
 }
 
-function PremiumTag ({isPremium}: {isPremium: boolean}): React.ReactNode {
-  if (isPremium) {
-    return (
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>);
-  }
-}
-
 export default function PlaceCard({offer, cardFormat, onCardHover, onCardLeave}: PlaceCardProps): JSX.Element {
-  const ratingWidth = `${offer.rating * 20}%`;
+  const ratingWidth = `${getRatingWidth(offer.rating)}`;
 
   return (
     <article className={`${PlaceCardDesign[cardFormat].cardClass}__card place-card`} onMouseEnter={onCardHover} onMouseLeave={onCardLeave}>
-      <PremiumTag isPremium={offer.isPremium} />
+      {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
       <div className={`${PlaceCardDesign[cardFormat].cardClass}__image-wrapper place-card__image-wrapper`}>
-        <Link to={AppPath.Offer}>
+        <Link to={`${AppPath.Offer}${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -55,7 +49,7 @@ export default function PlaceCard({offer, cardFormat, onCardHover, onCardLeave}:
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={AppPath.Offer}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

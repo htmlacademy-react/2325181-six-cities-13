@@ -27,7 +27,7 @@ const Offers: OffersType = [
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     bedrooms: 3,
     goods: [
-      'Heating'
+      'Heating', 'Wi-Fi', 'A/C'
     ],
     host: {
       name: 'Oliver Conner',
@@ -37,7 +37,7 @@ const Offers: OffersType = [
     images: [
       'img/apartment-01.jpg'
     ],
-    maxAdults: 4
+    maxAdults: 1
   },
   {
     id: '34f50f68-803c-43a9-8d59-9556fb9c0eaa',
@@ -64,7 +64,7 @@ const Offers: OffersType = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     bedrooms: 2,
     goods: [
-      'Microwave'
+      'Towels', 'Baby seat', 'Fridge'
     ],
     host: {
       name: 'Michael Daves',
@@ -72,7 +72,7 @@ const Offers: OffersType = [
       isPro: true
     },
     images: [
-      'https://loremflickr.com/apartment,Paris/all'
+      'https://loremflickr.com/320/240/apartment,Paris/all'
     ],
     maxAdults: 2
   },
@@ -101,7 +101,7 @@ const Offers: OffersType = [
     description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
     bedrooms: 2,
     goods: [
-      'Fridge'
+      'Microwave oven', 'Coffee machine', 'Washing machine'
     ],
     host: {
       name: 'Suzanne Vega',
@@ -109,7 +109,7 @@ const Offers: OffersType = [
       isPro: true
     },
     images: [
-      'https://loremflickr.com/apartment,Paris/all'
+      'https://loremflickr.com/320/240/apartment,Paris/all'
     ],
     maxAdults: 3
   },
@@ -138,7 +138,7 @@ const Offers: OffersType = [
     description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     bedrooms: 1,
     goods: [
-      'TV'
+      'Kitchen', 'Cabel TV', 'Kettle'
     ],
     host: {
       name: 'Ozzy Osborne',
@@ -146,7 +146,7 @@ const Offers: OffersType = [
       isPro: true
     },
     images: [
-      'https://loremflickr.com/apartment,Paris/all'
+      'https://loremflickr.com/320/240/apartment,Paris/all'
     ],
     maxAdults: 1
   }

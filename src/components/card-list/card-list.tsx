@@ -9,11 +9,10 @@ type CardListProps = {
 
 export default function CardList({offers}: CardListProps): JSX.Element {
   const [offerId, setOfferId] = useState('');
-  console.log(offerId);
   return (
     <>
       {offers.map(
-        (offer) => <PlaceCard key={offer.id} offer={offer} cardFormat={CardFormat.cities} onCardHover={() => setOfferId(offer.id)} onCardLeave={() => setOfferId('')} />
+        (offer) => <PlaceCard key={offer.id} offer={offer} cardFormat={CardFormat.Cities} onCardHover={() => setOfferId(offer.id)} onCardLeave={() => setOfferId('')} />
       )}
     </>
   );

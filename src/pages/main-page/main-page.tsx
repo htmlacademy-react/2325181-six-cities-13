@@ -4,6 +4,9 @@ import Sort from '../../components/sort/sort';
 import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
 import { OffersType } from '../../types/types';
+import { Link } from 'react-router-dom';
+import { AppPath } from '../../const';
+import { useState } from 'react';
 
 
 type MainPageProps = {
@@ -11,13 +14,19 @@ type MainPageProps = {
 }
 
 export default function MainPage({offers}: MainPageProps): JSX.Element {
+  const [activeLogo, setActiveLogo] = useState('--active');
   return (
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
+              <Link
+                className={`header__logo-link header__logo-link${activeLogo}`}
+                onMouseEnter={() => setActiveLogo('')}
+                onMouseLeave={() => setActiveLogo('--active')}
+                to={AppPath.Main}
+              >
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -25,7 +34,7 @@ export default function MainPage({offers}: MainPageProps): JSX.Element {
                   width="81"
                   height="41"
                 />
-              </a>
+              </Link>
             </div>
             <SignIn />
           </div>

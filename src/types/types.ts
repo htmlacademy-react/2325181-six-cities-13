@@ -1,8 +1,6 @@
-import { AuthorisationStatus, Locations, LodgingKinds } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix } from '../const';
 
-export type AuthorisationStatusType = {
-  authorisationStatus: typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
-};
+export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
 export type LocationType = typeof Locations[keyof typeof Locations];
 
@@ -57,3 +55,5 @@ export type ReviewType = {
 }
 
 export type ReviewsType = ReviewType [];
+
+export type PremiumPrefixType = typeof PremiumPrefix[keyof typeof PremiumPrefix];

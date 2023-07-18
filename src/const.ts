@@ -2,7 +2,8 @@ const AppPath = {
   Main: '/',
   Login: '/login',
   Favorites: '/favorites',
-  Offer: '/offer/:id',
+  Offer: '/offer/',
+  OfferId: ':id',
   NotFound: '*',
 } as const;
 
@@ -47,10 +48,10 @@ const Locations = {
 } as const;
 
 const LodgingKinds = {
-  Room: 'room',
-  Aparment: 'apartment',
-  House: 'house',
-  Hotel: 'hotel'
+  Room: 'Room',
+  Aparment: 'Apartment',
+  House: 'House',
+  Hotel: 'Hotel'
 } as const;
 
 const PlaceCardDesign = {
@@ -69,8 +70,14 @@ const PlaceCardDesign = {
 };
 
 const CardFormat = {
-  favorites: 'favorites',
-  cities: 'cities'
+  Favorites: 'favorites',
+  Cities: 'cities'
 } as const;
 
-export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, CardFormat };
+const PremiumPrefix = {
+  Offer: 'offer',
+  PlaceCard: 'place-card'
+} as const;
+
+
+export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, CardFormat, PremiumPrefix };

@@ -38,15 +38,15 @@ export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Elemen
               <li className="favorites__locations-items">
                 <div className="favorites__locations locations locations--current">
                   <div className="locations__item">
-                    <a className="locations__item-link" href="#">
+                    <Link className="locations__item-link" to={AppPath.Main}>
                       <span>Amsterdam</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="favorites__places">
                   {offers
                     .filter((offer) => offer.isFavorite)
-                    .map((offer) => <PlaceCard key={offer.id} offer={offer} cardFormat={CardFormat.favorites} />)}
+                    .map((offer) => <PlaceCard key={offer.id} offer={offer} cardFormat={CardFormat.Favorites} />)}
                 </div>
               </li>
             </ul>
