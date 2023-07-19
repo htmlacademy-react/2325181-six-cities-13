@@ -1,24 +1,20 @@
-import {useState} from 'react';
 import { Link} from 'react-router-dom';
 import { AppPath, Locations } from '../../const';
-import { LocationType } from '../../types/types';
+import { LocationType, ChangeLocationType } from '../../types/types';
 
-export default function Location(): JSX.Element {
-  const [activeLocation, setActiveLocation] = useState('Amsterdam');
-  const LocationClickHandler = (evt: React.MouseEvent<HTMLElement>) => {
-    evt.preventDefault();
-    const locationName = evt.currentTarget.textContent;
-    if (typeof locationName === 'string') {
-      setActiveLocation(locationName);
-    }
-  };
+type LocationProps = {
+  activeLocation: LocationType;
+  changeLocation: ChangeLocationType;
+}
+
+export default function Location({activeLocation, changeLocation}: LocationProps): JSX.Element {
   return (
     <ul className="locations__list tabs__list">
       {Object.values(Locations).map((location: LocationType) => (
         <li className="locations__item" key={location}>
           <Link
             className={`locations__item-link tabs__item ${location === activeLocation ? 'tabs__item--active' : ''}`}
-            onClick={LocationClickHandler}
+            onClick={() => changeLocation(location)}
             to={AppPath.Main}
           >
             <span>{location}</span>

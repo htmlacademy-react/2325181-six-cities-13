@@ -1,8 +1,17 @@
 import { Link } from 'react-router-dom';
-import { AppPath } from '../../const';
 import Logo from '../../components/logo/logo';
+import { AppPath, Locations } from '../../const';
 
-export default function LoginPage(): JSX.Element {
+import { getRandomArrayElement } from '../../helper';
+import { ChangeLocationType } from '../../types/types';
+
+type LoginPageProps = {
+  changeLocation: ChangeLocationType;
+}
+
+export default function LoginPage({changeLocation}: LoginPageProps): JSX.Element {
+  const locationsList = Object.values(Locations);
+  const randomLocation = getRandomArrayElement<typeof locationsList[number]>(locationsList);
   return (
     <div className="page page--gray page--login">
       <header className="header">
@@ -35,8 +44,11 @@ export default function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppPath.Main}>
-                <span>Amsterdam</span>
+              <Link className="locations__item-link"
+                onClick={() => changeLocation(randomLocation)}
+                to={AppPath.Main}
+              >
+                <span>{randomLocation}</span>
               </Link>
             </div>
           </section>

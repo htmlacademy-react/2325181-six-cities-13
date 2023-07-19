@@ -59,3 +59,5 @@ export type ReviewsType = ReviewType [];
 export type PremiumPrefixType = typeof PremiumPrefix[keyof typeof PremiumPrefix];
 
 export type RequestPageType = typeof RequestPage[keyof typeof RequestPage];
+
+export type ChangeLocationType = (location: LocationType) => void;

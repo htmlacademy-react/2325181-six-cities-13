@@ -72,7 +72,9 @@ const Offers: OffersType = [
       isPro: true
     },
     images: [
-      'https://loremflickr.com/320/240/apartment,Paris/all'
+      'https://loremflickr.com/320/240/hotel,Paris,reception/all',
+      'https://loremflickr.com/320/240/hotel,Paris,bed/all',
+      'https://loremflickr.com/320/240/hotel,Paris,restaurant/all'
     ],
     maxAdults: 2
   },
@@ -109,7 +111,9 @@ const Offers: OffersType = [
       isPro: true
     },
     images: [
-      'https://loremflickr.com/320/240/apartment,Paris/all'
+      'https://loremflickr.com/320/240/apartment,Paris,bed/all',
+      'https://loremflickr.com/320/240/apartment,Paris,kitchen/all',
+      'https://loremflickr.com/320/240/apartment,Paris,bathroom/all'
     ],
     maxAdults: 3
   },
@@ -146,7 +150,9 @@ const Offers: OffersType = [
       isPro: true
     },
     images: [
-      'https://loremflickr.com/320/240/apartment,Paris/all'
+      'https://loremflickr.com/320/240/room,Paris,bed/all',
+      'https://loremflickr.com/320/240/room,Paris,kitchen/all',
+      'https://loremflickr.com/320/240/room,Paris,bathroom/all'
     ],
     maxAdults: 1
   }

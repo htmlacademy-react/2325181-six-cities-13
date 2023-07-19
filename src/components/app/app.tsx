@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
@@ -6,7 +7,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { AppPath, AuthorisationStatus, RequestPage } from '../../const';
-import {OffersType, ReviewsType} from '../../types/types';
+import {OffersType, ReviewsType, LocationType, ChangeLocationType} from '../../types/types';
 
 
 type AppProps = {
@@ -16,12 +17,14 @@ type AppProps = {
 
 export default function App ({ offers, reviews}: AppProps): JSX.Element {
   const authorisationStatus = AuthorisationStatus.NoAuth;
+  const [activeLocation, setActiveLocation] = useState<LocationType>('Paris');
+  const changeLocation: ChangeLocationType = (location) => setActiveLocation(location);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppPath.Main}
-          element={<MainPage offers={offers} />}
+          element={<MainPage offers={offers} activeLocation={activeLocation} changeLocation={changeLocation} />}
         />
         <Route
           path={AppPath.Favorites}
@@ -35,7 +38,7 @@ export default function App ({ offers, reviews}: AppProps): JSX.Element {
           path={AppPath.Login}
           element={
             <PrivateRoute authorisationStatus={authorisationStatus} requestPage={RequestPage.Login}>
-              <LoginPage />
+              <LoginPage changeLocation={changeLocation} />
             </PrivateRoute>
           }
         />
