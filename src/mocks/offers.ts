@@ -9,7 +9,7 @@ const Offers: OffersType = [
     price: 120,
     previewImage: 'https://13.design.pages.academy/static/hotel/12.jpg',
     city: {
-      name: Locations.Paris,
+      name: Locations.Amsterdam,
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -85,7 +85,7 @@ const Offers: OffersType = [
     price: 174,
     previewImage: 'https://13.design.pages.academy/static/hotel/18.jpg',
     city: {
-      name: Locations.Paris,
+      name: Locations.Brussels,
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -97,7 +97,7 @@ const Offers: OffersType = [
       longitude: 2.330499,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 1.5,
     description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
@@ -124,7 +124,7 @@ const Offers: OffersType = [
     price: 224,
     previewImage: 'https://13.design.pages.academy/static/hotel/3.jpg',
     city: {
-      name: Locations.Paris,
+      name: Locations.Hamburg,
       location: {
         latitude: 48.85661,
         longitude: 2.351499,

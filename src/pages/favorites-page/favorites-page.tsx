@@ -2,14 +2,26 @@ import { Link } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
 import PlaceCard from '../../components/place-card/place-card';
 import Logo from '../../components/logo/logo';
-import { AppPath, CardFormat } from '../../const';
-import { OffersType } from '../../types/types';
+import { AppPath, CardFormat} from '../../const';
+import { OffersType, OfferType, ChangeLocationType, LocationType } from '../../types/types';
 
 type FavoritesPageProps = {
   offers: OffersType;
+  changeLocation: ChangeLocationType;
 }
 
-export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Element {
+type LocationReducerType = {
+  [name: string]: OffersType;
+};
+
+export default function FavoritesPage ({offers, changeLocation}: FavoritesPageProps): JSX.Element {
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  const groupByLocation = Object.entries(favoriteOffers.reduce((location: LocationReducerType, offer: OfferType) => {
+    const { name } = offer.city;
+    location[name] = location[name] ?? [];
+    location[name].push(offer);
+    return location;
+  }, {}));
   return (
     <div className="page">
       <header className="header">
@@ -27,25 +39,38 @@ export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Elemen
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <Link className="locations__item-link" to={AppPath.Main}>
-                      <span>Amsterdam</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  {offers
-                    .filter((offer) => offer.isFavorite)
-                    .map((offer) => <PlaceCard key={offer.id} offer={offer} cardFormat={CardFormat.Favorites} />)}
-                </div>
-              </li>
-            </ul>
-          </section>
+          { favoriteOffers.length ?
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
+              <ul className="favorites__list">
+                {groupByLocation.map(([locationName, locationOffers]) => (
+                  <li className="favorites__locations-items" key={locationName}>
+                    <div className="favorites__locations locations locations--current">
+                      <div className="locations__item">
+                        <Link className="locations__item-link"
+                          onClick={() => changeLocation(locationName as LocationType)}
+                          to={AppPath.Main}
+                        >
+                          <span>{locationName}</span>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="favorites__places">
+                      {locationOffers.map(
+                        (offer) => <PlaceCard key={offer.id} offer={offer} cardFormat={CardFormat.Favorites} />
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section> :
+            <section className="favorites favorites--empty">
+              <h1 className="visually-hidden">Favorites (empty)</h1>
+              <div className="favorites__status-wrapper">
+                <b className="favorites__status">Nothing yet saved.</b>
+                <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+              </div>
+            </section>}
         </div>
       </main>
       <footer className="footer container">

@@ -16,7 +16,7 @@ type AppProps = {
 }
 
 export default function App ({ offers, reviews}: AppProps): JSX.Element {
-  const authorisationStatus = AuthorisationStatus.NoAuth;
+  const authorisationStatus = AuthorisationStatus.Auth;
   const [activeLocation, setActiveLocation] = useState<LocationType>('Paris');
   const changeLocation: ChangeLocationType = (location) => setActiveLocation(location);
   return (
@@ -30,7 +30,7 @@ export default function App ({ offers, reviews}: AppProps): JSX.Element {
           path={AppPath.Favorites}
           element={
             <PrivateRoute authorisationStatus={authorisationStatus} requestPage={RequestPage.Favorites}>
-              <FavoritesPage offers={offers} />
+              <FavoritesPage offers={offers} changeLocation={changeLocation} />
             </PrivateRoute>
           }
         />
