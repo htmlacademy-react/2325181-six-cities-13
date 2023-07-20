@@ -8,7 +8,7 @@ type CardListProps = {
 }
 
 export default function CardList({offers}: CardListProps): JSX.Element {
-  const [offerId, setOfferId] = useState('');
+  const [, setOfferId] = useState('');
   return (
     <>
       {offers.map(

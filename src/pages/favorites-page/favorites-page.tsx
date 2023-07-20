@@ -7,14 +7,14 @@ import { OffersType, OfferType, ChangeLocationType, LocationType } from '../../t
 
 type FavoritesPageProps = {
   offers: OffersType;
-  changeLocation: ChangeLocationType;
+  onChangeLocation: ChangeLocationType;
 }
 
 type LocationReducerType = {
   [name: string]: OffersType;
 };
 
-export default function FavoritesPage ({offers, changeLocation}: FavoritesPageProps): JSX.Element {
+export default function FavoritesPage ({offers, onChangeLocation}: FavoritesPageProps): JSX.Element {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const groupByLocation = Object.entries(favoriteOffers.reduce((location: LocationReducerType, offer: OfferType) => {
     const { name } = offer.city;
@@ -48,7 +48,7 @@ export default function FavoritesPage ({offers, changeLocation}: FavoritesPagePr
                     <div className="favorites__locations locations locations--current">
                       <div className="locations__item">
                         <Link className="locations__item-link"
-                          onClick={() => changeLocation(locationName as LocationType)}
+                          onClick={() => onChangeLocation(locationName as LocationType)}
                           to={AppPath.Main}
                         >
                           <span>{locationName}</span>

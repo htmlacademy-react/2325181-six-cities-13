@@ -6,10 +6,10 @@ import { getRandomArrayElement } from '../../helper';
 import { ChangeLocationType } from '../../types/types';
 
 type LoginPageProps = {
-  changeLocation: ChangeLocationType;
+  onChangeLocation: ChangeLocationType;
 }
 
-export default function LoginPage({changeLocation}: LoginPageProps): JSX.Element {
+export default function LoginPage({onChangeLocation}: LoginPageProps): JSX.Element {
   const locationsList = Object.values(Locations);
   const randomLocation = getRandomArrayElement<typeof locationsList[number]>(locationsList);
   return (
@@ -45,7 +45,7 @@ export default function LoginPage({changeLocation}: LoginPageProps): JSX.Element
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <Link className="locations__item-link"
-                onClick={() => changeLocation(randomLocation)}
+                onClick={() => onChangeLocation(randomLocation)}
                 to={AppPath.Main}
               >
                 <span>{randomLocation}</span>

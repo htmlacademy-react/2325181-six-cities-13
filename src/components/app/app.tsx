@@ -18,19 +18,19 @@ type AppProps = {
 export default function App ({ offers, reviews}: AppProps): JSX.Element {
   const authorisationStatus = AuthorisationStatus.Auth;
   const [activeLocation, setActiveLocation] = useState<LocationType>('Paris');
-  const changeLocation: ChangeLocationType = (location) => setActiveLocation(location);
+  const onChangeLocation: ChangeLocationType = (location) => setActiveLocation(location);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppPath.Main}
-          element={<MainPage offers={offers} activeLocation={activeLocation} changeLocation={changeLocation} />}
+          element={<MainPage offers={offers} activeLocation={activeLocation} onChangeLocation={onChangeLocation} />}
         />
         <Route
           path={AppPath.Favorites}
           element={
             <PrivateRoute authorisationStatus={authorisationStatus} requestPage={RequestPage.Favorites}>
-              <FavoritesPage offers={offers} changeLocation={changeLocation} />
+              <FavoritesPage offers={offers} onChangeLocation={onChangeLocation} />
             </PrivateRoute>
           }
         />
@@ -38,7 +38,7 @@ export default function App ({ offers, reviews}: AppProps): JSX.Element {
           path={AppPath.Login}
           element={
             <PrivateRoute authorisationStatus={authorisationStatus} requestPage={RequestPage.Login}>
-              <LoginPage changeLocation={changeLocation} />
+              <LoginPage onChangeLocation={onChangeLocation} />
             </PrivateRoute>
           }
         />

@@ -13,10 +13,10 @@ import { AppPath } from '../../const';
 type MainPageProps = {
   offers: OffersType;
   activeLocation: LocationType;
-  changeLocation: ChangeLocationType;
+  onChangeLocation: ChangeLocationType;
 }
 
-export default function MainPage({offers, activeLocation, changeLocation}: MainPageProps): JSX.Element {
+export default function MainPage({offers, activeLocation, onChangeLocation}: MainPageProps): JSX.Element {
   const [activeLogo, setActiveLogo] = useState('--active');
   return (
     <div className="page page--gray page--main">
@@ -44,7 +44,7 @@ export default function MainPage({offers, activeLocation, changeLocation}: MainP
           <section className="locations container">
             <Location
               activeLocation={activeLocation}
-              changeLocation={changeLocation}
+              onChangeLocation={onChangeLocation}
             />
           </section>
         </div>
