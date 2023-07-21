@@ -1,37 +1,27 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import SignIn from '../../components/sign-in/sign-in';
 import Logo from '../../components/logo/logo';
 import Location from '../../components/location/location';
 import Sort from '../../components/sort/sort';
 import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
-import { ChangeLocationType, LocationType, OffersType } from '../../types/types';
-import { AppPath } from '../../const';
+import { OffersType } from '../../types/types';
 
 
 type MainPageProps = {
   offers: OffersType;
-  activeLocation: LocationType;
-  onChangeLocation: ChangeLocationType;
+
 }
 
-export default function MainPage({offers, activeLocation, onChangeLocation}: MainPageProps): JSX.Element {
-  const [activeLogo, setActiveLogo] = useState('--active');
+export default function MainPage({offers}: MainPageProps): JSX.Element {
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link
-                className={`header__logo-link header__logo-link${activeLogo}`}
-                onMouseEnter={() => setActiveLogo('')}
-                onMouseLeave={() => setActiveLogo('--active')}
-                to={AppPath.Main}
-              >
-                <Logo />
-              </Link>
+              <Logo />
             </div>
             <SignIn />
           </div>
@@ -42,17 +32,14 @@ export default function MainPage({offers, activeLocation, onChangeLocation}: Mai
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Location
-              activeLocation={activeLocation}
-              onChangeLocation={onChangeLocation}
-            />
+            <Location />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {activeLocation}</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sort />
               <div className="cities__places-list places__list tabs__content">
                 <CardList offers={offers} />

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
@@ -6,8 +5,8 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import { AppPath, AuthorisationStatus, RequestPage } from '../../const';
-import {OffersType, ReviewsType, LocationType, ChangeLocationType} from '../../types/types';
+import { AppPath, AuthorisationStatus } from '../../const';
+import {OffersType, ReviewsType } from '../../types/types';
 
 
 type AppProps = {
@@ -17,33 +16,27 @@ type AppProps = {
 
 export default function App ({ offers, reviews}: AppProps): JSX.Element {
   const authorisationStatus = AuthorisationStatus.Auth;
-  const [activeLocation, setActiveLocation] = useState<LocationType>('Paris');
-  const onChangeLocation: ChangeLocationType = (location) => setActiveLocation(location);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppPath.Main}
-          element={<MainPage offers={offers} activeLocation={activeLocation} onChangeLocation={onChangeLocation} />}
+          element={<MainPage offers={offers} />}
         />
         <Route
           path={AppPath.Favorites}
           element={
-            <PrivateRoute authorisationStatus={authorisationStatus} requestPage={RequestPage.Favorites}>
-              <FavoritesPage offers={offers} onChangeLocation={onChangeLocation} />
+            <PrivateRoute authorisationStatus={authorisationStatus}>
+              <FavoritesPage offers={offers} />
             </PrivateRoute>
           }
         />
         <Route
           path={AppPath.Login}
-          element={
-            <PrivateRoute authorisationStatus={authorisationStatus} requestPage={RequestPage.Login}>
-              <LoginPage onChangeLocation={onChangeLocation} />
-            </PrivateRoute>
-          }
+          element={<LoginPage authorisationStatus={authorisationStatus} />}
         />
         <Route
-          path={`${AppPath.Offer}${AppPath.OfferId}`}
+          path={AppPath.Offer}
           element={<OfferPage offers={offers} reviews={reviews} authorisationStatus={authorisationStatus} />}
         />
         <Route

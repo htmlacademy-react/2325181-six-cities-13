@@ -1,35 +1,34 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, generatePath } from 'react-router-dom';
 import PremiumTag from '../premium-tag/premium-tag';
-import { AppPath, PlaceCardDesign, CardFormat, PremiumPrefix} from '../../const';
-import { OfferType } from '../../types/types';
+import { AppPath, PlaceCardDesign, PremiumPrefix} from '../../const';
+import { OfferType, PlaceCardDesignType } from '../../types/types';
 import { getRatingWidth } from '../../helper';
 
 
 type PlaceCardProps = {
   offer: OfferType;
-  cardFormat: typeof CardFormat[keyof typeof CardFormat];
   onCardHover?: () => void;
   onCardLeave?: () => void;
 }
 
-export default function PlaceCard({offer, cardFormat, onCardHover, onCardLeave}: PlaceCardProps): JSX.Element {
+export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardProps): JSX.Element {
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
-
+  const path = useLocation().pathname as PlaceCardDesignType;
   return (
-    <article className={`${PlaceCardDesign[cardFormat].cardClass}__card place-card`} onMouseEnter={onCardHover} onMouseLeave={onCardLeave}>
+    <article className={`${PlaceCardDesign[path].cardClass}__card place-card`} onMouseEnter={onCardHover} onMouseLeave={onCardLeave}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
-      <div className={`${PlaceCardDesign[cardFormat].cardClass}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`${AppPath.Offer}${offer.id}`}>
+      <div className={`${PlaceCardDesign[path].cardClass}__image-wrapper place-card__image-wrapper`}>
+        <Link to={generatePath(AppPath.Offer, {id: offer.id})}>
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={PlaceCardDesign[cardFormat].cardWidth}
-            height={PlaceCardDesign[cardFormat].cardHeight}
+            width={PlaceCardDesign[path].cardWidth}
+            height={PlaceCardDesign[path].cardHeight}
             alt="Place image"
           />
         </Link>
       </div>
-      <div className={`${PlaceCardDesign[cardFormat].cardInfoClass} place-card__info`}>
+      <div className={`${PlaceCardDesign[path].cardInfoClass} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>

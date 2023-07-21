@@ -1,4 +1,4 @@
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, RequestPage } from '../const';
+import { PlaceCardDesign, AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -58,6 +58,10 @@ export type ReviewsType = ReviewType [];
 
 export type PremiumPrefixType = typeof PremiumPrefix[keyof typeof PremiumPrefix];
 
-export type RequestPageType = typeof RequestPage[keyof typeof RequestPage];
-
 export type ChangeLocationType = (location: LocationType) => void;
+
+export type PlaceCardDesignType = keyof typeof PlaceCardDesign;
+
+export type LocationReducerType = {
+  [name: string]: OffersType;
+};

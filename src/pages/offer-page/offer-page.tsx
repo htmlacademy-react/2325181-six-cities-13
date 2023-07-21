@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
 import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
@@ -25,9 +25,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Link className="header__logo-link" to={AppPath.Main}>
-                  <Logo />
-                </Link>
+                <Logo />
               </div>
               <SignIn />
             </div>

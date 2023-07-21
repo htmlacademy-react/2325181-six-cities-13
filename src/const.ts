@@ -2,8 +2,7 @@ const AppPath = {
   Main: '/',
   Login: '/login',
   Favorites: '/favorites',
-  Offer: '/offer/',
-  OfferId: ':id',
+  Offer: '/offer/:id',
   NotFound: '*',
 } as const;
 
@@ -55,13 +54,13 @@ const LodgingKinds = {
 } as const;
 
 const PlaceCardDesign = {
-  favorites: {
+  [AppPath.Favorites]: {
     cardClass: 'favorites',
     cardInfoClass: 'favorites__card-info',
     cardWidth: '150',
     cardHeight: '110'
   },
-  cities: {
+  [AppPath.Main]: {
     cardClass: 'cities',
     cardInfoClass: '',
     cardWidth: '260',
@@ -69,21 +68,25 @@ const PlaceCardDesign = {
   }
 };
 
-const CardFormat = {
-  Favorites: 'favorites',
-  Cities: 'cities'
-} as const;
-
 const PremiumPrefix = {
   Offer: 'offer',
   PlaceCard: 'place-card'
 } as const;
 
-const REVIEW_TEXT_MIN_LENGTH = 50;
+const ReviewValidationParameters = {
+  MinLength: 50,
+  MaxLength: 300,
+};
 
-const RequestPage = {
-  Favorites: 'favorites',
-  Login: 'login'
-} as const;
+const LogoSizes = {
+  Width : {
+    footer: '64',
+    header: '81'
+  },
+  Height: {
+    footer: '33',
+    header: '41'
+  }
+};
 
-export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, CardFormat, PremiumPrefix, REVIEW_TEXT_MIN_LENGTH, RequestPage };
+export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, PremiumPrefix, ReviewValidationParameters, LogoSizes};

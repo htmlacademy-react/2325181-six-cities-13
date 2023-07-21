@@ -1,9 +1,14 @@
-import { Fragment, useState } from 'react';
-import {REVIEW_TEXT_MIN_LENGTH, StarRatings} from '../../const';
+import { Fragment, useState, ChangeEvent} from 'react';
+import {ReviewValidationParameters, StarRatings} from '../../const';
 
-
+type StarRatingScoreType = typeof StarRatings[number]['star'];
 export default function Review ():JSX.Element {
-  const [reviewText, setReviewText] = useState('');
+  const [reviewRating, setReviewRating] = useState<StarRatingScoreType>('5');
+  const [reviewText, setReviewText] = useState<string>('');
+  const onRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const {value} = evt.target as HTMLInputElement;
+    setReviewRating(value as StarRatingScoreType);
+  };
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -11,9 +16,18 @@ export default function Review ():JSX.Element {
         {StarRatings.map(
           ({star, description}) => {
             const inputId = `${star}-stars`;
+            const isChecked = star === reviewRating;
             return (
               <Fragment key={star}>
-                <input className="form__rating-input visually-hidden" name="rating" value={star} id={inputId} type="radio"/>
+                <input
+                  className="form__rating-input visually-hidden"
+                  name="rating"
+                  onChange={onRatingChange}
+                  value={star}
+                  id={inputId}
+                  type="radio"
+                  checked={isChecked}
+                />
                 <label htmlFor={inputId} className="reviews__rating-label form__rating-label" title={description}>
                   <svg className="form__star-image" width="37" height="33">
                     <use xlinkHref="#icon-star"></use>
@@ -30,7 +44,8 @@ export default function Review ():JSX.Element {
         onChange={(evt) => setReviewText(evt.target.value)}
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        minLength={REVIEW_TEXT_MIN_LENGTH}
+        minLength={ReviewValidationParameters.MinLength}
+        maxLength={ReviewValidationParameters.MaxLength}
       >
       </textarea>
       <div className="reviews__button-wrapper">
