@@ -1,4 +1,4 @@
-import { AVATAR_URL, Locations, LodgingKinds } from '../const';
+import { AVATAR_URL, Locations, LocationsCoordinates, LodgingKinds } from '../const';
 import { OffersType } from '../types/types';
 
 const Offers: OffersType = [
@@ -11,8 +11,7 @@ const Offers: OffersType = [
     city: {
       name: Locations.Amsterdam,
       location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
+        ...{...LocationsCoordinates.Amsterdam},
         zoom: 13
       }
     },
@@ -48,8 +47,7 @@ const Offers: OffersType = [
     city: {
       name: Locations.Amsterdam,
       location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
+        ...{...LocationsCoordinates.Amsterdam},
         zoom: 13
       }
     },
@@ -87,8 +85,7 @@ const Offers: OffersType = [
     city: {
       name: Locations.Amsterdam,
       location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
+        ...{...LocationsCoordinates.Amsterdam},
         zoom: 13
       }
     },
@@ -126,8 +123,7 @@ const Offers: OffersType = [
     city: {
       name: Locations.Amsterdam,
       location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
+        ...{...LocationsCoordinates.Amsterdam},
         zoom: 13
       }
     },

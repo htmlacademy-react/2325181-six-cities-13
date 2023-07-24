@@ -127,5 +127,7 @@ const LocationsCoordinates = {
   }
 };
 
+const LOCATION_ZOOM = 10;
 
-export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, PremiumPrefix, ReviewValidationParameters, LogoSizes, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, IconDesign, LocationsCoordinates};
+
+export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, PremiumPrefix, ReviewValidationParameters, LogoSizes, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, IconDesign, LocationsCoordinates, LOCATION_ZOOM};
