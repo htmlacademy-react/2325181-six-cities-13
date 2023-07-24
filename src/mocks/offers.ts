@@ -11,7 +11,7 @@ const Offers: OffersType = [
     city: {
       name: Locations.Amsterdam,
       location: {
-        ...{...LocationsCoordinates.Amsterdam},
+        ...LocationsCoordinates.Amsterdam,
         zoom: 13
       }
     },
@@ -47,7 +47,7 @@ const Offers: OffersType = [
     city: {
       name: Locations.Amsterdam,
       location: {
-        ...{...LocationsCoordinates.Amsterdam},
+        ...LocationsCoordinates.Amsterdam,
         zoom: 13
       }
     },
@@ -85,7 +85,7 @@ const Offers: OffersType = [
     city: {
       name: Locations.Amsterdam,
       location: {
-        ...{...LocationsCoordinates.Amsterdam},
+        ...LocationsCoordinates.Amsterdam,
         zoom: 13
       }
     },
@@ -123,7 +123,7 @@ const Offers: OffersType = [
     city: {
       name: Locations.Amsterdam,
       location: {
-        ...{...LocationsCoordinates.Amsterdam},
+        ...LocationsCoordinates.Amsterdam,
         zoom: 13
       }
     },
