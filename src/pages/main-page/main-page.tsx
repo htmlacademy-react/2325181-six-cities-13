@@ -1,4 +1,6 @@
 
+import { useState } from 'react';
+
 import SignIn from '../../components/sign-in/sign-in';
 import Logo from '../../components/logo/logo';
 import Location from '../../components/location/location';
@@ -6,6 +8,7 @@ import Sort from '../../components/sort/sort';
 import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
 import { OffersType } from '../../types/types';
+import { Locations } from '../../const';
 
 
 type MainPageProps = {
@@ -14,7 +17,7 @@ type MainPageProps = {
 }
 
 export default function MainPage({offers}: MainPageProps): JSX.Element {
-
+  const [offerId, setOfferId] = useState('');
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -42,11 +45,11 @@ export default function MainPage({offers}: MainPageProps): JSX.Element {
               <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sort />
               <div className="cities__places-list places__list tabs__content">
-                <CardList offers={offers} />
+                <CardList onCardHover={(id) => setOfferId(id)} onCardLeave={() => setOfferId('')} offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">
-              <Map />
+              <Map offers={offers} location={Locations.Amsterdam} selectedOfferId={offerId}/>
             </div>
           </div>
         </div>

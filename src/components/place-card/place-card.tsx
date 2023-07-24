@@ -7,7 +7,7 @@ import { getRatingWidth } from '../../helper';
 
 type PlaceCardProps = {
   offer: OfferType;
-  onCardHover?: () => void;
+  onCardHover?: (id: string) => void;
   onCardLeave?: () => void;
 }
 
@@ -15,7 +15,7 @@ export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardPr
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
   const path = useLocation().pathname as PlaceCardDesignType;
   return (
-    <article className={`${PlaceCardDesign[path].cardClass}__card place-card`} onMouseEnter={onCardHover} onMouseLeave={onCardLeave}>
+    <article className={`${PlaceCardDesign[path].cardClass}__card place-card`} onMouseEnter={() => onCardHover ? onCardHover(offer.id) : ''} onMouseLeave={onCardLeave}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
       <div className={`${PlaceCardDesign[path].cardClass}__image-wrapper place-card__image-wrapper`}>
         <Link to={generatePath(AppPath.Offer, {id: offer.id})}>

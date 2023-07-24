@@ -1,3 +1,5 @@
+import { IconDesign } from './const';
+
 const getRatingWidth = (rating: number): string => `${rating * 20}%`;
 
 const getRandomNumber = (min: number, max: number): number => {
@@ -11,4 +13,6 @@ function getRandomArrayElement<T> (arrayInput: T[]): T {
   return arrayInput[getRandomNumber(0, arrayInput.length - 1)];
 }
 
-export { getRatingWidth, getRandomArrayElement };
+const getIconObject = (url: string): object => Object.assign({iconUrl: url}, {...IconDesign});
+
+export { getRatingWidth, getRandomArrayElement, getIconObject };

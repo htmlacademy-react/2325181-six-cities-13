@@ -89,4 +89,43 @@ const LogoSizes = {
   }
 };
 
-export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, PremiumPrefix, ReviewValidationParameters, LogoSizes};
+const URL_MARKER_DEFAULT =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+
+const URL_MARKER_CURRENT =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+
+const IconDesign = {
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+};
+
+const LocationsCoordinates = {
+  [Locations.Paris]: {
+    latitude: 48.85661,
+    longitude: 2.351499
+  },
+  [Locations.Cologne]: {
+    latitude: 50.938361,
+    longitude: 6.959974
+  },
+  [Locations.Brussels]: {
+    latitude: 50.846557,
+    longitude: 4.351697
+  },
+  [Locations.Amsterdam]: {
+    latitude: 52.37454,
+    longitude: 4.897976
+  },
+  [Locations.Hamburg]: {
+    latitude: 53.550341,
+    longitude: 10.000654
+  },
+  [Locations.Dusseldorf]: {
+    latitude: 51.225402,
+    longitude: 6.776314
+  }
+};
+
+
+export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, PremiumPrefix, ReviewValidationParameters, LogoSizes, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, IconDesign, LocationsCoordinates};

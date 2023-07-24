@@ -132,8 +132,8 @@ const Offers: OffersType = [
       }
     },
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      latitude: 52.3505553943508,
+      longitude: 4.919309666406198,
       zoom: 16
     },
     isFavorite: true,
