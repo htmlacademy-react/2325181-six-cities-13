@@ -1,7 +1,7 @@
 import { Link, useLocation, generatePath } from 'react-router-dom';
 import PremiumTag from '../premium-tag/premium-tag';
 import { AppPath, PlaceCardDesign, PremiumPrefix} from '../../const';
-import { OfferType, PlaceCardDesignType } from '../../types/types';
+import { OfferType } from '../../types/types';
 import { getRatingWidth } from '../../helper';
 
 
@@ -13,7 +13,7 @@ type PlaceCardProps = {
 
 export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardProps): JSX.Element {
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
-  const path = useLocation().pathname as PlaceCardDesignType;
+  const path = useLocation().pathname as keyof typeof PlaceCardDesign;
   return (
     <article className={`${PlaceCardDesign[path].cardClass}__card place-card`} onMouseEnter={() => onCardHover && onCardHover(offer.id)} onMouseLeave={onCardLeave}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}

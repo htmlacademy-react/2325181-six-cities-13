@@ -66,7 +66,7 @@ export const PlaceCardDesign = {
     cardWidth: '260',
     cardHeight: '200'
   }
-};
+} as const;
 
 export const PremiumPrefix = {
   Offer: 'offer',
@@ -76,7 +76,7 @@ export const PremiumPrefix = {
 export const ReviewValidationParameters = {
   MinLength: 50,
   MaxLength: 300,
-};
+} as const;
 
 export const LogoSizes = {
   Width : {
@@ -87,7 +87,7 @@ export const LogoSizes = {
     footer: '33',
     header: '41'
   }
-};
+} as const;
 
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
@@ -98,7 +98,7 @@ export const URL_MARKER_CURRENT =
 export const IconDesign = {
   iconSize: [40, 40],
   iconAnchor: [20, 40]
-};
+} as const;
 
 export const LocationsCoordinates = {
   [Locations.Paris]: {
@@ -125,7 +125,7 @@ export const LocationsCoordinates = {
     latitude: 51.225402,
     longitude: 6.776314
   }
-};
+} as const;
 
 export const LOCATION_ZOOM = 10;
 
@@ -134,3 +134,12 @@ export const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voy
 export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 export const MAX_REVIEWS_QUANTITY = 10;
+
+export const MapDesign = {
+  [AppPath.Main]:{
+    classAdded: 'cities__map map'
+  },
+  [AppPath.Offer]:{
+    classAdded: 'offer__map map'
+  }
+};

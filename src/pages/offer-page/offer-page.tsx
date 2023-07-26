@@ -5,9 +5,10 @@ import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
 import Logo from '../../components/logo/logo';
 import ReviewList from '../../components/review-list/review-list';
-import { AppPath, AuthorisationStatus, PremiumPrefix } from '../../const';
+import Map from '../../components/map/map';
+import { AppPath, AuthorisationStatus, Locations, PremiumPrefix } from '../../const';
 import { AuthorisationStatusType, OffersType, ReviewsType } from '../../types/types';
-import { getRatingWidth } from '../../helper';
+import { getRatingWidth, getOffersCoordinates } from '../../helper';
 
 type OfferPageProps = {
   authorisationStatus: AuthorisationStatusType;
@@ -19,6 +20,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
   const params = useParams();
   const offer = offers.find((place) => place.id === params.id);
   const offerReviews = reviews.filter((review) => review.id === offer?.id);
+  const offersCoordinates = getOffersCoordinates(offers);
   if (offer) {
     return (
       <div className="page">
@@ -121,6 +123,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
               </div>
             </div>
             <section className="offer__map map" />
+            <Map location={Locations.Amsterdam} offers={offersCoordinates} selectedOfferId={offer.id} />
           </section>
           <div className="container">
             <section className="near-places places">

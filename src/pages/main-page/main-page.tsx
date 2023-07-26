@@ -9,6 +9,7 @@ import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
 import { OffersType } from '../../types/types';
 import { Locations } from '../../const';
+import { getOffersCoordinates } from '../../helper';
 
 
 type MainPageProps = {
@@ -18,7 +19,8 @@ type MainPageProps = {
 
 export default function MainPage({offers}: MainPageProps): JSX.Element {
   const [offerId, setOfferId] = useState('');
-  const offersCoordinates = offers.map((offer) => ({id: offer.id, latitude: offer.location.latitude, longitude: offer.location.longitude}));
+  const offersCoordinates = getOffersCoordinates(offers);
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
