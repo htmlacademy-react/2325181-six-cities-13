@@ -1,8 +1,9 @@
+import classNames from 'classnames';
 import { Link, useLocation, generatePath } from 'react-router-dom';
 import PremiumTag from '../premium-tag/premium-tag';
 import { AppPath, PlaceCardDesign, PremiumPrefix} from '../../const';
 import { OfferType } from '../../types/types';
-import { getRatingWidth } from '../../helper';
+import { getRatingWidth, validateOfferPage } from '../../helper';
 
 
 type PlaceCardProps = {
@@ -13,11 +14,12 @@ type PlaceCardProps = {
 
 export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardProps): JSX.Element {
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
-  const path = useLocation().pathname as keyof typeof PlaceCardDesign;
+  const page = useLocation().pathname as keyof typeof PlaceCardDesign;
+  const path = validateOfferPage(page) && '/offer/:id' || page;
   return (
-    <article className={`${PlaceCardDesign[path].cardClass}__card place-card`} onMouseEnter={() => onCardHover && onCardHover(offer.id)} onMouseLeave={onCardLeave}>
+    <article className={classNames(`${PlaceCardDesign[path].cardClass}__card`, 'place-card')} onMouseEnter={() => onCardHover && onCardHover(offer.id)} onMouseLeave={onCardLeave}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
-      <div className={`${PlaceCardDesign[path].cardClass}__image-wrapper place-card__image-wrapper`}>
+      <div className={classNames(`${PlaceCardDesign[path].cardClass}__image-wrapper`, 'place-card__image-wrapper')}>
         <Link to={generatePath(AppPath.Offer, {id: offer.id})}>
           <img
             className="place-card__image"
@@ -48,7 +50,7 @@ export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardPr
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppPath.Offer}>{offer.title}</Link>
+          <Link to={generatePath(AppPath.Offer, {id: offer.id})}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

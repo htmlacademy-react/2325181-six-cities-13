@@ -65,6 +65,12 @@ export const PlaceCardDesign = {
     cardInfoClass: '',
     cardWidth: '260',
     cardHeight: '200'
+  },
+  [AppPath.Offer]: {
+    cardClass: 'near-places',
+    cardInfoClass: '',
+    cardWidth: '260',
+    cardHeight: '200'
   }
 } as const;
 
@@ -89,11 +95,9 @@ export const LogoSizes = {
   }
 } as const;
 
-export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 
-export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 
 export const IconDesign = {
   iconSize: [40, 40],
@@ -137,9 +141,15 @@ export const MAX_REVIEWS_QUANTITY = 10;
 
 export const MapDesign = {
   [AppPath.Main]:{
-    classAdded: 'cities__map map'
+    classAdded: 'cities__map map',
+
   },
-  [AppPath.Offer]:{
-    classAdded: 'offer__map map'
+  [AppPath.Offer]: {
+    classAdded: 'offer__map map',
+    style: {
+      width: '1144px',
+      height: '579px',
+      margin: '20px auto',
+    }
   }
-};
+} as const;

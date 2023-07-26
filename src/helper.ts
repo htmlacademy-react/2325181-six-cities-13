@@ -18,3 +18,4 @@ export const getIconObject = (url: string): object => Object.assign({iconUrl: ur
 
 export const getOffersCoordinates = (offers: OfferType[]) => offers.map((offer) => ({id: offer.id, latitude: offer.location.latitude, longitude: offer.location.longitude}));
 
+export const validateOfferPage = (page: string): boolean => RegExp('/offer/.*').test(page);
