@@ -13,9 +13,9 @@ const Reviews: ReviewsType = [
     }
   },
   {
-    id: '34f50f68-803c-43a9-8d59-9556fb9c0eaa',
-    comment: 'This villa is perfect in every way: the view on mountains and waterfalls, the hot tub and the villa itself. The evening here became a great continuation of our journeys over country.',
-    date: '2023-06-23T21:00:00.624Z',
+    id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
+    comment: 'This villa is perfect in every way: the view on mountains and waterfalls, the hot tub and the villa itself. The evening here became a great continuation of our journeys over country. 34f50f68-803c-43a9-8d59-9556fb9c0eaa',
+    date: '2023-07-23T21:00:00.624Z',
     rating: 1,
     user: {
       name: 'Mollie',

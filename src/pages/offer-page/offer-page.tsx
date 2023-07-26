@@ -1,9 +1,10 @@
-import dayjs from 'dayjs';
+
 import { Navigate, useParams } from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
 import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
 import Logo from '../../components/logo/logo';
+import ReviewList from '../../components/review-list/review-list';
 import { AppPath, AuthorisationStatus, PremiumPrefix } from '../../const';
 import { AuthorisationStatusType, OffersType, ReviewsType } from '../../types/types';
 import { getRatingWidth } from '../../helper';
@@ -114,38 +115,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                 </div>
                 <section className="offer__reviews reviews">
                   <h2 className="reviews__title">Reviews {offerReviews.length > 0 && <><span>&middot; </span><span className="reviews__amount">{offerReviews.length}</span></>}</h2>
-                  <ul className="reviews__list">
-                    {offerReviews.map((review) => (
-                      <li className="reviews__item" key={review.date}>
-                        <div className="reviews__user user">
-                          <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                            <img
-                              className="reviews__avatar user__avatar"
-                              src={review.user.avatarUrl}
-                              width="54"
-                              height="54"
-                              alt="Reviews avatar"
-                            />
-                          </div>
-                          <span className="reviews__user-name">
-                            {review.user.name}
-                          </span>
-                        </div>
-                        <div className="reviews__info">
-                          <div className="reviews__rating rating">
-                            <div className="reviews__stars rating__stars">
-                              <span style={{ width: getRatingWidth(review.rating) }} />
-                              <span className="visually-hidden">Rating</span>
-                            </div>
-                          </div>
-                          <p className="reviews__text">
-                            {review.comment}
-                          </p>
-                          <time className="reviews__time" dateTime={review.date}>{dayjs(review.date).format('MMMM YYYY')}</time>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                  <ReviewList reviews={offerReviews}/>
                   {authorisationStatus === AuthorisationStatus.Auth && <Review />}
                 </section>
               </div>
