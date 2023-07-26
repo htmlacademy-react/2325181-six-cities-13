@@ -11,6 +11,6 @@ export default function PrivateRoute ({authorisationStatus, children}: PrivateRo
   return (
     authorisationStatus === AuthorisationStatus.Auth
       ? children
-      : <Navigate to={AppPath.Login}></Navigate>
+      : <Navigate to={AppPath.Login} />
   );
 }

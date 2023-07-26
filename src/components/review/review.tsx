@@ -30,7 +30,7 @@ export default function Review ():JSX.Element {
                 />
                 <label htmlFor={inputId} className="reviews__rating-label form__rating-label" title={description}>
                   <svg className="form__star-image" width="37" height="33">
-                    <use xlinkHref="#icon-star"></use>
+                    <use xlinkHref="#icon-star" />
                   </svg>
                 </label>
               </Fragment>

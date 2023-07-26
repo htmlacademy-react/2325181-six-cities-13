@@ -65,3 +65,9 @@ export type PlaceCardDesignType = keyof typeof PlaceCardDesign;
 export type LocationReducerType = {
   [name: string]: OffersType;
 };
+
+export type OfferCoordinatesType = {
+  id: string;
+  latitude: number;
+  longitude: number;
+}

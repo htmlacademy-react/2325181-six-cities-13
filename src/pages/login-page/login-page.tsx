@@ -54,5 +54,5 @@ export default function LoginPage({authorisationStatus}: LoginPageProps): React.
       </div>
     )
     :
-    <Navigate to={AppPath.Main}></Navigate>;
+    <Navigate to={AppPath.Main} />;
 }
