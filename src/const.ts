@@ -129,5 +129,9 @@ const LocationsCoordinates = {
 
 const LOCATION_ZOOM = 10;
 
+const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
-export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, PremiumPrefix, ReviewValidationParameters, LogoSizes, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, IconDesign, LocationsCoordinates, LOCATION_ZOOM};
+const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+
+export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, PremiumPrefix, ReviewValidationParameters, LogoSizes, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, IconDesign, LocationsCoordinates, LOCATION_ZOOM, TILE_LAYER_URL, ATTRIBUTION};

@@ -1,6 +1,6 @@
 import {useEffect, useState, MutableRefObject, useRef} from 'react';
 import {Map, TileLayer} from 'leaflet';
-import { LocationsCoordinates, LOCATION_ZOOM } from '../const';
+import { LocationsCoordinates, LOCATION_ZOOM, TILE_LAYER_URL, ATTRIBUTION } from '../const';
 import {LocationType} from '../types/types';
 
 export default function useMap(
@@ -21,10 +21,9 @@ export default function useMap(
       });
 
       const layer = new TileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+        TILE_LAYER_URL,
         {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          attribution: ATTRIBUTION
         }
       );
 

@@ -15,7 +15,7 @@ export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardPr
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
   const path = useLocation().pathname as PlaceCardDesignType;
   return (
-    <article className={`${PlaceCardDesign[path].cardClass}__card place-card`} onMouseEnter={() => onCardHover ? onCardHover(offer.id) : ''} onMouseLeave={onCardLeave}>
+    <article className={`${PlaceCardDesign[path].cardClass}__card place-card`} onMouseEnter={() => onCardHover && onCardHover(offer.id)} onMouseLeave={onCardLeave}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
       <div className={`${PlaceCardDesign[path].cardClass}__image-wrapper place-card__image-wrapper`}>
         <Link to={generatePath(AppPath.Offer, {id: offer.id})}>
@@ -36,14 +36,14 @@ export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardPr
           </div>
           <button className="place-card__bookmark-button button" type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
+              <use xlinkHref="#icon-bookmark" />
             </svg>
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: ratingWidth}}></span>
+            <span style={{width: ratingWidth}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

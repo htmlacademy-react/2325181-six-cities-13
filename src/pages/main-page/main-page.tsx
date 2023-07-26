@@ -18,6 +18,7 @@ type MainPageProps = {
 
 export default function MainPage({offers}: MainPageProps): JSX.Element {
   const [offerId, setOfferId] = useState('');
+  const offersCoordinates = offers.map((offer) => ({id: offer.id, latitude: offer.location.latitude, longitude: offer.location.longitude}));
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -49,7 +50,7 @@ export default function MainPage({offers}: MainPageProps): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} location={Locations.Amsterdam} selectedOfferId={offerId}/>
+              <Map offers={offersCoordinates} location={Locations.Amsterdam} selectedOfferId={offerId}/>
             </div>
           </div>
         </div>

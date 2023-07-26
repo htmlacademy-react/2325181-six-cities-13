@@ -2,13 +2,13 @@ import {useRef, useEffect} from 'react';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
-import { LocationType, OffersType } from '../../types/types';
+import { LocationType, OfferCoordinatesType } from '../../types/types';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { getIconObject } from '../../helper';
 
 type MapProps = {
   location: LocationType;
-  offers: OffersType;
+  offers: OfferCoordinatesType [];
   selectedOfferId: string;
 }
 
@@ -24,13 +24,13 @@ export default function Map({location, offers, selectedOfferId}: MapProps): JSX.
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longitude
+          lat: offer.latitude,
+          lng: offer.longitude
         });
 
         marker
           .setIcon(
-            selectedOfferId !== undefined && offer.id === selectedOfferId
+            selectedOfferId !== '' && offer.id === selectedOfferId
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -47,7 +47,6 @@ export default function Map({location, offers, selectedOfferId}: MapProps): JSX.
     <section
       className="cities__map map"
       ref={mapRef}
-    >
-    </section>
+    />
   );
 }

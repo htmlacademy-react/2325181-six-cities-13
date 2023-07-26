@@ -51,14 +51,14 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                   </h1>
                   <button className="offer__bookmark-button button" type="button">
                     <svg className="offer__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
+                      <use xlinkHref="#icon-bookmark" />
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
                   </button>
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{ width: `${getRatingWidth(offer.rating)}`}}></span>
+                    <span style={{ width: `${getRatingWidth(offer.rating)}`}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="offer__rating-value rating__value">{offer.rating}</span>
@@ -134,7 +134,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                         <div className="reviews__info">
                           <div className="reviews__rating rating">
                             <div className="reviews__stars rating__stars">
-                              <span style={{ width: getRatingWidth(review.rating) }}></span>
+                              <span style={{ width: getRatingWidth(review.rating) }} />
                               <span className="visually-hidden">Rating</span>
                             </div>
                           </div>
@@ -150,7 +150,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                 </section>
               </div>
             </div>
-            <section className="offer__map map"></section>
+            <section className="offer__map map" />
           </section>
           <div className="container">
             <section className="near-places places">
@@ -176,14 +176,14 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                       </div>
                       <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkHref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark" />
                         </svg>
                         <span className="visually-hidden">In bookmarks</span>
                       </button>
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style={{ width: '80%' }}></span>
+                        <span style={{ width: '80%' }} />
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -214,14 +214,14 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                       </div>
                       <button className="place-card__bookmark-button button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkHref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark" />
                         </svg>
                         <span className="visually-hidden">To bookmarks</span>
                       </button>
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style={{ width: '80%' }}></span>
+                        <span style={{ width: '80%' }} />
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -255,14 +255,14 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                       </div>
                       <button className="place-card__bookmark-button button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkHref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark" />
                         </svg>
                         <span className="visually-hidden">To bookmarks</span>
                       </button>
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style={{ width: '100%' }}></span>
+                        <span style={{ width: '100%' }} />
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
