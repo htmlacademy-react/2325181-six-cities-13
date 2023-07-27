@@ -5,11 +5,11 @@ import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
 import Logo from '../../components/logo/logo';
 import ReviewList from '../../components/review-list/review-list';
-import Map from '../../components/map/map';
 import { AppPath, AuthorisationStatus, Locations, PremiumPrefix } from '../../const';
 import { AuthorisationStatusType, OffersType, ReviewsType } from '../../types/types';
 import { getRatingWidth, getOffersCoordinates } from '../../helper';
-import PlaceCard from '../../components/place-card/place-card';
+import MapOffer from '../../components/map-offer/map-offer';
+import { CardOffer } from '../../components/card-offer/card-offer';
 
 type OfferPageProps = {
   authorisationStatus: AuthorisationStatusType;
@@ -124,7 +124,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                 </section>
               </div>
             </div>
-            <Map
+            <MapOffer
               location={Locations.Amsterdam}
               offers={offersCoordinates}
               selectedOfferId={offer.id}
@@ -135,7 +135,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
                 {offers.map((nearOffer) =>
-                  <PlaceCard key={nearOffer.id} offer={nearOffer} />
+                  <CardOffer key={nearOffer.id} offer={nearOffer} />
                 )}
               </div>
             </section>

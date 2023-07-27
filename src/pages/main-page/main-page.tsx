@@ -5,11 +5,11 @@ import SignIn from '../../components/sign-in/sign-in';
 import Logo from '../../components/logo/logo';
 import Location from '../../components/location/location';
 import Sort from '../../components/sort/sort';
-import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
 import { OffersType } from '../../types/types';
 import { Locations } from '../../const';
 import { getOffersCoordinates } from '../../helper';
+import MapMain from '../../components/map-main/map-main';
 
 
 type MainPageProps = {
@@ -52,7 +52,7 @@ export default function MainPage({offers}: MainPageProps): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map offers={offersCoordinates} location={Locations.Amsterdam} selectedOfferId={offerId}/>
+              <MapMain offers={offersCoordinates} location={Locations.Amsterdam} selectedOfferId={offerId}/>
             </div>
           </div>
         </div>

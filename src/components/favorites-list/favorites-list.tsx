@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import PlaceCard from '../place-card/place-card';
 
 import { AppPath } from '../../const';
 import { OffersType } from '../../types/types';
+import { CardFavorites } from '../card-favorites/card-favorites';
 
 type FavoriteLocationProps = {
   groupByLocation: [string, OffersType][];
@@ -26,7 +26,7 @@ export default function FavoritesList ({groupByLocation}: FavoriteLocationProps)
             </div>
             <div className="favorites__places">
               {locationOffers.map(
-                (offer) => <PlaceCard key={offer.id} offer={offer} />
+                (offer) => <CardFavorites key={offer.id} offer={offer} />
               )}
             </div>
           </li>

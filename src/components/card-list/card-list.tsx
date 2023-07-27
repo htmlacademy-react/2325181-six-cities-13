@@ -1,5 +1,5 @@
 import { OffersType } from '../../types/types';
-import PlaceCard from '../place-card/place-card';
+import { CardMain } from '../card-main/card-main';
 
 type CardListProps = {
   offers: OffersType;
@@ -12,7 +12,7 @@ export default function CardList({offers, onCardHover, onCardLeave}: CardListPro
   return (
     <>
       {offers.map(
-        (offer) => <PlaceCard key={offer.id} offer={offer} onCardHover={onCardHover} onCardLeave={onCardLeave} />
+        (offer) => <CardMain key={offer.id} offer={offer} onCardHover={onCardHover} onCardLeave={onCardLeave} />
       )}
     </>
   );

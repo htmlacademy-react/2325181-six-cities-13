@@ -100,8 +100,8 @@ export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 
 export const IconDesign = {
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [30, 45],
+  iconAnchor: [15, 45]
 } as const;
 
 export const LocationsCoordinates = {
@@ -131,7 +131,7 @@ export const LocationsCoordinates = {
   }
 } as const;
 
-export const LOCATION_ZOOM = 10;
+export const LOCATION_ZOOM = 12;
 
 export const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
