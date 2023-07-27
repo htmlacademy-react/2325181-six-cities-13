@@ -9,7 +9,7 @@ import { AppPath, AuthorisationStatus, Locations, PremiumPrefix } from '../../co
 import { AuthorisationStatusType, OffersType, ReviewsType } from '../../types/types';
 import { getRatingWidth, getOffersCoordinates } from '../../helper';
 import MapOffer from '../../components/map-offer/map-offer';
-import { CardOffer } from '../../components/card-offer/card-offer';
+import { NearbyList } from '../../components/nearby-list/nearby-list';
 
 type OfferPageProps = {
   authorisationStatus: AuthorisationStatusType;
@@ -134,9 +134,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                {offers.map((nearOffer) =>
-                  <CardOffer key={nearOffer.id} offer={nearOffer} />
-                )}
+                <NearbyList offers={offers} />
               </div>
             </section>
           </div>

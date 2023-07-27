@@ -5,7 +5,7 @@ import SignIn from '../../components/sign-in/sign-in';
 import Logo from '../../components/logo/logo';
 import Location from '../../components/location/location';
 import Sort from '../../components/sort/sort';
-import CardList from '../../components/card-list/card-list';
+import MainList from '../../components/main-list/main-list';
 import { OffersType } from '../../types/types';
 import { Locations } from '../../const';
 import { getOffersCoordinates } from '../../helper';
@@ -48,7 +48,7 @@ export default function MainPage({offers}: MainPageProps): JSX.Element {
               <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sort />
               <div className="cities__places-list places__list tabs__content">
-                <CardList onCardHover={(id) => setOfferId(id)} onCardLeave={() => setOfferId('')} offers={offers} />
+                <MainList onCardHover={(id) => setOfferId(id)} onCardLeave={() => setOfferId('')} offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">
