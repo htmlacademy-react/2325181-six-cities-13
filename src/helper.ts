@@ -1,7 +1,7 @@
-import { IconDesign } from './const';
+import { IconDesign, RATING_WIDTH_UNIT } from './const';
 import { OfferType } from './types/types';
 
-export const getRatingWidth = (rating: number): string => `${rating * 20}%`;
+export const getRatingWidth = (rating: number): string => `${rating * RATING_WIDTH_UNIT}%`;
 
 export const getRandomNumber = (min: number, max: number): number => {
   const from = Math.ceil(Math.min(min, max));

@@ -5,7 +5,7 @@ import { OffersType } from '../../types/types';
 type MainListProps = {offers: OffersType} & Pick<PlaceCardProps, 'onCardHover' | 'onCardLeave'>;
 
 export default function MainList({offers, onCardHover, onCardLeave}: MainListProps): JSX.Element {
-  const design = PlaceCardDesign[AppPath.Main];
+  const designProps = PlaceCardDesign[AppPath.Main];
   return (
     <>
       {offers.map(
@@ -15,10 +15,7 @@ export default function MainList({offers, onCardHover, onCardLeave}: MainListPro
             offer={offer}
             onCardHover={onCardHover}
             onCardLeave={onCardLeave}
-            cardClass={design.cardClass}
-            cardInfoClass={design.cardInfoClass}
-            cardWidth={design.cardWidth}
-            cardHeight={design.cardHeight}
+            {...designProps}
           />)
       )}
     </>

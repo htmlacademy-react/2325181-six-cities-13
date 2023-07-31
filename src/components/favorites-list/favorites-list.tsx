@@ -8,7 +8,7 @@ type FavoriteLocationProps = {
 }
 
 export default function FavoritesList ({groupByLocation}: FavoriteLocationProps): JSX.Element {
-  const design = PlaceCardDesign[AppPath.Favorites];
+  const designProps = PlaceCardDesign[AppPath.Favorites];
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
@@ -30,10 +30,7 @@ export default function FavoritesList ({groupByLocation}: FavoriteLocationProps)
                   <PlaceCard
                     key={offer.id}
                     offer={offer}
-                    cardClass={design.cardClass}
-                    cardInfoClass={design.cardInfoClass}
-                    cardWidth={design.cardWidth}
-                    cardHeight={design.cardHeight}
+                    {...designProps}
                   />)
               )}
             </div>

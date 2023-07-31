@@ -7,7 +7,7 @@ type NearbyListProps = {
 };
 
 export function NearbyList({offers}: NearbyListProps): JSX.Element {
-  const design = PlaceCardDesign[AppPath.Offer];
+  const designProps = PlaceCardDesign[AppPath.Offer];
   return (
     <>
       {offers.map(
@@ -15,10 +15,7 @@ export function NearbyList({offers}: NearbyListProps): JSX.Element {
           <PlaceCard
             key={offer.id}
             offer={offer}
-            cardClass={design.cardClass}
-            cardInfoClass={design.cardInfoClass}
-            cardWidth={design.cardWidth}
-            cardHeight={design.cardHeight}
+            {...designProps}
           />)
       )}
     </>

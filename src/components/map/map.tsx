@@ -1,4 +1,4 @@
-import {useRef, useEffect} from 'react';
+import {useRef, useEffect, CSSProperties} from 'react';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
@@ -11,7 +11,7 @@ export type MapProps = {
   offers: OfferCoordinatesType [];
   selectedOfferId: string;
   classAdded: string;
-  mapStyle?: object;
+  mapStyle?: CSSProperties;
 }
 
 const defaultCustomIcon = new Icon(getIconObject(URL_MARKER_DEFAULT));
