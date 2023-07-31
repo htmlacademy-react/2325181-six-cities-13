@@ -1,34 +1,38 @@
-import { Link, useLocation, generatePath } from 'react-router-dom';
+import classNames from 'classnames';
+import { Link, generatePath } from 'react-router-dom';
 import PremiumTag from '../premium-tag/premium-tag';
-import { AppPath, PlaceCardDesign, PremiumPrefix} from '../../const';
-import { OfferType, PlaceCardDesignType } from '../../types/types';
-import { getRatingWidth } from '../../helper';
+import { AppPath, PremiumPrefix} from '../../const';
+import { OfferType } from '../../types/types';
+import { getRatingWidth} from '../../helper';
 
-
-type PlaceCardProps = {
+export type PlaceCardProps = {
   offer: OfferType;
   onCardHover?: (id: string) => void;
   onCardLeave?: () => void;
+  cardClass: string;
+  cardInfoClass: string;
+  cardWidth: string;
+  cardHeight: string;
 }
 
-export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardProps): JSX.Element {
+export function PlaceCard({offer, onCardHover, onCardLeave, cardClass, cardInfoClass, cardHeight, cardWidth}: PlaceCardProps): JSX.Element {
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
-  const path = useLocation().pathname as PlaceCardDesignType;
+  const offerPath = generatePath(AppPath.Offer, {id: offer.id});
   return (
-    <article className={`${PlaceCardDesign[path].cardClass}__card place-card`} onMouseEnter={() => onCardHover && onCardHover(offer.id)} onMouseLeave={onCardLeave}>
+    <article className={classNames(`${cardClass}__card`, 'place-card')} onMouseEnter={() => onCardHover && onCardHover(offer.id)} onMouseLeave={onCardLeave}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
-      <div className={`${PlaceCardDesign[path].cardClass}__image-wrapper place-card__image-wrapper`}>
-        <Link to={generatePath(AppPath.Offer, {id: offer.id})}>
+      <div className={classNames(`${cardClass}__image-wrapper`, 'place-card__image-wrapper')}>
+        <Link to={offerPath}>
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={PlaceCardDesign[path].cardWidth}
-            height={PlaceCardDesign[path].cardHeight}
+            width={cardWidth}
+            height={cardHeight}
             alt="Place image"
           />
         </Link>
       </div>
-      <div className={`${PlaceCardDesign[path].cardInfoClass} place-card__info`}>
+      <div className={`${cardInfoClass} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -48,7 +52,7 @@ export default function PlaceCard({offer, onCardHover, onCardLeave}: PlaceCardPr
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppPath.Offer}>{offer.title}</Link>
+          <Link to={offerPath}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

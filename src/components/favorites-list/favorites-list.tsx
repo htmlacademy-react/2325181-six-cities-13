@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import PlaceCard from '../place-card/place-card';
-
-import { AppPath } from '../../const';
+import { PlaceCard } from '../place-card/place-card';
+import { PlaceCardDesign, AppPath } from '../../const';
 import { OffersType } from '../../types/types';
 
 type FavoriteLocationProps = {
@@ -9,6 +8,7 @@ type FavoriteLocationProps = {
 }
 
 export default function FavoritesList ({groupByLocation}: FavoriteLocationProps): JSX.Element {
+  const design = PlaceCardDesign[AppPath.Favorites];
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
@@ -26,7 +26,15 @@ export default function FavoritesList ({groupByLocation}: FavoriteLocationProps)
             </div>
             <div className="favorites__places">
               {locationOffers.map(
-                (offer) => <PlaceCard key={offer.id} offer={offer} />
+                (offer) => (
+                  <PlaceCard
+                    key={offer.id}
+                    offer={offer}
+                    cardClass={design.cardClass}
+                    cardInfoClass={design.cardInfoClass}
+                    cardWidth={design.cardWidth}
+                    cardHeight={design.cardHeight}
+                  />)
               )}
             </div>
           </li>

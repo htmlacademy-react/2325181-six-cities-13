@@ -1,4 +1,4 @@
-const AppPath = {
+export const AppPath = {
   Main: '/',
   Login: '/login',
   Favorites: '/favorites',
@@ -6,13 +6,13 @@ const AppPath = {
   NotFound: '*',
 } as const;
 
-const AuthorisationStatus = {
+export const AuthorisationStatus = {
   Auth: 'AUTH',
   NoAuth: 'NO_AUTH',
   Unknown: 'UNKNOWN'
 } as const;
 
-const StarRatings = [
+export const StarRatings = [
   {
     star: '5',
     description: 'perfect'
@@ -35,9 +35,9 @@ const StarRatings = [
   },
 ] as const;
 
-const AVATAR_URL = 'https://i.pravatar.cc/128';
+export const AVATAR_URL = 'https://i.pravatar.cc/128';
 
-const Locations = {
+export const Locations = {
   Paris: 'Paris',
   Cologne: 'Cologne',
   Brussels: 'Brussels',
@@ -46,14 +46,14 @@ const Locations = {
   Dusseldorf: 'Dusseldorf'
 } as const;
 
-const LodgingKinds = {
+export const LodgingKinds = {
   Room: 'Room',
   Aparment: 'Apartment',
   House: 'House',
   Hotel: 'Hotel'
 } as const;
 
-const PlaceCardDesign = {
+export const PlaceCardDesign = {
   [AppPath.Favorites]: {
     cardClass: 'favorites',
     cardInfoClass: 'favorites__card-info',
@@ -65,20 +65,26 @@ const PlaceCardDesign = {
     cardInfoClass: '',
     cardWidth: '260',
     cardHeight: '200'
+  },
+  [AppPath.Offer]: {
+    cardClass: 'near-places',
+    cardInfoClass: '',
+    cardWidth: '260',
+    cardHeight: '200'
   }
-};
+} as const;
 
-const PremiumPrefix = {
+export const PremiumPrefix = {
   Offer: 'offer',
   PlaceCard: 'place-card'
 } as const;
 
-const ReviewValidationParameters = {
+export const ReviewValidationParameters = {
   MinLength: 50,
   MaxLength: 300,
-};
+} as const;
 
-const LogoSizes = {
+export const LogoSizes = {
   Width : {
     footer: '64',
     header: '81'
@@ -87,20 +93,18 @@ const LogoSizes = {
     footer: '33',
     header: '41'
   }
-};
+} as const;
 
-const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 
-const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 
-const IconDesign = {
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-};
+export const IconDesign = {
+  iconSize: [30, 45],
+  iconAnchor: [15, 45]
+} as const;
 
-const LocationsCoordinates = {
+export const LocationsCoordinates = {
   [Locations.Paris]: {
     latitude: 48.85661,
     longitude: 2.351499
@@ -125,13 +129,27 @@ const LocationsCoordinates = {
     latitude: 51.225402,
     longitude: 6.776314
   }
-};
+} as const;
 
-const LOCATION_ZOOM = 10;
+export const LOCATION_ZOOM = 12;
 
-const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+export const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
-const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
+export const MAX_REVIEWS_QUANTITY = 10;
 
-export {AppPath, AuthorisationStatus, StarRatings, AVATAR_URL, Locations, LodgingKinds, PlaceCardDesign, PremiumPrefix, ReviewValidationParameters, LogoSizes, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, IconDesign, LocationsCoordinates, LOCATION_ZOOM, TILE_LAYER_URL, ATTRIBUTION};
+export const MapDesign = {
+  [AppPath.Main]:{
+    classAdded: 'cities__map map',
+
+  },
+  [AppPath.Offer]: {
+    classAdded: 'offer__map map',
+    style: {
+      width: '1144px',
+      height: '579px',
+      margin: '20px auto',
+    }
+  }
+} as const;

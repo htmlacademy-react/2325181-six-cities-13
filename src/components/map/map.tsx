@@ -6,16 +6,18 @@ import { LocationType, OfferCoordinatesType } from '../../types/types';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { getIconObject } from '../../helper';
 
-type MapProps = {
+export type MapProps = {
   location: LocationType;
   offers: OfferCoordinatesType [];
   selectedOfferId: string;
+  classAdded: string;
+  mapStyle?: object;
 }
 
 const defaultCustomIcon = new Icon(getIconObject(URL_MARKER_DEFAULT));
 const currentCustomIcon = new Icon(getIconObject(URL_MARKER_CURRENT));
 
-export default function Map({location, offers, selectedOfferId}: MapProps): JSX.Element {
+export function Map({location, offers, selectedOfferId, classAdded, mapStyle}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
 
@@ -45,8 +47,9 @@ export default function Map({location, offers, selectedOfferId}: MapProps): JSX.
 
   return (
     <section
-      className="cities__map map"
+      className={classAdded}
       ref={mapRef}
+      style={mapStyle}
     />
   );
 }

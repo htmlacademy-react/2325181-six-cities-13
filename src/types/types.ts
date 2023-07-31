@@ -1,4 +1,4 @@
-import { PlaceCardDesign, AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -60,8 +60,6 @@ export type PremiumPrefixType = typeof PremiumPrefix[keyof typeof PremiumPrefix]
 
 export type ChangeLocationType = (location: LocationType) => void;
 
-export type PlaceCardDesignType = keyof typeof PlaceCardDesign;
-
 export type LocationReducerType = {
   [name: string]: OffersType;
 };
@@ -71,3 +69,5 @@ export type OfferCoordinatesType = {
   latitude: number;
   longitude: number;
 }
+
+export type MapPageType = keyof typeof MapDesign;
