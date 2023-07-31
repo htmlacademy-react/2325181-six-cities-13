@@ -45,7 +45,7 @@ const Offers: OffersType = [
     price: 197,
     previewImage: 'https://13.design.pages.academy/static/hotel/10.jpg',
     city: {
-      name: Locations.Amsterdam,
+      name: Locations.Cologne,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13
@@ -83,7 +83,7 @@ const Offers: OffersType = [
     price: 174,
     previewImage: 'https://13.design.pages.academy/static/hotel/18.jpg',
     city: {
-      name: Locations.Amsterdam,
+      name: Locations.Dusseldorf,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13
@@ -121,7 +121,7 @@ const Offers: OffersType = [
     price: 224,
     previewImage: 'https://13.design.pages.academy/static/hotel/3.jpg',
     city: {
-      name: Locations.Amsterdam,
+      name: Locations.Cologne,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13

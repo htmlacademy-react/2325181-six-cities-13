@@ -1,3 +1,4 @@
+import { store } from '../store';
 import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
@@ -71,3 +72,12 @@ export type OfferCoordinatesType = {
 }
 
 export type MapPageType = keyof typeof MapDesign;
+
+export type InitialStateType = {
+  location: LocationType;
+  offers: OffersType;
+};
+
+export type State = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
