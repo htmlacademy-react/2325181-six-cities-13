@@ -5,3 +5,5 @@ export const changeLocation = createAction('location/change', (newLocation: Loca
   payload: newLocation
 })
 );
+
+export const renderFilteredOffers = createAction('offers/push');
