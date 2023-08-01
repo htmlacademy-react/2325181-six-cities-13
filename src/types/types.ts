@@ -1,5 +1,5 @@
 import { store } from '../store';
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -76,3 +76,5 @@ export type MapPageType = keyof typeof MapDesign;
 export type StateType = ReturnType<typeof store.getState>;
 
 export type AppDispatchType = typeof store.dispatch;
+
+export type ActiveSortOrderType = typeof SortOrders[keyof typeof SortOrders]['order'];

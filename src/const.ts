@@ -1,3 +1,5 @@
+import { OffersType } from './types/types';
+
 export const AppPath = {
   Main: '/',
   Login: '/login',
@@ -160,7 +162,8 @@ export const RATING_WIDTH_UNIT = 20;
 
 export const NameSpace = {
   Location: 'location',
-  Offers: 'offers'
+  Offers: 'offers',
+  Sorting: 'sorting'
 } as const;
 
 export const Action = {
@@ -170,3 +173,27 @@ export const Action = {
   Update: 'update'
 } as const;
 
+export const SortOrders = {
+  Popular: {
+    order: 'Popular',
+    title: 'Popular',
+    callback: (offers: OffersType) => offers.slice()
+  },
+  PriceAscending: {
+    order: 'PriceAscending',
+    title: 'Price: low to high',
+    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerA.price - offerB.price)
+  },
+  PriceDescending: {
+    order: 'PriceDescending',
+    title: 'Price: high to low',
+    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerB.price - offerA.price)
+  },
+  RatedFirst: {
+    order: 'RatedFirst',
+    title: 'Top rated first',
+    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerB.rating - offerA.rating)
+  }
+} as const;
+
+export const DEFAULT_SORT_ORDER = 'Popular';
