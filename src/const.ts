@@ -158,3 +158,15 @@ export const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 
 export const RATING_WIDTH_UNIT = 20;
 
+export const NameSpace = {
+  Location: 'location',
+  Offers: 'offers'
+} as const;
+
+export const Action = {
+  Add: 'add',
+  Delete: 'delete',
+  Get: 'get',
+  Update: 'update'
+} as const;
+

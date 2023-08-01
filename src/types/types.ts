@@ -73,11 +73,6 @@ export type OfferCoordinatesType = {
 
 export type MapPageType = keyof typeof MapDesign;
 
-export type InitialStateType = {
-  location: LocationType;
-  offers: OffersType;
-};
+export type StateType = ReturnType<typeof store.getState>;
 
-export type State = ReturnType<typeof store.getState>;
-
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatchType = typeof store.dispatch;

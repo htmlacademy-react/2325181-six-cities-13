@@ -1,15 +1,11 @@
 import { Link, Navigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { AppPath, AuthorisationStatus, Locations } from '../../const';
-
+import { useAppSelector } from '../../hooks';
 import { getRandomArrayElement } from '../../helper';
-import { AuthorisationStatusType } from '../../types/types';
 
-type LoginPageProps = {
-  authorisationStatus: AuthorisationStatusType;
-}
-
-export default function LoginPage({authorisationStatus}: LoginPageProps): React.ReactNode {
+export default function LoginPage(): React.ReactNode {
+  const authorisationStatus = useAppSelector((state) => state.authorisationStatus);
   const locationsList = Object.values(Locations);
   const randomLocation = getRandomArrayElement<typeof locationsList[number]>(locationsList);
   return authorisationStatus === AuthorisationStatus.NoAuth

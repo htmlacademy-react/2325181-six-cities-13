@@ -5,25 +5,23 @@ import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
 import Logo from '../../components/logo/logo';
 import ReviewList from '../../components/review-list/review-list';
-import { AppPath, AuthorisationStatus, Locations, PremiumPrefix } from '../../const';
-import { AuthorisationStatusType, OffersType, ReviewsType } from '../../types/types';
+import { useAppSelector } from '../../hooks';
+import { AppPath, AuthorisationStatus, PremiumPrefix } from '../../const';
 import { getRatingWidth, getOffersCoordinates } from '../../helper';
 import MapOffer from '../../components/map-offer/map-offer';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
 
-type OfferPageProps = {
-  authorisationStatus: AuthorisationStatusType;
-  offers: OffersType;
-  reviews: ReviewsType;
-};
-
-export default function OfferPage({ authorisationStatus, offers, reviews}: OfferPageProps): JSX.Element {
+export default function OfferPage(): JSX.Element {
   const params = useParams();
-  const offer = offers.find((place) => place.id === params.id);
-  const offerReviews = reviews.filter((review) => review.id === offer?.id);
+  const offers = useAppSelector((state) => state.offers);
+  const reviews = useAppSelector((state) => state.reviews);
+  const authorisationStatus = useAppSelector((state) => state.authorisationStatus);
+  const activeOffer = offers.find((place) => place.id === params.id);
+  const offersNearby = offers.filter((offer) => offer.city.name === activeOffer?.city.name && offer.id !== activeOffer.id);
+  const offerReviews = reviews.filter((review) => review.id === activeOffer?.id);
   const offersCoordinates = getOffersCoordinates(offers);
 
-  if (offer) {
+  if (activeOffer) {
     return (
       <div className="page">
         <header className="header">
@@ -41,7 +39,7 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                {offer.images.map((image) => (
+                {activeOffer.images.map((image) => (
                   <div className="offer__image-wrapper" key={image}>
                     <img className="offer__image" src={image} alt="Photo studio" />
                   </div>))}
@@ -49,10 +47,10 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
             </div>
             <div className="offer__container container">
               <div className="offer__wrapper">
-                {offer.isPremium && <PremiumTag prefix={PremiumPrefix.Offer} />}
+                {activeOffer.isPremium && <PremiumTag prefix={PremiumPrefix.Offer} />}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">
-                    {offer.title}
+                    {activeOffer.title}
                   </h1>
                   <button className="offer__bookmark-button button" type="button">
                     <svg className="offer__bookmark-icon" width="31" height="33">
@@ -63,30 +61,30 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{ width: `${getRatingWidth(offer.rating)}`}} />
+                    <span style={{ width: `${getRatingWidth(activeOffer.rating)}`}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="offer__rating-value rating__value">{offer.rating}</span>
+                  <span className="offer__rating-value rating__value">{activeOffer.rating}</span>
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {offer.type}
+                    {activeOffer.type}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offer.bedrooms} Bedroom{offer.bedrooms > 1 && 's'}
+                    {activeOffer.bedrooms} Bedroom{activeOffer.bedrooms > 1 && 's'}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offer.maxAdults} adult{offer.maxAdults > 1 && 's'}
+                    Max {activeOffer.maxAdults} adult{activeOffer.maxAdults > 1 && 's'}
                   </li>
                 </ul>
                 <div className="offer__price">
-                  <b className="offer__price-value">&euro;{offer.price}</b>
+                  <b className="offer__price-value">&euro;{activeOffer.price}</b>
                   <span className="offer__price-text">&nbsp;night</span>
                 </div>
                 <div className="offer__inside">
                   <h2 className="offer__inside-title">What&apos;s inside</h2>
                   <ul className="offer__inside-list">
-                    {offer.goods.map((item) => (
+                    {activeOffer.goods.map((item) => (
                       <li key={item} className="offer__inside-item">
                         {item}
                       </li>))}
@@ -98,22 +96,22 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
                     <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                       <img
                         className="offer__avatar user__avatar"
-                        src={offer.host.avatarUrl}
+                        src={activeOffer.host.avatarUrl}
                         width="74"
                         height="74"
                         alt="Host avatar"
                       />
                     </div>
                     <span className="offer__user-name">
-                      {offer.host.name}
+                      {activeOffer.host.name}
                     </span>
                     <span className="offer__user-status">
-                      {offer.host.isPro && 'Pro'}
+                      {activeOffer.host.isPro && 'Pro'}
                     </span>
                   </div>
                   <div className="offer__description">
                     <p className="offer__text">
-                      {offer.description}
+                      {activeOffer.description}
                     </p>
                   </div>
                 </div>
@@ -125,16 +123,16 @@ export default function OfferPage({ authorisationStatus, offers, reviews}: Offer
               </div>
             </div>
             <MapOffer
-              location={Locations.Amsterdam}
+              location={activeOffer.city.name}
               offers={offersCoordinates}
-              selectedOfferId={offer.id}
+              selectedOfferId={activeOffer.id}
             />
           </section>
           <div className="container">
             <section className="near-places places">
-              <h2 className="near-places__title">Other places in the neighbourhood</h2>
+              <h2 className="near-places__title">{offersNearby.length === 0 && 'No '}Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <NearbyList offers={offers} />
+                <NearbyList offers={offersNearby} />
               </div>
             </section>
           </div>

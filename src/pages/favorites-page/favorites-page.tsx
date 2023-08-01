@@ -1,13 +1,11 @@
+import { useAppSelector } from '../../hooks';
 import SignIn from '../../components/sign-in/sign-in';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
-import { OffersType, LocationReducerType } from '../../types/types';
+import { LocationReducerType } from '../../types/types';
 
-type FavoritesPageProps = {
-  offers: OffersType;
-}
-
-export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Element {
+export default function FavoritesPage (): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const groupByLocation = Object.entries(favoriteOffers.reduce<LocationReducerType>((location, offer) => {
     const { name } = offer.city;

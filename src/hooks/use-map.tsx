@@ -32,7 +32,8 @@ export default function useMap(
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, location]);
+    map?.setView([LocationsCoordinates[location].latitude, LocationsCoordinates[location].longitude]);
+  }, [map, mapRef, location]);
 
   return map;
 }
