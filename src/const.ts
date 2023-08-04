@@ -163,6 +163,7 @@ export const RATING_WIDTH_UNIT = 20;
 export const NameSpace = {
   Location: 'location',
   Offers: 'offers',
+  OfferId: 'offer',
   Sorting: 'sorting'
 } as const;
 
@@ -170,7 +171,8 @@ export const Action = {
   Add: 'add',
   Delete: 'delete',
   Get: 'get',
-  Update: 'update'
+  Update: 'update',
+  Set: 'set'
 } as const;
 
 export const SortOrders = {

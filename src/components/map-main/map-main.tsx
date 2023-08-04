@@ -1,13 +1,16 @@
-import { Map, MapProps } from '../map/map';
+import { Map } from '../map/map';
 import { AppPath, MapDesign } from '../../const';
+import { OffersType } from '../../types/types';
+import { getOffersCoordinates } from '../../helper';
 
-type MapMainOmitType = 'mapStyle' | 'classAdded';
+type MapMainProps = {
+  offers: OffersType;
+}
 
-type MapMainProps = Omit<MapProps, MapMainOmitType >
-
-export default function MapMain(props: MapMainProps): JSX.Element {
+export default function MapMain({offers}: MapMainProps): JSX.Element {
+  const offersCoordinates = getOffersCoordinates(offers);
   return (
-    <Map classAdded= {MapDesign[AppPath.Main].classAdded} {...props}/>
+    <Map classAdded= {MapDesign[AppPath.Main].classAdded} offers={offersCoordinates}/>
   );
 
 }

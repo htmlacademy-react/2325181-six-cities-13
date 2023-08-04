@@ -5,7 +5,7 @@ type StarRatingScoreType = typeof StarRatings[number]['star'];
 export default function Review ():JSX.Element {
   const [reviewRating, setReviewRating] = useState<StarRatingScoreType>('5');
   const [reviewText, setReviewText] = useState<string>('');
-  const onRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {value} = evt.target as HTMLInputElement;
     setReviewRating(value as StarRatingScoreType);
   };
@@ -22,7 +22,7 @@ export default function Review ():JSX.Element {
                 <input
                   className="form__rating-input visually-hidden"
                   name="rating"
-                  onChange={onRatingChange}
+                  onChange={handleRatingChange}
                   value={star}
                   id={inputId}
                   type="radio"

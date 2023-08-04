@@ -59,8 +59,6 @@ export type ReviewsType = ReviewType [];
 
 export type PremiumPrefixType = typeof PremiumPrefix[keyof typeof PremiumPrefix];
 
-export type ChangeLocationType = (location: LocationType) => void;
-
 export type LocationReducerType = {
   [name: string]: OffersType;
 };

@@ -4,12 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { updateSortOrder } from '../../store/action';
 import { SortOrders} from '../../const';
 import { ActiveSortOrderType } from '../../types/types';
+import { selectActiveSortOrder } from '../../selectors';
 
 export default function Sort(): JSX.Element {
-  const activeOrder: ActiveSortOrderType = useAppSelector((state) => state.activeSortOrder);
+  const activeOrder: ActiveSortOrderType = useAppSelector(selectActiveSortOrder);
   const [isOpened, setIsOpened] = useState(false);
   const dispatch = useAppDispatch();
-  const onSortTypeClick = (order: ActiveSortOrderType) => {
+  const handleSortTypeClick = (order: ActiveSortOrderType) => {
     dispatch(updateSortOrder(order));
     setIsOpened(false);
   };
@@ -24,7 +25,7 @@ export default function Sort(): JSX.Element {
       </span>
       <ul className={classNames('places__options', 'places__options--custom', {'places__options--opened': isOpened, 'places__options--closed': !isOpened})}>
         {Object.entries(SortOrders).map(([, {order, title}]) =>
-          <li key={order} className={classNames('places__option', {'places__option--active': activeOrder === title})} onClick={() => onSortTypeClick(order)} tabIndex={0}>{title}</li>
+          <li key={order} className={classNames('places__option', {'places__option--active': activeOrder === title})} onClick={() => handleSortTypeClick(order)} tabIndex={0}>{title}</li>
         )}
       </ul>
     </form>

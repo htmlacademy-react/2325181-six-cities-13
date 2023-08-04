@@ -2,14 +2,14 @@ import {useRef, useEffect, CSSProperties} from 'react';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
-import { LocationType, OfferCoordinatesType } from '../../types/types';
-import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { selectLocation, selectOfferId } from '../../selectors';
+import { OfferCoordinatesType } from '../../types/types';
+import { AppPath, MapDesign, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { getIconObject } from '../../helper';
 
 export type MapProps = {
-  location: LocationType;
   offers: OfferCoordinatesType [];
-  selectedOfferId: string;
   classAdded: string;
   mapStyle?: CSSProperties;
 }
@@ -17,11 +17,20 @@ export type MapProps = {
 const defaultCustomIcon = new Icon(getIconObject(URL_MARKER_DEFAULT));
 const currentCustomIcon = new Icon(getIconObject(URL_MARKER_CURRENT));
 
-export function Map({location, offers, selectedOfferId, classAdded, mapStyle}: MapProps): JSX.Element {
-  const mapRef = useRef(null);
-  const map = useMap(mapRef, location);
 
+export function Map({offers, classAdded, mapStyle}: MapProps): JSX.Element {
+  const mapRef = useRef(null);
+  const location = useAppSelector(selectLocation);
+  const map = useMap(mapRef, location);
+  const selectedOfferId = useAppSelector(selectOfferId);
   useEffect(() => {
+    const setIconStyle = (offer: OfferCoordinatesType) => {
+      if (offer.id === selectedOfferId
+            && classAdded !== MapDesign[AppPath.Offer].classAdded) {
+        return currentCustomIcon;
+      }
+      return defaultCustomIcon;
+    };
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
@@ -32,9 +41,7 @@ export function Map({location, offers, selectedOfferId, classAdded, mapStyle}: M
 
         marker
           .setIcon(
-            selectedOfferId !== '' && offer.id === selectedOfferId
-              ? currentCustomIcon
-              : defaultCustomIcon
+            setIconStyle(offer)
           )
           .addTo(markerLayer);
       });
@@ -43,7 +50,7 @@ export function Map({location, offers, selectedOfferId, classAdded, mapStyle}: M
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOfferId]);
+  }, [map, offers, selectedOfferId, classAdded]);
 
   return (
     <section
