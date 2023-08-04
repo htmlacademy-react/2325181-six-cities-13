@@ -203,3 +203,5 @@ export const DEFAULT_SORT_ORDER = 'Popular';
 export const BASE_URL = 'https://13.design.pages.academy/six-cities';
 
 export const REQUEST_TIMEOUT = 5000;
+
+export const AUTH_TOKEN_KEY = '6-cities-token';
