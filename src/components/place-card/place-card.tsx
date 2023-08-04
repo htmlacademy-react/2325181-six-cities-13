@@ -1,25 +1,26 @@
 import classNames from 'classnames';
 import { Link, generatePath } from 'react-router-dom';
 import PremiumTag from '../premium-tag/premium-tag';
+import { useAppDispatch } from '../../hooks';
 import { AppPath, PremiumPrefix} from '../../const';
 import { OfferType } from '../../types/types';
 import { getRatingWidth} from '../../helper';
+import { setOfferId } from '../../store/action';
 
-export type PlaceCardProps = {
+type PlaceCardProps = {
   offer: OfferType;
-  onCardHover?: (id: string) => void;
-  onCardLeave?: () => void;
   cardClass: string;
   cardInfoClass: string;
   cardWidth: string;
   cardHeight: string;
 }
 
-export function PlaceCard({offer, onCardHover, onCardLeave, cardClass, cardInfoClass, cardHeight, cardWidth}: PlaceCardProps): JSX.Element {
+export function PlaceCard({offer, cardClass, cardInfoClass, cardHeight, cardWidth}: PlaceCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
   const offerPath = generatePath(AppPath.Offer, {id: offer.id});
   return (
-    <article className={classNames(`${cardClass}__card`, 'place-card')} onMouseEnter={() => onCardHover && onCardHover(offer.id)} onMouseLeave={onCardLeave}>
+    <article className={classNames(`${cardClass}__card`, 'place-card')} onMouseEnter={() => dispatch(setOfferId(offer.id))} onMouseLeave={() => dispatch(setOfferId(''))}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
       <div className={classNames(`${cardClass}__image-wrapper`, 'place-card__image-wrapper')}>
         <Link to={offerPath}>

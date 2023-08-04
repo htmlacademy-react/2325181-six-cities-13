@@ -1,28 +1,60 @@
-
-import { useState } from 'react';
-
+import classNames from 'classnames';
+import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../hooks';
 import SignIn from '../../components/sign-in/sign-in';
 import Logo from '../../components/logo/logo';
 import Location from '../../components/location/location';
-import Sort from '../../components/sort/sort';
 import MainList from '../../components/main-list/main-list';
-import { OffersType } from '../../types/types';
-import { Locations } from '../../const';
-import { getOffersCoordinates } from '../../helper';
 import MapMain from '../../components/map-main/map-main';
+import { LocationType, OffersType } from '../../types/types';
+import { selectLocation, selectOffers } from '../../selectors';
 
-
-type MainPageProps = {
-  offers: OffersType;
-
+type EmptyListProps = {
+  location: LocationType;
 }
 
-export default function MainPage({offers}: MainPageProps): JSX.Element {
-  const [offerId, setOfferId] = useState('');
-  const offersCoordinates = getOffersCoordinates(offers);
+type MainListWithMapProps = {
+  filteredOffers: OffersType;
+}
+
+function EmptyList({location}: EmptyListProps):JSX.Element {
+  return (
+    <>
+      <section className="cities__no-places">
+        <div className="cities__status-wrapper tabs__content">
+          <b className="cities__status">No places to stay available</b>
+          <p className="cities__status-description">We could not find any property available at the moment in {location}</p>
+        </div>
+      </section>
+      <div className="cities__right-section"></div>
+    </>
+  );
+}
+
+
+function MainListWithMap({filteredOffers}: MainListWithMapProps): JSX.Element {
+  return (
+    <>
+      <MainList offers={filteredOffers} />
+      <div className="cities__right-section">
+        <MapMain offers={filteredOffers} />
+      </div>
+    </>
+  );
+}
+
+
+export default function MainPage(): JSX.Element {
+  const offers = useAppSelector(selectOffers);
+  const activeLocation = useAppSelector(selectLocation);
+  const filteredOffers = offers.filter((offer) => offer.city.name === activeLocation);
+  const isEmptyList = !filteredOffers.length;
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 cities. Rental offers in European capitals</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -34,7 +66,7 @@ export default function MainPage({offers}: MainPageProps): JSX.Element {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main className={classNames('page__main page__main--index', {'page__main--index-empty': isEmptyList})}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -42,18 +74,8 @@ export default function MainPage({offers}: MainPageProps): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
-              <Sort />
-              <div className="cities__places-list places__list tabs__content">
-                <MainList onCardHover={(id) => setOfferId(id)} onCardLeave={() => setOfferId('')} offers={offers} />
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <MapMain offers={offersCoordinates} location={Locations.Amsterdam} selectedOfferId={offerId}/>
-            </div>
+          <div className={classNames('cities__places-container', {'cities__places-container--empty': isEmptyList}, 'container')}>
+            {isEmptyList ? <EmptyList location={activeLocation} /> : <MainListWithMap filteredOffers={filteredOffers} />}
           </div>
         </div>
       </main>

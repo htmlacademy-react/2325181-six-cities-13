@@ -1,4 +1,5 @@
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign } from '../const';
+import { store } from '../store';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -58,8 +59,6 @@ export type ReviewsType = ReviewType [];
 
 export type PremiumPrefixType = typeof PremiumPrefix[keyof typeof PremiumPrefix];
 
-export type ChangeLocationType = (location: LocationType) => void;
-
 export type LocationReducerType = {
   [name: string]: OffersType;
 };
@@ -71,3 +70,9 @@ export type OfferCoordinatesType = {
 }
 
 export type MapPageType = keyof typeof MapDesign;
+
+export type StateType = ReturnType<typeof store.getState>;
+
+export type AppDispatchType = typeof store.dispatch;
+
+export type ActiveSortOrderType = typeof SortOrders[keyof typeof SortOrders]['order'];

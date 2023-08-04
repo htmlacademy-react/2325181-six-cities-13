@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { getRatingWidth } from '../../helper';
-import { MAX_REVIEWS_QUANTITY } from '../../const';
+import { MAX_REVIEWS_QUANTITY, REVIEW_DATE_FORMAT } from '../../const';
 import { ReviewsType } from '../../types/types';
 
 type ReviewListProps = {
@@ -37,7 +37,7 @@ export default function ReviewList ({reviews}:ReviewListProps): JSX.Element {
             <p className="reviews__text">
               {review.comment}
             </p>
-            <time className="reviews__time" dateTime={review.date}>{dayjs(review.date).format('MMMM YYYY')}</time>
+            <time className="reviews__time" dateTime={review.date}>{dayjs(review.date).format(REVIEW_DATE_FORMAT)}</time>
           </div>
         </li>
       ))}

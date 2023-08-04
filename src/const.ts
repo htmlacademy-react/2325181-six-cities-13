@@ -1,3 +1,5 @@
+import { OffersType } from './types/types';
+
 export const AppPath = {
   Main: '/',
   Login: '/login',
@@ -100,8 +102,8 @@ export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 
 export const IconDesign = {
-  iconSize: [30, 45],
-  iconAnchor: [15, 45]
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39]
 } as const;
 
 export const LocationsCoordinates = {
@@ -149,7 +151,51 @@ export const MapDesign = {
     style: {
       width: '1144px',
       height: '579px',
-      margin: '20px auto',
+      margin: '0 auto 20px auto',
     }
   }
 } as const;
+
+export const REVIEW_DATE_FORMAT = 'MMMM YYYY';
+
+export const RATING_WIDTH_UNIT = 20;
+
+export const NameSpace = {
+  Location: 'location',
+  Offers: 'offers',
+  OfferId: 'offer',
+  Sorting: 'sorting'
+} as const;
+
+export const Action = {
+  Add: 'add',
+  Delete: 'delete',
+  Get: 'get',
+  Update: 'update',
+  Set: 'set'
+} as const;
+
+export const SortOrders = {
+  Popular: {
+    order: 'Popular',
+    title: 'Popular',
+    callback: (offers: OffersType) => offers.slice()
+  },
+  PriceAscending: {
+    order: 'PriceAscending',
+    title: 'Price: low to high',
+    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerA.price - offerB.price)
+  },
+  PriceDescending: {
+    order: 'PriceDescending',
+    title: 'Price: high to low',
+    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerB.price - offerA.price)
+  },
+  RatedFirst: {
+    order: 'RatedFirst',
+    title: 'Top rated first',
+    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerB.rating - offerA.rating)
+  }
+} as const;
+
+export const DEFAULT_SORT_ORDER = 'Popular';

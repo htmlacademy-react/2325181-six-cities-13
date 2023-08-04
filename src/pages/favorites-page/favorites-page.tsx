@@ -1,13 +1,13 @@
+import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../hooks';
 import SignIn from '../../components/sign-in/sign-in';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
-import { OffersType, LocationReducerType } from '../../types/types';
+import { LocationReducerType } from '../../types/types';
+import { selectOffers } from '../../selectors';
 
-type FavoritesPageProps = {
-  offers: OffersType;
-}
-
-export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Element {
+export default function FavoritesPage (): JSX.Element {
+  const offers = useAppSelector(selectOffers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const groupByLocation = Object.entries(favoriteOffers.reduce<LocationReducerType>((location, offer) => {
     const { name } = offer.city;
@@ -17,6 +17,9 @@ export default function FavoritesPage ({offers}: FavoritesPageProps): JSX.Elemen
   }, {}));
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities. Favorite offers</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
