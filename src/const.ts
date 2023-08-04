@@ -199,3 +199,7 @@ export const SortOrders = {
 } as const;
 
 export const DEFAULT_SORT_ORDER = 'Popular';
+
+export const BASE_URL = 'https://13.design.pages.academy/six-cities';
+
+export const REQUEST_TIMEOUT = 5000;
