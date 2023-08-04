@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
-import SignIn from '../../components/sign-in/sign-in';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { LocationReducerType } from '../../types/types';
@@ -20,16 +19,6 @@ export default function FavoritesPage (): JSX.Element {
       <Helmet>
         <title>6 cities. Favorite offers</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <SignIn />
-          </div>
-        </div>
-      </header>
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
