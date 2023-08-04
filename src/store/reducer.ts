@@ -1,8 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { updateLocation, updateSortOrder, setOfferId } from './action';
+import { updateLocation, updateSortOrder, setOfferId, loadOffers } from './action';
 import { Locations, AuthorisationStatus, SortOrders} from '../const';
 import { LocationType, OffersType, ReviewsType, AuthorisationStatusType, ActiveSortOrderType } from '../types/types';
-import { Offers } from '../mocks/offers';
 import { Reviews } from '../mocks/reviews';
 
 export type InitialStateType = {
@@ -16,7 +15,7 @@ export type InitialStateType = {
 
 export const initialState: InitialStateType = {
   location: Locations.Amsterdam,
-  offers: Offers,
+  offers: [],
   offerId: '',
   reviews: Reviews,
   authorisationStatus: AuthorisationStatus.Auth,
@@ -30,6 +29,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOfferId, (state, action) => {
       state.offerId = action.payload;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
     })
     .addCase(updateSortOrder, (state, action) => {
       state.activeSortOrder = action.payload;
