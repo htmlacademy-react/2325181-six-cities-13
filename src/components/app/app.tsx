@@ -7,6 +7,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { AppPath } from '../../const';
+import Layout from '../layout/layout';
 
 
 export default function App (): JSX.Element {
@@ -14,30 +15,32 @@ export default function App (): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={AppPath.Main}
-            element={<MainPage />}
-          />
-          <Route
-            path={AppPath.Favorites}
-            element={
-              <PrivateRoute>
-                <FavoritesPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path={AppPath.Login}
-            element={<LoginPage />}
-          />
-          <Route
-            path={AppPath.Offer}
-            element={<OfferPage />}
-          />
-          <Route
-            path={AppPath.NotFound}
-            element={<NotFoundPage />}
-          />
+          <Route path='/' element={<Layout />}>
+            <Route
+              index
+              element={<MainPage />}
+            />
+            <Route
+              path={AppPath.Favorites}
+              element={
+                <PrivateRoute>
+                  <FavoritesPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={AppPath.Login}
+              element={<LoginPage />}
+            />
+            <Route
+              path={AppPath.Offer}
+              element={<OfferPage />}
+            />
+            <Route
+              path={AppPath.NotFound}
+              element={<NotFoundPage />}
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

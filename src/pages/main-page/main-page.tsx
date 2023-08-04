@@ -1,8 +1,6 @@
 import classNames from 'classnames';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
-import SignIn from '../../components/sign-in/sign-in';
-import Logo from '../../components/logo/logo';
 import Location from '../../components/location/location';
 import MainList from '../../components/main-list/main-list';
 import MapMain from '../../components/map-main/map-main';
@@ -55,16 +53,6 @@ export default function MainPage(): JSX.Element {
       <Helmet>
         <title>6 cities. Rental offers in European capitals</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <SignIn />
-          </div>
-        </div>
-      </header>
 
       <main className={classNames('page__main page__main--index', {'page__main--index-empty': isEmptyList})}>
         <h1 className="visually-hidden">Cities</h1>

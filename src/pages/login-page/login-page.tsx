@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate } from 'react-router-dom';
-import Logo from '../../components/logo/logo';
 import { AppPath, AuthorisationStatus, Locations } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getRandomArrayElement } from '../../helper';
@@ -11,20 +10,14 @@ export default function LoginPage(): React.ReactNode {
   const locationsList = Object.values(Locations);
   const randomLocation = getRandomArrayElement<typeof locationsList[number]>(locationsList);
   return authorisationStatus === AuthorisationStatus.NoAuth
-    ? (
+    ? <Navigate to={AppPath.Main} />
+    :
+    (
       <div className="page page--gray page--login">
         <Helmet>
           <title>6 cities. Login page</title>
         </Helmet>
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <Logo />
-              </div>
-            </div>
-          </div>
-        </header>
+
         <main className="page__main page__main--login">
           <div className="page__login-container container">
             <section className="login">
@@ -53,7 +46,6 @@ export default function LoginPage(): React.ReactNode {
           </div>
         </main>
       </div>
-    )
-    :
-    <Navigate to={AppPath.Main} />;
+    );
+
 }

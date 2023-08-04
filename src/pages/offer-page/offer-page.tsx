@@ -1,9 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Navigate, useParams } from 'react-router-dom';
-import SignIn from '../../components/sign-in/sign-in';
 import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
-import Logo from '../../components/logo/logo';
 import ReviewList from '../../components/review-list/review-list';
 import { useAppSelector } from '../../hooks';
 import { AppPath, AuthorisationStatus, PremiumPrefix } from '../../const';
@@ -29,16 +27,6 @@ export default function OfferPage(): JSX.Element {
       <Helmet>
         <title>6 cities. {activeOffer.title}</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <SignIn />
-          </div>
-        </div>
-      </header>
 
       <main className="page__main page__main--offer">
         <section className="offer">
