@@ -11,3 +11,5 @@ export const selectOffers = (state: InitialStateType) => state.offers;
 export const selectReviews = (state: InitialStateType) => state.reviews;
 
 export const selectOfferId = (state: InitialStateType) => state.offerId;
+
+export const selectDataLoadingStatus = (state: InitialStateType) => state.isDataLoading;

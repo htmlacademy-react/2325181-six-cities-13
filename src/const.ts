@@ -1,4 +1,4 @@
-import { OffersType } from './types/types';
+import { CSSProperties } from 'react';
 
 export const AppPath = {
   Main: '/',
@@ -164,7 +164,8 @@ export const NameSpace = {
   Location: 'location',
   Offers: 'offers',
   OfferId: 'offer',
-  Sorting: 'sorting'
+  Sorting: 'sorting',
+  LoadingStatus: 'loading'
 } as const;
 
 export const Action = {
@@ -180,22 +181,18 @@ export const SortOrders = {
   Popular: {
     order: 'Popular',
     title: 'Popular',
-    callback: (offers: OffersType) => offers.slice()
   },
   PriceAscending: {
     order: 'PriceAscending',
     title: 'Price: low to high',
-    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerA.price - offerB.price)
   },
   PriceDescending: {
     order: 'PriceDescending',
     title: 'Price: high to low',
-    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerB.price - offerA.price)
   },
   RatedFirst: {
     order: 'RatedFirst',
     title: 'Top rated first',
-    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerB.rating - offerA.rating)
   }
 } as const;
 
@@ -210,4 +207,27 @@ export const AUTH_TOKEN_KEY = '6-cities-token';
 export const APIPath = {
   Offers: '/offers',
   Reviews: '/reviews',
+};
+
+export const containerStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around'
+};
+
+export const spinnerCSSOverride: CSSProperties = {
+  display: 'block',
+  margin: '300px auto'
+};
+
+export const spinnerSize = 500;
+
+export const spinnerColor = '#4481C3';
+
+export const loadingStyle: CSSProperties = {
+  display: 'block',
+  margin: 'auto',
+  color: '#4481C3',
+  fontSize: 'x-large',
+  fontWeight: '700'
 };

@@ -9,3 +9,5 @@ export const updateSortOrder = createAction<ActiveSortOrderType>(`${NameSpace.So
 export const setOfferId = createAction<string>(`${NameSpace.OfferId}/${Action.Set}`);
 
 export const loadOffers = createAction<OffersType>(`${NameSpace.Offers}/${Action.Load}`);
+
+export const setDataLoadingStatus = createAction<boolean>(`${NameSpace.LoadingStatus}/${Action.Set}`);
