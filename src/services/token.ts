@@ -1,6 +1,6 @@
 import { AUTH_TOKEN_KEY } from '../const';
+import { Token } from '../types/types';
 
-export type Token = string;
 
 export const setToken = (token: Token): void => {
   localStorage.setItem(AUTH_TOKEN_KEY, token);

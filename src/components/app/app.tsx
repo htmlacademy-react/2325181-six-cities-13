@@ -15,6 +15,7 @@ import { selectDataLoadingStatus } from '../../selectors';
 
 export default function App (): JSX.Element {
   const isDataLoading = useAppSelector(selectDataLoadingStatus);
+
   if (isDataLoading) {
     return <LoadingPage />;
   }

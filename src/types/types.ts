@@ -76,3 +76,13 @@ export type StateType = ReturnType<typeof store.getState>;
 export type AppDispatchType = typeof store.dispatch;
 
 export type ActiveSortOrderType = typeof SortOrders[keyof typeof SortOrders]['order'];
+
+export type Token = string;
+
+export type UserDataType = {
+  email: string;
+  password: string;
+  token: Token;
+}
+
+export type AuthDataType = Omit<UserDataType, 'token'>;

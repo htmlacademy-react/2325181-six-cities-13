@@ -165,7 +165,9 @@ export const NameSpace = {
   Offers: 'offers',
   OfferId: 'offer',
   Sorting: 'sorting',
-  LoadingStatus: 'loading'
+  LoadingStatus: 'loading',
+  AuthorisationStatus: 'authorisation',
+  User: 'user'
 } as const;
 
 export const Action = {
@@ -174,7 +176,9 @@ export const Action = {
   Get: 'get',
   Update: 'update',
   Set: 'set',
-  Load: 'load'
+  Load: 'load',
+  Login: 'login',
+  Logout: 'logout'
 } as const;
 
 export const SortOrders = {
@@ -202,12 +206,13 @@ export const BASE_URL = 'https://13.design.pages.academy/six-cities';
 
 export const REQUEST_TIMEOUT = 5000;
 
-export const AUTH_TOKEN_KEY = '6-cities-token';
+export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
 
 export const APIPath = {
   Offers: '/offers',
   Reviews: '/reviews',
-};
+  Login: '/login'
+} as const;
 
 export const containerStyle: CSSProperties = {
   display: 'flex',

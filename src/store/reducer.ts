@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { updateLocation, updateSortOrder, setOfferId, loadOffers, setDataLoadingStatus } from './action';
+import { updateLocation, updateSortOrder, setOfferId, loadOffers, setDataLoadingStatus, updateAuthorisationStatus } from './action';
 import { Locations, AuthorisationStatus, SortOrders} from '../const';
 import { LocationType, OffersType, ReviewsType, AuthorisationStatusType, ActiveSortOrderType } from '../types/types';
 import { Reviews } from '../mocks/reviews';
@@ -37,6 +37,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setDataLoadingStatus, (state, action) => {
       state.isDataLoading = action.payload;
+    })
+    .addCase(updateAuthorisationStatus, (state, action) => {
+      state.authorisationStatus = action.payload;
     })
     .addCase(updateSortOrder, (state, action) => {
       state.activeSortOrder = action.payload;
