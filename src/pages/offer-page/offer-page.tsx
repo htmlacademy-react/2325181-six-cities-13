@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
 import ReviewList from '../../components/review-list/review-list';
@@ -8,17 +8,19 @@ import { AppPath, AuthorisationStatus, PremiumPrefix } from '../../const';
 import { getRatingWidth } from '../../helper';
 import MapOffer from '../../components/map-offer/map-offer';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
-import { selectAuthorisationStatus, selectOffers, selectReviews } from '../../selectors';
+import { selectAuthorisationStatus, selectDataLoadingStatus, selectOfferDetails, selectReviewsList, selectOffersNearby } from '../../selectors';
+import LoadingPage from '../loading-page/loading-page';
+
 
 export default function OfferPage(): JSX.Element {
-  const params = useParams();
-  const offers = useAppSelector(selectOffers);
-  const reviews = useAppSelector(selectReviews);
+  const activeOffer = useAppSelector(selectOfferDetails);
+  const offerReviews = useAppSelector(selectReviewsList);
+  const offersNearby = useAppSelector(selectOffersNearby);
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
-  const activeOffer = offers.find((place) => place.id === params.id);
-  const offersNearby = offers.filter((offer) => offer.city.name === activeOffer?.city.name && offer.id !== activeOffer.id);
-  const offerReviews = reviews.filter((review) => review.id === activeOffer?.id);
-
+  const isDataLoading = useAppSelector(selectDataLoadingStatus);
+  if (isDataLoading) {
+    return <LoadingPage />;
+  }
   if (!activeOffer) {
     return <Navigate to={AppPath.NotFound} />;
   }
@@ -116,7 +118,7 @@ export default function OfferPage(): JSX.Element {
             </div>
           </div>
           <MapOffer
-            offers={offers}
+            offers={offersNearby}
           />
         </section>
         <div className="container">

@@ -5,8 +5,10 @@ import App from './components/app/app';
 import { store } from './store';
 import { loadOffersAction, updateAuthStatusAction } from './store/api-actions';
 
+
 store.dispatch(loadOffersAction());
 store.dispatch(updateAuthStatusAction());
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

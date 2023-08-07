@@ -8,8 +8,12 @@ export const selectAuthorisationStatus = (state: InitialStateType) => state.auth
 
 export const selectOffers = (state: InitialStateType) => state.offers;
 
-export const selectReviews = (state: InitialStateType) => state.reviews;
+export const selectOffersNearby = (state: InitialStateType) => state.offersNearby;
 
 export const selectOfferId = (state: InitialStateType) => state.offerId;
 
 export const selectDataLoadingStatus = (state: InitialStateType) => state.isDataLoading;
+
+export const selectOfferDetails = (state: InitialStateType) => state.offerDetails;
+
+export const selectReviewsList = (state: InitialStateType) => state.reviews;

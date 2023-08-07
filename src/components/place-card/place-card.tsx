@@ -6,6 +6,8 @@ import { AppPath, PremiumPrefix} from '../../const';
 import { OfferType } from '../../types/types';
 import { getRatingWidth} from '../../helper';
 import { setOfferId } from '../../store/action';
+import { store } from '../../store';
+import { loadOfferDetailsAction, loadReviewsListAction, loadOffersNearbyAction } from '../../store/api-actions';
 
 type PlaceCardProps = {
   offer: OfferType;
@@ -15,12 +17,19 @@ type PlaceCardProps = {
   cardHeight: string;
 }
 
+const handleClick = (offerId: string) => {
+  store.dispatch(loadOfferDetailsAction(offerId));
+  store.dispatch(loadReviewsListAction(offerId));
+  store.dispatch(loadOffersNearbyAction(offerId));
+
+};
+
 export function PlaceCard({offer, cardClass, cardInfoClass, cardHeight, cardWidth}: PlaceCardProps): JSX.Element {
   const dispatch = useAppDispatch();
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
   const offerPath = generatePath(AppPath.Offer, {id: offer.id});
   return (
-    <article className={classNames(`${cardClass}__card`, 'place-card')} onMouseEnter={() => dispatch(setOfferId(offer.id))} onMouseLeave={() => dispatch(setOfferId(''))}>
+    <article className={classNames(`${cardClass}__card`, 'place-card')} onClick={() => handleClick(offer.id)} onMouseEnter={() => dispatch(setOfferId(offer.id))} onMouseLeave={() => dispatch(setOfferId(''))}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
       <div className={classNames(`${cardClass}__image-wrapper`, 'place-card__image-wrapper')}>
         <Link to={offerPath}>

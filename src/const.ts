@@ -163,11 +163,14 @@ export const RATING_WIDTH_UNIT = 20;
 export const NameSpace = {
   Location: 'location',
   Offers: 'offers',
+  OffersNearby: 'offersNearby',
   OfferId: 'offer',
   Sorting: 'sorting',
   LoadingStatus: 'loading',
   AuthorisationStatus: 'authorisation',
-  User: 'user'
+  User: 'user',
+  Offer: 'offer',
+  Reviews: 'reviews'
 } as const;
 
 export const Action = {
@@ -210,8 +213,10 @@ export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
 
 export const APIPath = {
   Offers: '/offers',
-  Reviews: '/reviews',
-  Login: '/login'
+  Reviews: '/comments/:offerId',
+  Login: '/login',
+  OfferId: '/offers/:offerId',
+  OffersNearby: '/offers/:offerId/nearby'
 } as const;
 
 export const containerStyle: CSSProperties = {

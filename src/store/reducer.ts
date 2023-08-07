@@ -1,13 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { updateLocation, updateSortOrder, setOfferId, loadOffers, setDataLoadingStatus, updateAuthorisationStatus } from './action';
+import { updateLocation, updateSortOrder, setOfferId, loadOffers, setDataLoadingStatus, updateAuthorisationStatus, loadOfferDetails, loadReviewsList, loadOffersNearby } from './action';
 import { Locations, AuthorisationStatus, SortOrders} from '../const';
-import { LocationType, OffersType, ReviewsType, AuthorisationStatusType, ActiveSortOrderType } from '../types/types';
-import { Reviews } from '../mocks/reviews';
+import { LocationType, OffersType, ReviewsType, AuthorisationStatusType, ActiveSortOrderType, OfferType } from '../types/types';
 
 export type InitialStateType = {
   location: LocationType;
   offers: OffersType;
+  offersNearby: OffersType;
   offerId: string;
+  offerDetails: OfferType | null;
   reviews: ReviewsType;
   authorisationStatus: AuthorisationStatusType;
   activeSortOrder: ActiveSortOrderType;
@@ -17,8 +18,10 @@ export type InitialStateType = {
 export const initialState: InitialStateType = {
   location: Locations.Amsterdam,
   offers: [],
+  offersNearby: [],
   offerId: '',
-  reviews: Reviews,
+  offerDetails: null,
+  reviews: [],
   authorisationStatus: AuthorisationStatus.Auth,
   activeSortOrder: SortOrders.Popular.order,
   isDataLoading: false
@@ -34,6 +37,15 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(loadOffersNearby, (state, action) => {
+      state.offersNearby = action.payload;
+    })
+    .addCase(loadOfferDetails, (state, action) => {
+      state.offerDetails = action.payload;
+    })
+    .addCase(loadReviewsList, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(setDataLoadingStatus, (state, action) => {
       state.isDataLoading = action.payload;
