@@ -17,12 +17,11 @@ type PlaceCardProps = {
   cardHeight: string;
 }
 
-const handleClick = (offerId: string) => {
-  store.dispatch(loadOfferDetailsAction(offerId));
-  store.dispatch(loadReviewsListAction(offerId));
-  store.dispatch(loadOffersNearbyAction(offerId));
-
-};
+async function handleClick (offerId: string): Promise<void> {
+  await store.dispatch(loadOfferDetailsAction(offerId));
+  await store.dispatch(loadReviewsListAction(offerId));
+  await store.dispatch(loadOffersNearbyAction(offerId));
+}
 
 export function PlaceCard({offer, cardClass, cardInfoClass, cardHeight, cardWidth}: PlaceCardProps): JSX.Element {
   const dispatch = useAppDispatch();
