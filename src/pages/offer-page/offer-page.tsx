@@ -1,29 +1,44 @@
+
 import { Helmet } from 'react-helmet-async';
-import { Navigate } from 'react-router-dom';
 import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
 import ReviewList from '../../components/review-list/review-list';
-import { useAppSelector } from '../../hooks';
-import { AppPath, AuthorisationStatus, PremiumPrefix } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AuthorisationStatus, PremiumPrefix } from '../../const';
 import { getRatingWidth } from '../../helper';
 import MapOffer from '../../components/map-offer/map-offer';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
 import { selectAuthorisationStatus, selectDataLoadingStatus, selectOfferDetails, selectReviewsList, selectOffersNearby } from '../../selectors';
+import {useEffect} from 'react';
 import LoadingPage from '../loading-page/loading-page';
+import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
+import NotFoundPage from '../not-found-page/not-found-page';
+import { useParams } from 'react-router-dom';
 
 
 export default function OfferPage(): JSX.Element {
-  const activeOffer = useAppSelector(selectOfferDetails);
-  const offerReviews = useAppSelector(selectReviewsList);
+  const dispatch = useAppDispatch();
+  const offerId = useParams().id;
+
   const offersNearby = useAppSelector(selectOffersNearby);
+  const offerReviews = useAppSelector(selectReviewsList);
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
+  useEffect(() => {
+    if (offerId) {
+      dispatch(loadOfferDetailsAction(offerId));
+      dispatch(loadOffersNearbyAction(offerId));
+      dispatch(loadReviewsListAction(offerId));
+    }
+  }, [offerId, dispatch]);
+  const activeOffer = useAppSelector(selectOfferDetails);
   const isDataLoading = useAppSelector(selectDataLoadingStatus);
   if (isDataLoading) {
-    return <LoadingPage />;
+    <LoadingPage />;
   }
   if (!activeOffer) {
-    return <Navigate to={AppPath.NotFound} />;
+    return <NotFoundPage />;
   }
+
   return (
     <div className="page">
       <Helmet>
@@ -133,3 +148,5 @@ export default function OfferPage(): JSX.Element {
     </div>
   );
 }
+
+

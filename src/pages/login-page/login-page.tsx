@@ -4,7 +4,7 @@ import { AppPath, AuthorisationStatus, Locations } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRandomArrayElement } from '../../helper';
 import { selectAuthorisationStatus } from '../../selectors';
-import { authoriseUserAction } from '../../store/api-actions';
+import { loginUserAction } from '../../store/api-actions';
 import { FormEvent, useRef } from 'react';
 
 export default function LoginPage(): React.ReactNode {
@@ -17,7 +17,7 @@ export default function LoginPage(): React.ReactNode {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (emailRef.current !== null && passwordRef.current !== null) {
-      dispatch(authoriseUserAction({
+      dispatch(loginUserAction({
         email: emailRef.current.value,
         password: passwordRef.current.value
       }));

@@ -17,3 +17,7 @@ export const selectDataLoadingStatus = (state: InitialStateType) => state.isData
 export const selectOfferDetails = (state: InitialStateType) => state.offerDetails;
 
 export const selectReviewsList = (state: InitialStateType) => state.reviews;
+
+export const selectError = (state: InitialStateType) => state.error;
+
+export const selectEmail = (state: InitialStateType) => state.email;

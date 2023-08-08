@@ -1,5 +1,5 @@
 import { store } from '../store';
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders, AppPath } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -86,3 +86,5 @@ export type UserDataType = {
 }
 
 export type AuthDataType = Omit<UserDataType, 'token'>;
+
+export type AppPathType = typeof AppPath[keyof typeof AppPath]

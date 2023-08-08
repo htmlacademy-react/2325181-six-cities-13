@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import { Action, NameSpace } from '../const';
-import { LocationType, ActiveSortOrderType, OffersType, AuthorisationStatusType, OfferType, ReviewsType } from '../types/types';
+import { LocationType, ActiveSortOrderType, OffersType, AuthorisationStatusType, OfferType, ReviewsType, AppPathType } from '../types/types';
 
 export const updateLocation = createAction<LocationType>(`${NameSpace.Location}/${Action.Update}`);
 
@@ -19,3 +19,9 @@ export const loadOfferDetails = createAction<OfferType>(`${NameSpace.Offer}/${Ac
 export const loadReviewsList = createAction<ReviewsType>(`${NameSpace.Reviews}/${Action.Load}`);
 
 export const loadOffersNearby = createAction<OffersType>(`${NameSpace.OffersNearby}/${Action.Load}`);
+
+export const setError = createAction<string | null>(`${NameSpace.Error}/${Action.Set}`);
+
+export const redirectToRoute = createAction<AppPathType>(`${NameSpace.Route}/${Action.Redirect}`);
+
+export const setEmail = createAction<string>(`${NameSpace.User}/${Action.Set}`);

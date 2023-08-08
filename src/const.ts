@@ -1,4 +1,5 @@
 import { CSSProperties } from 'react';
+import { StatusCodes } from 'http-status-codes/build/cjs/status-codes';
 
 export const AppPath = {
   Main: '/',
@@ -170,7 +171,10 @@ export const NameSpace = {
   AuthorisationStatus: 'authorisation',
   User: 'user',
   Offer: 'offer',
-  Reviews: 'reviews'
+  Reviews: 'reviews',
+  Error: 'error',
+  Route: 'route',
+  Email:'email'
 } as const;
 
 export const Action = {
@@ -181,7 +185,8 @@ export const Action = {
   Set: 'set',
   Load: 'load',
   Login: 'login',
-  Logout: 'logout'
+  Logout: 'logout',
+  Redirect: 'redirect'
 } as const;
 
 export const SortOrders = {
@@ -216,7 +221,8 @@ export const APIPath = {
   Reviews: '/comments/:offerId',
   Login: '/login',
   OfferId: '/offers/:offerId',
-  OffersNearby: '/offers/:offerId/nearby'
+  OffersNearby: '/offers/:offerId/nearby',
+  Logout: '/logout'
 } as const;
 
 export const containerStyle: CSSProperties = {
@@ -241,3 +247,13 @@ export const loadingStyle: CSSProperties = {
   fontSize: 'x-large',
   fontWeight: '700'
 };
+
+export const TIMEOUT_SHOW_ERROR = 5000;
+
+export const StatusCodeMapping: Record<number, boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true
+};
+
+export const OFFERS_NEARBY_COUNT = 3;
