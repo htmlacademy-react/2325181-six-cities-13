@@ -17,7 +17,7 @@ type PlaceCardProps = {
   cardHeight: string;
 }
 
-async function handleClick (offerId: string): Promise<void> {
+async function handleClick (offerId: string) {
   await store.dispatch(loadOfferDetailsAction(offerId));
   await store.dispatch(loadReviewsListAction(offerId));
   await store.dispatch(loadOffersNearbyAction(offerId));
