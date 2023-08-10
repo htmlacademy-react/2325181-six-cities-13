@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { updateLocation, updateSortOrder, setOfferId, loadOffers, setDataLoadingStatus, updateAuthorisationStatus, loadOfferDetails, loadReviewsList, loadOffersNearby, setError, setEmail, addComment } from './action';
+import { updateLocation, updateSortOrder, setOfferId, loadOffers, setDataLoadingStatus, updateAuthorisationStatus, loadOfferDetails, loadReviewsList, loadOffersNearby, setError, setEmail, addComment, idleReviewPostingStatus } from './action';
 import { Locations, AuthorisationStatus, SortOrders, RequestStatus} from '../const';
 import { LocationType, OffersType, ReviewsType, AuthorisationStatusType, ActiveSortOrderType, OfferType, RequestStatusType } from '../types/types';
 import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction, postReviewAction} from './api-actions';
@@ -113,6 +113,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(postReviewAction.fulfilled, (state) => {
       state.reviewPostingStatus = RequestStatus.Fulfilled;
+    })
+    .addCase(idleReviewPostingStatus, (state) => {
+      state.reviewPostingStatus = RequestStatus.Idle;
     });
 
 });

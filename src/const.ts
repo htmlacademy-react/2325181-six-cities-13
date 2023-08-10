@@ -177,7 +177,8 @@ export const NameSpace = {
   Review: 'review',
   Error: 'error',
   Route: 'route',
-  Email:'email'
+  Email:'email',
+  ReviewLoading: 'reviewloading'
 } as const;
 
 export const Action = {
@@ -189,7 +190,8 @@ export const Action = {
   Load: 'load',
   Login: 'login',
   Logout: 'logout',
-  Redirect: 'redirect'
+  Redirect: 'redirect',
+  Idle: 'idle'
 } as const;
 
 export const SortOrders = {

@@ -55,8 +55,6 @@ export type ReviewType = {
   };
 }
 
-export type CommentType = Pick<ReviewType, 'id' | 'comment' | 'rating'>;
-
 export type ReviewsType = ReviewType [];
 
 export type PremiumPrefixType = typeof PremiumPrefix[keyof typeof PremiumPrefix];
@@ -92,3 +90,9 @@ export type AuthDataType = Omit<UserDataType, 'token'>;
 export type AppPathType = typeof AppPath[keyof typeof AppPath];
 
 export type RequestStatusType = typeof RequestStatus[keyof typeof RequestStatus];
+
+export type ReviewFormType = {
+  id: string | null;
+  comment: string;
+  rating: number;
+}

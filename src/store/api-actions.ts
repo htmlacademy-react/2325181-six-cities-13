@@ -2,7 +2,7 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { generatePath } from 'react-router-dom';
 import { InitialStateType } from './reducer';
-import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, CommentType, ReviewType } from '../types/types';
+import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType } from '../types/types';
 import { APIPath, Action, AuthorisationStatus, NameSpace, TIMEOUT_SHOW_ERROR, AppPath, OFFERS_NEARBY_COUNT } from '../const';
 import { addComment, loadOfferDetails, loadOffers, loadOffersNearby, loadReviewsList, redirectToRoute, setDataLoadingStatus, setEmail, setError, updateAuthorisationStatus } from './action';
 import { setToken, removeToken } from '../services/token';
@@ -115,7 +115,7 @@ export const loginUserAction = createAsyncThunk<void, AuthDataType, {
   },
 );
 
-export const postReviewAction = createAsyncThunk<void, CommentType, {
+export const postReviewAction = createAsyncThunk<void, ReviewFormType, {
   dispatch: AppDispatchType;
   state: InitialStateType;
   extra: AxiosInstance;
