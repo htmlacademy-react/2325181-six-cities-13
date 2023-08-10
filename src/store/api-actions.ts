@@ -2,17 +2,19 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { generatePath } from 'react-router-dom';
 import { InitialStateType } from './reducer';
-import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType } from '../types/types';
+import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, CommentType, ReviewType } from '../types/types';
 import { APIPath, Action, AuthorisationStatus, NameSpace, TIMEOUT_SHOW_ERROR, AppPath, OFFERS_NEARBY_COUNT } from '../const';
-import { loadOfferDetails, loadOffers, loadOffersNearby, loadReviewsList, redirectToRoute, setDataLoadingStatus, setEmail, setError, updateAuthorisationStatus } from './action';
+import { addComment, loadOfferDetails, loadOffers, loadOffersNearby, loadReviewsList, redirectToRoute, setDataLoadingStatus, setEmail, setError, updateAuthorisationStatus } from './action';
 import { setToken, removeToken } from '../services/token';
-import { store } from '.';
 
-export const clearErrorAction = createAsyncThunk(
+export const clearErrorAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatchType;
+  }
+>(
   `${NameSpace.Error}/${Action.Delete}`,
-  () => {
+  (_, {dispatch}) => {
     setTimeout(
-      () => store.dispatch(setError(null)),
+      () => dispatch(setError(null)),
       TIMEOUT_SHOW_ERROR,
     );
   },
@@ -110,6 +112,20 @@ export const loginUserAction = createAsyncThunk<void, AuthDataType, {
     dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
     dispatch(setEmail(email));
     dispatch(redirectToRoute(AppPath.Favorites));
+  },
+);
+
+export const postReviewAction = createAsyncThunk<void, CommentType, {
+  dispatch: AppDispatchType;
+  state: InitialStateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Review}/${Action.Add}`,
+  async ({id, comment, rating}, {dispatch, extra: axiosApi}) => {
+    const {data} = await axiosApi.post<ReviewType>(generatePath(APIPath.Reviews, {offerId: id}), {comment, rating});
+    dispatch(addComment(data));
   },
 );
 

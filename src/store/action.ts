@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import { Action, NameSpace } from '../const';
-import { LocationType, ActiveSortOrderType, OffersType, AuthorisationStatusType, OfferType, ReviewsType, AppPathType } from '../types/types';
+import { LocationType, ActiveSortOrderType, OffersType, AuthorisationStatusType, OfferType, ReviewsType, AppPathType, ReviewType } from '../types/types';
 
 export const updateLocation = createAction<LocationType>(`${NameSpace.Location}/${Action.Update}`);
 
@@ -14,7 +14,7 @@ export const setDataLoadingStatus = createAction<boolean>(`${NameSpace.LoadingSt
 
 export const updateAuthorisationStatus = createAction<AuthorisationStatusType>(`${NameSpace.AuthorisationStatus}/${Action.Update}`);
 
-export const loadOfferDetails = createAction<OfferType>(`${NameSpace.Offer}/${Action.Load}`);
+export const loadOfferDetails = createAction<OfferType | null>(`${NameSpace.Offer}/${Action.Load}`);
 
 export const loadReviewsList = createAction<ReviewsType>(`${NameSpace.Reviews}/${Action.Load}`);
 
@@ -25,3 +25,6 @@ export const setError = createAction<string | null>(`${NameSpace.Error}/${Action
 export const redirectToRoute = createAction<AppPathType>(`${NameSpace.Route}/${Action.Redirect}`);
 
 export const setEmail = createAction<string>(`${NameSpace.User}/${Action.Set}`);
+
+export const addComment = createAction<ReviewType>(`${NameSpace.Review}/${Action.Add}`);
+

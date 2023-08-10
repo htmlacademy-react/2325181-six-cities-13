@@ -17,23 +17,23 @@ export const AuthorisationStatus = {
 
 export const StarRatings = [
   {
-    star: '5',
+    star: 5,
     description: 'perfect'
   },
   {
-    star: '4',
+    star: 4,
     description: 'good'
   },
   {
-    star: '3',
+    star: 3,
     description: 'not bad'
   },
   {
-    star: '2',
+    star: 2,
     description: 'badly'
   },
   {
-    star: '1',
+    star: 1,
     description: 'terribly'
   },
 ] as const;
@@ -82,9 +82,11 @@ export const PremiumPrefix = {
   PlaceCard: 'place-card'
 } as const;
 
-export const ReviewValidationParameters = {
+export const FormValidation = {
   MinLength: 50,
   MaxLength: 300,
+  MinRating: 1,
+  MaxRating: 5
 } as const;
 
 export const LogoSizes = {
@@ -140,7 +142,7 @@ export const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voy
 
 export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
-export const MAX_REVIEWS_QUANTITY = 10;
+export const MAX_REVIEWS_QUANTITY = -10;
 
 export const MapDesign = {
   [AppPath.Main]:{
@@ -172,6 +174,7 @@ export const NameSpace = {
   User: 'user',
   Offer: 'offer',
   Reviews: 'reviews',
+  Review: 'review',
   Error: 'error',
   Route: 'route',
   Email:'email'
@@ -257,3 +260,12 @@ export const StatusCodeMapping: Record<number, boolean> = {
 };
 
 export const OFFERS_NEARBY_COUNT = 3;
+
+export const DEFAULT_RATING_NUMBER = 5;
+
+export const RequestStatus = {
+  Idle: 'idle',
+  Pending: 'pending',
+  Fulfilled: 'fulfilled',
+  Rejected: 'rejected'
+} as const;

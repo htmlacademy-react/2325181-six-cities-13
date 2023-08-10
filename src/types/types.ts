@@ -1,5 +1,5 @@
 import { store } from '../store';
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders, AppPath } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders, AppPath, RequestStatus } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -55,6 +55,8 @@ export type ReviewType = {
   };
 }
 
+export type CommentType = Pick<ReviewType, 'id' | 'comment' | 'rating'>;
+
 export type ReviewsType = ReviewType [];
 
 export type PremiumPrefixType = typeof PremiumPrefix[keyof typeof PremiumPrefix];
@@ -87,4 +89,6 @@ export type UserDataType = {
 
 export type AuthDataType = Omit<UserDataType, 'token'>;
 
-export type AppPathType = typeof AppPath[keyof typeof AppPath]
+export type AppPathType = typeof AppPath[keyof typeof AppPath];
+
+export type RequestStatusType = typeof RequestStatus[keyof typeof RequestStatus];

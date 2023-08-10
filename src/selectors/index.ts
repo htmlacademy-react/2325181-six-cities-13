@@ -21,3 +21,11 @@ export const selectReviewsList = (state: InitialStateType) => state.reviews;
 export const selectError = (state: InitialStateType) => state.error;
 
 export const selectEmail = (state: InitialStateType) => state.email;
+
+export const selectOfferStatus = (state: InitialStateType) => state.offerLoadingStatus;
+
+export const selectReviewStatus = (state: InitialStateType) => state.reviewsLoadingStatus;
+
+export const selectNearbyStatus = (state: InitialStateType) => state.nearbyLoadingStatus;
+
+export const selectReviewPostingStatus = (state: InitialStateType) => state.reviewPostingStatus;
