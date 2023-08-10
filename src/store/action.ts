@@ -28,5 +28,5 @@ export const setEmail = createAction<string>(`${NameSpace.User}/${Action.Set}`);
 
 export const addComment = createAction<ReviewType>(`${NameSpace.Review}/${Action.Add}`);
 
-export const idleReviewPostingStatus = createAction<ReviewType>(`${NameSpace.ReviewLoading}/${Action.Idle}`);
+export const idleReviewPostingStatus = createAction(`${NameSpace.ReviewLoading}/${Action.Idle}`);
 

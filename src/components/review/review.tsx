@@ -7,11 +7,10 @@ import { isFulfilled, isValidForm } from '../../helper';
 import { selectReviewPostingStatus } from '../../selectors';
 import { ReviewFormType } from '../../types/types';
 import { idleReviewPostingStatus } from '../../store/action';
-import { store } from '../../store';
 
 export default function Review ():JSX.Element {
   const dispatch = useAppDispatch();
-  const offerId = useParams().id || '';
+  const offerId = useParams().id as string;
   const reviewPostingStatus = useAppSelector(selectReviewPostingStatus);
   const [isBlockedForm, setIsBlockedForm] = useState<boolean>(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false);
@@ -30,10 +29,11 @@ export default function Review ():JSX.Element {
       });
     }
     if (isFulfilled(reviewPostingStatus)) {
-      store.dispatch(idleReviewPostingStatus);
       setIsBlockedForm(false);
+      dispatch(idleReviewPostingStatus());
     }
     return () => {
+
       setIsSubmitClicked(false);
     };
   }, [isSubmitClicked, dispatch, offerId, reviewForm, reviewPostingStatus]);
