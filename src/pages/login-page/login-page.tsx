@@ -1,11 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate } from 'react-router-dom';
-import { AppPath, AuthorisationStatus, Locations } from '../../const';
+import { AppPath, AuthorisationStatus, Locations, PASSWORD_REGEX } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRandomArrayElement } from '../../helper';
 import { selectAuthorisationStatus } from '../../selectors';
 import { loginUserAction } from '../../store/api-actions';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
+import styles from './loading-page.module.css';
 
 export default function LoginPage(): React.ReactNode {
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
@@ -14,15 +15,19 @@ export default function LoginPage(): React.ReactNode {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
+  const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (emailRef.current !== null && passwordRef.current !== null) {
+    if (emailRef.current !== null &&
+      passwordRef.current !== null &&
+      isPasswordValid(passwordRef.current.value)) {
       dispatch(loginUserAction({
         email: emailRef.current.value,
         password: passwordRef.current.value
       }));
     }
   };
+  const [password, setPassword] = useState<string>('');
   return authorisationStatus === AuthorisationStatus.Auth
     ? <Navigate to={AppPath.Main} />
     :
@@ -43,7 +48,17 @@ export default function LoginPage(): React.ReactNode {
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
-                  <input className="login__input form__input" ref={passwordRef} type="password" name="password" placeholder="Password" required/>
+                  <input
+                    className="login__input form__input"
+                    ref={passwordRef}
+                    onChange={() => setPassword(passwordRef.current?.value ?? '')}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                  />
+                  {!isPasswordValid(password) &&
+                    <div className={styles.passwordNotValid}>Password must contain at least one digit and one letter sign.</div>}
                 </div>
                 <button className="login__submit form__submit button" type="submit">Sign in</button>
               </form>

@@ -8,18 +8,12 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { AppPath } from '../../const';
 import Layout from '../layout/layout';
-import LoadingPage from '../../pages/loading-page/loading-page';
-import { useAppSelector } from '../../hooks';
-import { selectDataLoadingStatus } from '../../selectors';
 import HistoryRouter from '../history-route/history-route';
 import { browserHistory } from '../../browser-history';
 
 export default function App (): JSX.Element {
 
-  const isDataLoading = useAppSelector(selectDataLoadingStatus);
-  if (isDataLoading) {
-    return <LoadingPage />;
-  }
+
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>

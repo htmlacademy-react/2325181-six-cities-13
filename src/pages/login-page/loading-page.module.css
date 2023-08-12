@@ -1,0 +1,7 @@
+.passwordNotValid {
+  color: #fff;
+  background-color: #ab1005;
+  font-size: 16px;
+  margin-bottom: 20px;
+  padding: 5px 15px;
+}

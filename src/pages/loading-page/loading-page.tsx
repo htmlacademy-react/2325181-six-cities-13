@@ -1,18 +1,18 @@
 import { CircleLoader } from 'react-spinners';
-import { containerStyle, spinnerCSSOverride, spinnerSize, spinnerColor, loadingStyle} from '../../const';
+import { CONTAINER_STYLE, SPINNER_CSS_OVERRIDE, SPINNER_SIZE, SPINNER_COLOR, LOADING_STYLE} from '../../const';
 
 export default function LoadingPage(): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
       <main>
-        <div style={containerStyle}>
+        <div style={CONTAINER_STYLE}>
           <CircleLoader
-            cssOverride={spinnerCSSOverride}
-            size={spinnerSize}
-            color={spinnerColor}
+            cssOverride={SPINNER_CSS_OVERRIDE}
+            size={SPINNER_SIZE}
+            color={SPINNER_COLOR}
           />
-          <div style={loadingStyle}>Loading...</div>
+          <div style={LOADING_STYLE}>Loading...</div>
         </div>
       </main>
     </div>

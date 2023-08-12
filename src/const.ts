@@ -230,22 +230,22 @@ export const APIPath = {
   Logout: '/logout'
 } as const;
 
-export const containerStyle: CSSProperties = {
+export const CONTAINER_STYLE: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around'
 };
 
-export const spinnerCSSOverride: CSSProperties = {
+export const SPINNER_CSS_OVERRIDE: CSSProperties = {
   display: 'block',
   margin: '300px auto'
 };
 
-export const spinnerSize = 500;
+export const SPINNER_SIZE = 500;
 
-export const spinnerColor = '#4481C3';
+export const SPINNER_COLOR = '#4481C3';
 
-export const loadingStyle: CSSProperties = {
+export const LOADING_STYLE: CSSProperties = {
   display: 'block',
   margin: 'auto',
   color: '#4481C3',
@@ -271,3 +271,5 @@ export const RequestStatus = {
   Fulfilled: 'fulfilled',
   Rejected: 'rejected'
 } as const;
+
+export const PASSWORD_REGEX = /^.*(?=.*\d)(?=.*[a-zA-Z]).*$|(^$)/;

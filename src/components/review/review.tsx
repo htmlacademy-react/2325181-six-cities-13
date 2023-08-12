@@ -1,53 +1,34 @@
-import { Fragment, useState, FormEvent, useEffect} from 'react';
+import { Fragment, useState, FormEvent} from 'react';
 import {FormValidation, StarRatings} from '../../const';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
-import { isFulfilled, isValidForm } from '../../helper';
+import { isValidForm, isPending } from '../../helper';
 import { selectReviewPostingStatus } from '../../selectors';
 import { ReviewFormType } from '../../types/types';
-import { idleReviewPostingStatus } from '../../store/action';
 
 export default function Review ():JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = useParams().id as string;
   const reviewPostingStatus = useAppSelector(selectReviewPostingStatus);
-  const [isBlockedForm, setIsBlockedForm] = useState<boolean>(false);
-  const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false);
-  const [reviewForm, setReviewForm] = useState<ReviewFormType>({
+  const DEFAULT_REVIEW_FORM = {
     id: offerId,
     comment: '',
     rating: 0
-  });
-  useEffect(() => {
-    if (isSubmitClicked) {
-      dispatch(postReviewAction(reviewForm));
-      setReviewForm({
-        id: offerId,
-        comment: '',
-        rating: 0
-      });
-    }
-    if (isFulfilled(reviewPostingStatus)) {
-      setIsBlockedForm(false);
-      dispatch(idleReviewPostingStatus());
-    }
-    return () => {
-
-      setIsSubmitClicked(false);
-    };
-  }, [isSubmitClicked, dispatch, offerId, reviewForm, reviewPostingStatus]);
-
+  };
+  const [reviewForm, setReviewForm] = useState<ReviewFormType>(DEFAULT_REVIEW_FORM);
+  const isButtonDisabled = !isValidForm(reviewForm.comment, reviewForm.rating) || isPending(reviewPostingStatus);
+  const isBlockedForm = isPending(reviewPostingStatus);
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (isValidForm(reviewForm.comment, reviewForm.rating)) {
-      setReviewForm({...reviewForm,
+      dispatch(postReviewAction({
+        id: offerId,
         comment: reviewForm.comment,
         rating: reviewForm.rating
-      });
-      setIsBlockedForm(true);
-      setIsSubmitClicked(true);
+      }));
+      setReviewForm(DEFAULT_REVIEW_FORM);
     }
   };
   return (
@@ -98,7 +79,7 @@ export default function Review ():JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!isValidForm(reviewForm.comment, reviewForm.rating) || isBlockedForm}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isButtonDisabled}>Submit</button>
       </div>
     </form>
   );

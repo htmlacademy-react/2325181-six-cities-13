@@ -18,14 +18,13 @@ import { useParams } from 'react-router-dom';
 
 export default function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offerId = useParams().id;
+  const offerId = useParams().id as string;
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
   useEffect(() => {
-    if (offerId) {
-      dispatch(loadOfferDetailsAction(offerId));
-      dispatch(loadOffersNearbyAction(offerId));
-      dispatch(loadReviewsListAction(offerId));
-    }
+    dispatch(loadOfferDetailsAction(offerId));
+    dispatch(loadOffersNearbyAction(offerId));
+    dispatch(loadReviewsListAction(offerId));
+
   }, [offerId, dispatch]);
   const activeOffer = useAppSelector(selectOfferDetails);
   const offersNearby = useAppSelector(selectOffersNearby);
