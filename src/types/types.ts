@@ -1,5 +1,5 @@
 import { store } from '../store';
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders, AppPath, RequestStatus } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -76,3 +76,23 @@ export type StateType = ReturnType<typeof store.getState>;
 export type AppDispatchType = typeof store.dispatch;
 
 export type ActiveSortOrderType = typeof SortOrders[keyof typeof SortOrders]['order'];
+
+export type Token = string;
+
+export type UserDataType = {
+  email: string;
+  password: string;
+  token: Token;
+}
+
+export type AuthDataType = Omit<UserDataType, 'token'>;
+
+export type AppPathType = typeof AppPath[keyof typeof AppPath];
+
+export type RequestStatusType = typeof RequestStatus[keyof typeof RequestStatus];
+
+export type ReviewFormType = {
+  id: string | null;
+  comment: string;
+  rating: number;
+}

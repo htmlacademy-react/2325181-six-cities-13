@@ -1,4 +1,5 @@
-import { OffersType } from './types/types';
+import { CSSProperties } from 'react';
+import { StatusCodes } from 'http-status-codes/build/cjs/status-codes';
 
 export const AppPath = {
   Main: '/',
@@ -16,23 +17,23 @@ export const AuthorisationStatus = {
 
 export const StarRatings = [
   {
-    star: '5',
+    star: 5,
     description: 'perfect'
   },
   {
-    star: '4',
+    star: 4,
     description: 'good'
   },
   {
-    star: '3',
+    star: 3,
     description: 'not bad'
   },
   {
-    star: '2',
+    star: 2,
     description: 'badly'
   },
   {
-    star: '1',
+    star: 1,
     description: 'terribly'
   },
 ] as const;
@@ -81,9 +82,11 @@ export const PremiumPrefix = {
   PlaceCard: 'place-card'
 } as const;
 
-export const ReviewValidationParameters = {
+export const FormValidation = {
   MinLength: 50,
   MaxLength: 300,
+  MinRating: 1,
+  MaxRating: 5
 } as const;
 
 export const LogoSizes = {
@@ -139,7 +142,7 @@ export const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voy
 
 export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
-export const MAX_REVIEWS_QUANTITY = 10;
+export const MAX_REVIEWS_QUANTITY = -10;
 
 export const MapDesign = {
   [AppPath.Main]:{
@@ -163,8 +166,19 @@ export const RATING_WIDTH_UNIT = 20;
 export const NameSpace = {
   Location: 'location',
   Offers: 'offers',
+  OffersNearby: 'offersNearby',
   OfferId: 'offer',
-  Sorting: 'sorting'
+  Sorting: 'sorting',
+  LoadingStatus: 'loading',
+  AuthorisationStatus: 'authorisation',
+  User: 'user',
+  Offer: 'offer',
+  Reviews: 'reviews',
+  Review: 'review',
+  Error: 'error',
+  Route: 'route',
+  Email:'email',
+  ReviewLoading: 'reviewloading'
 } as const;
 
 export const Action = {
@@ -172,30 +186,90 @@ export const Action = {
   Delete: 'delete',
   Get: 'get',
   Update: 'update',
-  Set: 'set'
+  Set: 'set',
+  Load: 'load',
+  Login: 'login',
+  Logout: 'logout',
+  Redirect: 'redirect',
+  Idle: 'idle'
 } as const;
 
 export const SortOrders = {
   Popular: {
     order: 'Popular',
     title: 'Popular',
-    callback: (offers: OffersType) => offers.slice()
   },
   PriceAscending: {
     order: 'PriceAscending',
     title: 'Price: low to high',
-    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerA.price - offerB.price)
   },
   PriceDescending: {
     order: 'PriceDescending',
     title: 'Price: high to low',
-    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerB.price - offerA.price)
   },
   RatedFirst: {
     order: 'RatedFirst',
     title: 'Top rated first',
-    callback: (offers: OffersType) => offers.slice().sort((offerA, offerB) => offerB.rating - offerA.rating)
   }
 } as const;
 
 export const DEFAULT_SORT_ORDER = 'Popular';
+
+export const BASE_URL = 'https://13.design.pages.academy/six-cities';
+
+export const REQUEST_TIMEOUT = 5000;
+
+export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
+
+export const APIPath = {
+  Offers: '/offers',
+  Reviews: '/comments/:offerId',
+  Login: '/login',
+  OfferId: '/offers/:offerId',
+  OffersNearby: '/offers/:offerId/nearby',
+  Logout: '/logout'
+} as const;
+
+export const CONTAINER_STYLE: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around'
+};
+
+export const SPINNER_CSS_OVERRIDE: CSSProperties = {
+  display: 'block',
+  margin: '300px auto'
+};
+
+export const SPINNER_SIZE = 500;
+
+export const SPINNER_COLOR = '#4481C3';
+
+export const LOADING_STYLE: CSSProperties = {
+  display: 'block',
+  margin: 'auto',
+  color: '#4481C3',
+  fontSize: 'x-large',
+  fontWeight: '700'
+};
+
+export const TIMEOUT_SHOW_ERROR = 5000;
+
+export const StatusCodeMapping: Record<number, boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true
+};
+
+export const OFFERS_NEARBY_COUNT = 3;
+
+export const DEFAULT_RATING_NUMBER = 5;
+
+export const RequestStatus = {
+  Idle: 'idle',
+  Pending: 'pending',
+  Fulfilled: 'fulfilled',
+  Rejected: 'rejected'
+} as const;
+
+export const PASSWORD_REGEX = /^.*(?=.*\d)(?=.*[a-zA-Z]).*$|(^$)/;

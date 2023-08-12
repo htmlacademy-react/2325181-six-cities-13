@@ -3,44 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import Location from '../../components/location/location';
 import MainList from '../../components/main-list/main-list';
-import MapMain from '../../components/map-main/map-main';
-import { LocationType, OffersType } from '../../types/types';
 import { selectLocation, selectOffers } from '../../selectors';
-
-type EmptyListProps = {
-  location: LocationType;
-}
-
-type MainListWithMapProps = {
-  filteredOffers: OffersType;
-}
-
-function EmptyList({location}: EmptyListProps):JSX.Element {
-  return (
-    <>
-      <section className="cities__no-places">
-        <div className="cities__status-wrapper tabs__content">
-          <b className="cities__status">No places to stay available</b>
-          <p className="cities__status-description">We could not find any property available at the moment in {location}</p>
-        </div>
-      </section>
-      <div className="cities__right-section"></div>
-    </>
-  );
-}
-
-
-function MainListWithMap({filteredOffers}: MainListWithMapProps): JSX.Element {
-  return (
-    <>
-      <MainList offers={filteredOffers} />
-      <div className="cities__right-section">
-        <MapMain offers={filteredOffers} />
-      </div>
-    </>
-  );
-}
-
+import MainEmpty from '../../components/main-empty/main-empty';
 
 export default function MainPage(): JSX.Element {
   const offers = useAppSelector(selectOffers);
@@ -63,7 +27,7 @@ export default function MainPage(): JSX.Element {
         </div>
         <div className="cities">
           <div className={classNames('cities__places-container', {'cities__places-container--empty': isEmptyList}, 'container')}>
-            {isEmptyList ? <EmptyList location={activeLocation} /> : <MainListWithMap filteredOffers={filteredOffers} />}
+            {isEmptyList ? <MainEmpty location={activeLocation} /> : <MainList offers={filteredOffers} />}
           </div>
         </div>
       </main>

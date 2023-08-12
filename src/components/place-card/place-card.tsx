@@ -7,6 +7,7 @@ import { OfferType } from '../../types/types';
 import { getRatingWidth} from '../../helper';
 import { setOfferId } from '../../store/action';
 
+
 type PlaceCardProps = {
   offer: OfferType;
   cardClass: string;
