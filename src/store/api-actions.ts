@@ -141,6 +141,5 @@ export const logoutUserAction = createAsyncThunk<void, undefined, {
     await axiosApi.delete(APIPath.Logout);
     removeToken();
     dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
-
   },
 );
