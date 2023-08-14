@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import Location from '../../components/location/location';
 import MainList from '../../components/main-list/main-list';
-import { selectLocation, selectOffers } from '../../selectors';
+import { selectLocation } from '../../store/card-list/card-list.selectors';
+import { selectOffers } from '../../store/offers/offers.selectors';
 import MainEmpty from '../../components/main-empty/main-empty';
 
 export default function MainPage(): JSX.Element {

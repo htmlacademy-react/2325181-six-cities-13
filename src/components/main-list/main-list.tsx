@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks';
 import { PlaceCard } from '../place-card/place-card';
 import Sort from '../../components/sort/sort';
-import { selectActiveSortOrder, selectLocation } from '../../selectors';
+import { selectLocation, selectActiveSortOrder } from '../../store/card-list/card-list.selectors';
 import { PlaceCardDesign, AppPath } from '../../const';
 import { OffersType, ActiveSortOrderType } from '../../types/types';
 import { sortOffers } from '../../helper';

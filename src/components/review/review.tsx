@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { isValidForm, isPending } from '../../helper';
-import { selectReviewPostingStatus } from '../../selectors';
+import { selectReviewPostingStatus } from '../../store/comment/comment.selectors';
 import { ReviewFormType } from '../../types/types';
 
 export default function Review ():JSX.Element {

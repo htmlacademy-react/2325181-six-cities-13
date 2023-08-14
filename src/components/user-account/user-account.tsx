@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectEmail } from '../../selectors';
+import { selectEmail } from '../../store/user/user.selectors';
 import { AppPath } from '../../const';
 import { logoutUserAction } from '../../store/api-actions';
 

@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { AppPath, AuthorisationStatus, Locations, PASSWORD_REGEX } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRandomArrayElement } from '../../helper';
-import { selectAuthorisationStatus } from '../../selectors';
+import { selectAuthorisationStatus } from '../../store/user/user.selectors';
 import { loginUserAction } from '../../store/api-actions';
 import { FormEvent, useRef, useState } from 'react';
 import styles from './loading-page.module.css';

@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { LocationReducerType } from '../../types/types';
-import { selectOffers } from '../../selectors';
+import { selectOffers } from '../../store/offers/offers.selectors';
 
 export default function FavoritesPage (): JSX.Element {
   const offers = useAppSelector(selectOffers);

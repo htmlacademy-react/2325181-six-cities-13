@@ -1,11 +1,17 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { generatePath } from 'react-router-dom';
-import { InitialStateType } from './reducer';
+import { State } from '../types/types';
 import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType } from '../types/types';
 import { APIPath, Action, AuthorisationStatus, NameSpace, TIMEOUT_SHOW_ERROR, AppPath, OFFERS_NEARBY_COUNT } from '../const';
-import { addComment, loadOfferDetails, loadOffers, loadOffersNearby, loadReviewsList, redirectToRoute, setDataLoadingStatus, setEmail, setError, updateAuthorisationStatus } from './action';
+import { redirectToRoute } from './action';
 import { setToken, removeToken } from '../services/token';
+import { setError } from './error/error.slice';
+import { loadOfferDetails } from './offer-details/offer-details.slice';
+import { loadReviewsList } from './reviews/reviews.slice';
+import { loadOffersNearby } from './offers-nearby/offers-nearby.slice';
+import { addComment } from './reviews/reviews.slice';
+import { setEmail, updateAuthorisationStatus } from './user/user.slice';
 
 export const clearErrorAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -21,25 +27,23 @@ export const clearErrorAction = createAsyncThunk<void, undefined, {
 );
 
 
-export const loadOffersAction = createAsyncThunk<void, undefined, {
+export const loadOffersAction = createAsyncThunk<OffersType, undefined, {
   dispatch: AppDispatchType;
-  state: InitialStateType;
+  state: State;
   extra: AxiosInstance;
   }
 >
 (
   `${NameSpace.Offers}/${Action.Load}`,
-  async (_arg, {dispatch, extra: axiosApi}) => {
-    dispatch(setDataLoadingStatus(true));
+  async (_arg, {extra: axiosApi}) => {
     const {data} = await axiosApi.get<OffersType>(APIPath.Offers);
-    dispatch(setDataLoadingStatus(false));
-    dispatch(loadOffers(data));
+    return data;
   },
 );
 
 export const loadOfferDetailsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
-  state: InitialStateType;
+  state: State;
   extra: AxiosInstance;
   }
 >
@@ -51,9 +55,23 @@ export const loadOfferDetailsAction = createAsyncThunk<void, string, {
   },
 );
 
+export const loadOffersNearbyAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: State;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.OffersNearby}/${Action.Load}`,
+  async (offerId, {dispatch, extra: axiosApi}) => {
+    const {data} = await axiosApi.get<OffersType>(generatePath(APIPath.OffersNearby, {offerId: offerId}));
+    dispatch(loadOffersNearby(data.slice(0, OFFERS_NEARBY_COUNT)));
+  },
+);
+
 export const loadReviewsListAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
-  state: InitialStateType;
+  state: State;
   extra: AxiosInstance;
   }
 >
@@ -65,24 +83,12 @@ export const loadReviewsListAction = createAsyncThunk<void, string, {
   },
 );
 
-export const loadOffersNearbyAction = createAsyncThunk<void, string, {
-  dispatch: AppDispatchType;
-  state: InitialStateType;
-  extra: AxiosInstance;
-  }
->
-(
-  `${NameSpace.Offers}/${Action.Load}`,
-  async (offerId, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi.get<OffersType>(generatePath(APIPath.OffersNearby, {offerId: offerId}));
-    dispatch(loadOffersNearby(data.slice(0, OFFERS_NEARBY_COUNT)));
-  },
-);
+
 
 
 export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
-  state: InitialStateType;
+  state: State;
   extra: AxiosInstance;
   }
 >
@@ -100,7 +106,7 @@ export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
 
 export const loginUserAction = createAsyncThunk<void, AuthDataType, {
   dispatch: AppDispatchType;
-  state: InitialStateType;
+  state: State;
   extra: AxiosInstance;
   }
 >
@@ -117,7 +123,7 @@ export const loginUserAction = createAsyncThunk<void, AuthDataType, {
 
 export const postReviewAction = createAsyncThunk<void, ReviewFormType, {
   dispatch: AppDispatchType;
-  state: InitialStateType;
+  state: State;
   extra: AxiosInstance;
   }
 >
@@ -131,7 +137,7 @@ export const postReviewAction = createAsyncThunk<void, ReviewFormType, {
 
 export const logoutUserAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
-  state: InitialStateType;
+  state: State;
   extra: AxiosInstance;
   }
 >

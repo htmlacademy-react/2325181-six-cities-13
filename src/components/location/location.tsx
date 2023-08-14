@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { Link} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectLocation } from '../../selectors';
-import { updateLocation } from '../../store/action';
+import { selectLocation } from '../../store/card-list/card-list.selectors';
+import { updateLocation } from '../../store/card-list/card-list.slice';
 import { AppPath, Locations } from '../../const';
 import { LocationType} from '../../types/types';
 

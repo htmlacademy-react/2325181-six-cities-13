@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../hooks';
 import { AppPath, PremiumPrefix} from '../../const';
 import { OfferType } from '../../types/types';
 import { getRatingWidth} from '../../helper';
-import { setOfferId } from '../../store/action';
+import { setOfferId } from '../../store/offer-details/offer-details.slice';
 
 
 type PlaceCardProps = {

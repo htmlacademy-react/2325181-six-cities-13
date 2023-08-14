@@ -1,13 +1,12 @@
 import {PlaceCard } from '../place-card/place-card';
 import { PlaceCardDesign, AppPath } from '../../const';
-import { OffersType } from '../../types/types';
+import { useAppSelector } from '../../hooks';
+import { selectOffersNearby } from '../../store/offers-nearby/offers-nearby.selectors';
 
-type NearbyListProps = {
-  offers: OffersType;
-};
 
-export function NearbyList({offers}: NearbyListProps): JSX.Element {
+export function NearbyList(): JSX.Element {
   const designProps = PlaceCardDesign[AppPath.Offer];
+  const offers = useAppSelector(selectOffersNearby);
   return (
     <section className="near-places places">
       <h2 className="near-places__title">{offers.length === 0 && 'No '}Other places in the neighbourhood</h2>

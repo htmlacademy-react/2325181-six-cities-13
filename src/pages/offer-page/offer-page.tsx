@@ -8,12 +8,14 @@ import { AuthorisationStatus, PremiumPrefix, } from '../../const';
 import { getRatingWidth, isRejected, isFulfilled, isPending } from '../../helper';
 import MapOffer from '../../components/map-offer/map-offer';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
-import { selectAuthorisationStatus, selectOfferDetails, selectOffersNearby, selectOfferStatus} from '../../selectors';
 import {useEffect} from 'react';
 import LoadingPage from '../loading-page/loading-page';
 import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { useParams } from 'react-router-dom';
+import { selectAuthorisationStatus } from '../../store/user/user.selectors';
+import { selectOfferDetails } from '../../store/offer-details/offer-details.selectors';
+import { selectOfferStatus } from '../../store/offer-details/offer-details.selectors';
 
 
 export default function OfferPage(): JSX.Element {
@@ -27,7 +29,6 @@ export default function OfferPage(): JSX.Element {
 
   }, [offerId, dispatch]);
   const activeOffer = useAppSelector(selectOfferDetails);
-  const offersNearby = useAppSelector(selectOffersNearby);
   const offerLoadingStatus = useAppSelector(selectOfferStatus);
   return (
     <>
@@ -127,7 +128,7 @@ export default function OfferPage(): JSX.Element {
             <MapOffer />
           </section>
           <div className="container">
-            <NearbyList offers={offersNearby} />
+            <NearbyList />
           </div>
         </main>
       </div>}

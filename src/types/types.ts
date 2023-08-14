@@ -96,3 +96,5 @@ export type ReviewFormType = {
   comment: string;
   rating: number;
 }
+
+export type State = ReturnType<typeof store.getState>;

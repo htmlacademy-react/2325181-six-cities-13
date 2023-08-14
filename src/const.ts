@@ -164,21 +164,16 @@ export const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 export const RATING_WIDTH_UNIT = 20;
 
 export const NameSpace = {
-  Location: 'location',
   Offers: 'offers',
   OffersNearby: 'offersNearby',
-  OfferId: 'offer',
-  Sorting: 'sorting',
-  LoadingStatus: 'loading',
   AuthorisationStatus: 'authorisation',
   User: 'user',
-  Offer: 'offer',
   Reviews: 'reviews',
   Review: 'review',
   Error: 'error',
   Route: 'route',
-  Email:'email',
-  ReviewLoading: 'reviewloading'
+  OfferDetails: 'offerDetails',
+  CardList: 'cardlist'
 } as const;
 
 export const Action = {
