@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import FavoritesList from '../../components/favorites-list/favorites-list';
-import Logo from '../../components/logo/logo';
+import {LogoMemo} from '../../components/logo/logo';
 import { LocationReducerType } from '../../types/types';
 import { selectFavorites } from '../../store/favorties/favorites.selectors';
 
@@ -35,7 +35,7 @@ export default function FavoritesPage (): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <Logo isFooterLogo />
+        <LogoMemo isFooterLogo />
       </footer>
     </div>
   );

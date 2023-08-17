@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import { Link} from 'react-router-dom';
 import classNames from 'classnames';
 import { LogoSizes, AppPath } from '../../const';
@@ -5,7 +6,7 @@ type LogoProps = {
   isFooterLogo?: boolean;
 }
 
-export default function Logo ({isFooterLogo}: LogoProps): JSX.Element {
+function Logo ({isFooterLogo}: LogoProps): JSX.Element {
   return (
     <Link
       className={classNames({
@@ -28,3 +29,4 @@ export default function Logo ({isFooterLogo}: LogoProps): JSX.Element {
   );
 }
 
+export const LogoMemo = memo(Logo);
