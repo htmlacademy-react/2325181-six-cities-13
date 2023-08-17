@@ -98,3 +98,10 @@ export type ReviewFormType = {
 }
 
 export type State = ReturnType<typeof store.getState>;
+
+export type FavoriteStatusType = {
+  id: string;
+  status: number;
+}
+
+export type EmailType = string;

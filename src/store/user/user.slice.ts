@@ -10,7 +10,7 @@ export type UserStateType = {
 
 export const userState: UserStateType = {
   authorisationStatus: AuthorisationStatus.Unknown,
-  email: '',
+  email: ''
 };
 
 export const user = createSlice({
@@ -22,7 +22,7 @@ export const user = createSlice({
     },
     setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
-    }
+    },
   }
 });
 

@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {OfferType, RequestStatusType } from '../../types/types';
 import { NameSpace, RequestStatus } from '../../const';
-import { loadOfferDetailsAction} from '../api-actions';
+import { loadOfferDetailsAction, addBookmarkAction} from '../api-actions';
 
 export type OfferDetailsStateType = {
   offerId: string;
@@ -40,6 +40,12 @@ export const offerDetails = createSlice({
       .addCase(loadOfferDetailsAction.rejected, (state) => {
         state.offerLoadingStatus = RequestStatus.Rejected;
         state.hasOfferDetailsError = true;
+      })
+      .addCase(addBookmarkAction.fulfilled, (state, action) => {
+        const favoriteOffer = action.payload;
+        if (state.offerDetails) {
+          state.offerDetails.isFavorite = favoriteOffer.isFavorite;
+        }
       });
   }
 });

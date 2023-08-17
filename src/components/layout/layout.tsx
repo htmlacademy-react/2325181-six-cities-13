@@ -1,11 +1,14 @@
 import { Outlet } from 'react-router-dom';
-import Logo from '../logo/logo';
-import SignIn from '../sign-in/sign-in';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import { useAppSelector } from '../../hooks';
 import { selectDataLoadingStatus } from '../../store/offers/offers.selectors';
 
-export default function Layout ():JSX.Element {
+type LayoutProps = {
+  logo: JSX.Element;
+  signin: JSX.Element;
+}
+
+export default function Layout ({logo, signin}: LayoutProps):JSX.Element {
   const isDataLoading = useAppSelector(selectDataLoadingStatus);
   if (isDataLoading) {
     return <LoadingPage />;
@@ -16,9 +19,9 @@ export default function Layout ():JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo />
+              {logo}
             </div>
-            <SignIn />
+            {signin}
           </div>
         </div>
       </header>

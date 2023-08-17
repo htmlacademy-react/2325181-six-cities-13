@@ -173,7 +173,8 @@ export const NameSpace = {
   Error: 'error',
   Route: 'route',
   OfferDetails: 'offerDetails',
-  CardList: 'cardlist'
+  CardList: 'cardlist',
+  Favorites: 'favorites'
 } as const;
 
 export const Action = {
@@ -222,7 +223,8 @@ export const APIPath = {
   Login: '/login',
   OfferId: '/offers/:offerId',
   OffersNearby: '/offers/:offerId/nearby',
-  Logout: '/logout'
+  Logout: '/logout',
+  Favorite: '/favorite'
 } as const;
 
 export const CONTAINER_STYLE: CSSProperties = {
@@ -268,3 +270,5 @@ export const RequestStatus = {
 } as const;
 
 export const PASSWORD_REGEX = /^.*(?=.*\d)(?=.*[a-zA-Z]).*$|(^$)/;
+
+export const Email = 'email';

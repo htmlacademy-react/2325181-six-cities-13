@@ -1,21 +1,20 @@
-
+import {useEffect} from 'react';
+import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
 import ReviewList from '../../components/review-list/review-list';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthorisationStatus, PremiumPrefix, } from '../../const';
-import { getRatingWidth, isRejected, isFulfilled, isPending } from '../../helper';
+import LoadingPage from '../loading-page/loading-page';
+import NotFoundPage from '../not-found-page/not-found-page';
 import MapOffer from '../../components/map-offer/map-offer';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
-import {useEffect} from 'react';
-import LoadingPage from '../loading-page/loading-page';
-import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
-import NotFoundPage from '../not-found-page/not-found-page';
-import { useParams } from 'react-router-dom';
+import { addBookmarkAction, loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
+import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details/offer-details.selectors';
 import { selectAuthorisationStatus } from '../../store/user/user.selectors';
-import { selectOfferDetails } from '../../store/offer-details/offer-details.selectors';
-import { selectOfferStatus } from '../../store/offer-details/offer-details.selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AuthorisationStatus, PremiumPrefix} from '../../const';
+import { getRatingWidth, isRejected, isFulfilled, isPending, favoriteStatusCode } from '../../helper';
 
 
 export default function OfferPage(): JSX.Element {
@@ -30,6 +29,9 @@ export default function OfferPage(): JSX.Element {
   }, [offerId, dispatch]);
   const activeOffer = useAppSelector(selectOfferDetails);
   const offerLoadingStatus = useAppSelector(selectOfferStatus);
+  const handleBookmarkClick = () => {
+    dispatch(addBookmarkAction({id: activeOffer?.id as string, status: favoriteStatusCode(!activeOffer?.isFavorite)}));
+  };
   return (
     <>
       {isPending(offerLoadingStatus) && <LoadingPage />}
@@ -56,7 +58,11 @@ export default function OfferPage(): JSX.Element {
                   <h1 className="offer__name">
                     {activeOffer.title}
                   </h1>
-                  <button className="offer__bookmark-button button" type="button">
+                  <button
+                    className={classNames('offer__bookmark-button', {'offer__bookmark-button--active': activeOffer.isFavorite}, 'button')}
+                    onClick={handleBookmarkClick}
+                    type="button"
+                  >
                     <svg className="offer__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark" />
                     </svg>

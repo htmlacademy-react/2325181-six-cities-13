@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { OffersType } from '../../types/types';
-import { loadOffersAction } from '../api-actions';
+import { loadOffersAction, addBookmarkAction, logoutUserAction } from '../api-actions';
 
 export type OffersStateType = {
   offers: OffersType;
@@ -19,13 +19,9 @@ export const offers = createSlice({
   name: NameSpace.Offers,
   initialState: offersState,
   reducers: {
-    loadOffers: (state, action: PayloadAction<OffersType>) => {
-      state.offers = action.payload;
-    },
     setDataLoadingStatus: (state, action: PayloadAction<boolean>) => {
       state.isDataLoading = action.payload;
     }
-
   },
   extraReducers(builder) {
     builder
@@ -40,9 +36,24 @@ export const offers = createSlice({
       .addCase(loadOffersAction.rejected, (state) => {
         state.isDataLoading = false;
         state.hasDataError = true;
+      })
+      .addCase(logoutUserAction.fulfilled, (state) => {
+        state.offers.forEach((offer) => {
+          if (offer.isFavorite) {
+            offer.isFavorite = false;
+          }
+        });
+      })
+      .addCase(addBookmarkAction.fulfilled, (state, action) => {
+        const favoriteOffer = action.payload;
+        state.offers.forEach((offer) => {
+          if (offer.id === favoriteOffer.id) {
+            offer.isFavorite = favoriteOffer.isFavorite;
+          }
+        });
       });
   }
 
 });
 
-export const {loadOffers, setDataLoadingStatus} = offers.actions;
+export const {setDataLoadingStatus} = offers.actions;

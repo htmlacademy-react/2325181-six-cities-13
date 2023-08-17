@@ -3,11 +3,10 @@ import { useAppSelector } from '../../hooks';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { LocationReducerType } from '../../types/types';
-import { selectOffers } from '../../store/offers/offers.selectors';
+import { selectFavorites } from '../../store/favorties/favorites.selectors';
 
 export default function FavoritesPage (): JSX.Element {
-  const offers = useAppSelector(selectOffers);
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  const favoriteOffers = useAppSelector(selectFavorites);
   const groupByLocation = Object.entries(favoriteOffers.reduce<LocationReducerType>((location, offer) => {
     const { name } = offer.city;
     location[name] = location[name] ?? [];

@@ -27,3 +27,4 @@ export default function Logo ({isFooterLogo}: LogoProps): JSX.Element {
     </Link>
   );
 }
+

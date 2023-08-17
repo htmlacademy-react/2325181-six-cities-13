@@ -8,6 +8,7 @@ import { user } from './user/user.slice';
 import { comment } from './comment/comment.slice';
 import { offersNearby } from './offers-nearby/offers-nearby.slice';
 import { reviews } from './reviews/reviews.slice';
+import { favorites } from './favorties/favorites.slice';
 
 export const rootReducer = combineReducers({
   [NameSpace.CardList]: cardlist.reducer,
@@ -18,4 +19,5 @@ export const rootReducer = combineReducers({
   [NameSpace.Review]: comment.reducer,
   [NameSpace.OffersNearby]: offersNearby.reducer,
   [NameSpace.Reviews]: reviews.reducer,
+  [NameSpace.Favorites]: favorites.reducer
 });

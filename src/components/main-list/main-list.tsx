@@ -15,6 +15,7 @@ export default function MainList({offers}: MainListProps): JSX.Element {
   const activeLocation = useAppSelector(selectLocation);
   const activeOrder: ActiveSortOrderType = useAppSelector(selectActiveSortOrder);
   const sortedOffers: OffersType = sortOffers(offers, activeOrder);
+
   return (
     <>
       <section className="cities__places places">

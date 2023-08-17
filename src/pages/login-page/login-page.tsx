@@ -6,7 +6,7 @@ import { getRandomArrayElement } from '../../helper';
 import { selectAuthorisationStatus } from '../../store/user/user.selectors';
 import { loginUserAction } from '../../store/api-actions';
 import { FormEvent, useRef, useState } from 'react';
-import styles from './loading-page.module.css';
+import styles from './login-page.module.css';
 
 export default function LoginPage(): React.ReactNode {
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);

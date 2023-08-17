@@ -1,7 +1,13 @@
-import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders } from './const';
+import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX } from './const';
 import { ActiveSortOrderType, OfferType, OffersType, RequestStatusType } from './types/types';
 
-export const getRatingWidth = (rating: number): string => `${rating * RATING_WIDTH_UNIT}%`;
+export const getRatingWidth = (rating: number | null | undefined): string => {
+  const correctRating = rating ?? 0;
+  if (correctRating >= 0 && correctRating <= 5) {
+    return `${correctRating * RATING_WIDTH_UNIT}%`;
+  }
+  return '0%';
+};
 
 export const getRandomNumber = (min: number, max: number): number => {
   const from = Math.ceil(Math.min(min, max));
@@ -50,4 +56,6 @@ export const isIdle = (status: RequestStatusType) => status === RequestStatus.Id
 export const isFulfilled = (status: RequestStatusType) => status === RequestStatus.Fulfilled;
 export const isRejected = (status: RequestStatusType) => status === RequestStatus.Rejected;
 
+export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
 
+export const favoriteStatusCode = (isFavorite: boolean): number => isFavorite ? 1 : 0;

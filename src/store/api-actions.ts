@@ -1,8 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import { generatePath } from 'react-router-dom';
-import { State } from '../types/types';
-import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType } from '../types/types';
+import { generatePath} from 'react-router-dom';
+import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType, State, FavoriteStatusType } from '../types/types';
 import { APIPath, Action, AuthorisationStatus, NameSpace, TIMEOUT_SHOW_ERROR, AppPath, OFFERS_NEARBY_COUNT } from '../const';
 import { redirectToRoute } from './action';
 import { setToken, removeToken } from '../services/token';
@@ -12,6 +11,7 @@ import { loadReviewsList } from './reviews/reviews.slice';
 import { loadOffersNearby } from './offers-nearby/offers-nearby.slice';
 import { addComment } from './reviews/reviews.slice';
 import { setEmail, updateAuthorisationStatus } from './user/user.slice';
+import { getLocalEmail, removeLocalEmail, setLocalEmail } from '../services/email';
 
 export const clearErrorAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -41,6 +41,20 @@ export const loadOffersAction = createAsyncThunk<OffersType, undefined, {
   },
 );
 
+export const loadFavoritesAction = createAsyncThunk<OffersType, undefined, {
+  dispatch: AppDispatchType;
+  state: State;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Favorites}/${Action.Load}`,
+  async (_arg, {extra: axiosApi}) => {
+    const {data} = await axiosApi.get<OffersType>(APIPath.Favorite);
+    return data;
+  },
+);
+
 export const loadOfferDetailsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
   state: State;
@@ -48,7 +62,7 @@ export const loadOfferDetailsAction = createAsyncThunk<void, string, {
   }
 >
 (
-  `${NameSpace.Offer}/${Action.Load}`,
+  `${NameSpace.OfferDetails}/${Action.Load}`,
   async (offerId, {dispatch, extra: axiosApi}) => {
     const {data} = await axiosApi.get<OfferType>(generatePath(APIPath.OfferId, {offerId: offerId}));
     dispatch(loadOfferDetails(data));
@@ -84,8 +98,6 @@ export const loadReviewsListAction = createAsyncThunk<void, string, {
 );
 
 
-
-
 export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
   state: State;
@@ -98,6 +110,7 @@ export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
     try {
       await axiosApi.get(APIPath.Login);
       dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
+      dispatch(setEmail(getLocalEmail()));
     } catch {
       dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
     }
@@ -117,6 +130,9 @@ export const loginUserAction = createAsyncThunk<void, AuthDataType, {
     setToken(token);
     dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
     dispatch(setEmail(email));
+    setLocalEmail(email);
+    dispatch(loadOffersAction());
+    dispatch(loadFavoritesAction());
     dispatch(redirectToRoute(AppPath.Favorites));
   },
 );
@@ -135,6 +151,21 @@ export const postReviewAction = createAsyncThunk<void, ReviewFormType, {
   },
 );
 
+export const addBookmarkAction = createAsyncThunk<OfferType, FavoriteStatusType, {
+  dispatch: AppDispatchType;
+  state: State;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Favorites}/${Action.Update}`,
+  async ({id, status}, { dispatch, extra: axiosApi}) => {
+    const {data} = await axiosApi.post<OfferType>(`${APIPath.Favorite}/${id}/${status}`);
+    dispatch(loadFavoritesAction());
+    return data;
+  },
+);
+
 export const logoutUserAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
   state: State;
@@ -146,6 +177,7 @@ export const logoutUserAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: axiosApi}) => {
     await axiosApi.delete(APIPath.Logout);
     removeToken();
+    removeLocalEmail();
     dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
   },
 );

@@ -6,11 +6,13 @@ import {loadReviewsListAction} from '../api-actions';
 export type ReviewsStateType = {
   reviews: ReviewsType;
   reviewsLoadingStatus: RequestStatusType;
+  hasReviewsError: boolean;
 }
 
 const reviewsState: ReviewsStateType = {
   reviews: [],
   reviewsLoadingStatus: RequestStatus.Idle,
+  hasReviewsError: false
 };
 
 export const reviews = createSlice({
@@ -28,12 +30,14 @@ export const reviews = createSlice({
     builder
       .addCase(loadReviewsListAction.pending, (state) => {
         state.reviewsLoadingStatus = RequestStatus.Pending;
+        state.hasReviewsError = false;
       })
       .addCase(loadReviewsListAction.fulfilled, (state) => {
         state.reviewsLoadingStatus = RequestStatus.Fulfilled;
       })
       .addCase(loadReviewsListAction.rejected, (state) => {
         state.reviewsLoadingStatus = RequestStatus.Rejected;
+        state.hasReviewsError = true;
       });
   }
 });

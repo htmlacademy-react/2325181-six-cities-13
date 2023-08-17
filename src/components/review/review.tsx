@@ -4,13 +4,13 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { isValidForm, isPending } from '../../helper';
-import { selectReviewPostingStatus } from '../../store/comment/comment.selectors';
+import { selectCommentPostingStatus } from '../../store/comment/comment.selectors';
 import { ReviewFormType } from '../../types/types';
 
 export default function Review ():JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = useParams().id as string;
-  const reviewPostingStatus = useAppSelector(selectReviewPostingStatus);
+  const reviewPostingStatus = useAppSelector(selectCommentPostingStatus);
   const DEFAULT_REVIEW_FORM = {
     id: offerId,
     comment: '',
