@@ -8,12 +8,13 @@ import ReviewList from '../../components/review-list/review-list';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import MapOffer from '../../components/map-offer/map-offer';
+import { redirectToRoute } from '../../store/action';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
 import { addBookmarkAction, loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
 import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details/offer-details.selectors';
 import { selectAuthorisationStatus } from '../../store/user/user.selectors';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthorisationStatus, PremiumPrefix} from '../../const';
+import { AuthorisationStatus, PremiumPrefix, AppPath} from '../../const';
 import { getRatingWidth, isRejected, isFulfilled, isPending, favoriteStatusCode } from '../../helper';
 
 
@@ -21,6 +22,7 @@ export default function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = useParams().id as string;
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
+  const isAuth = authorisationStatus === AuthorisationStatus.Auth;
   useEffect(() => {
     dispatch(loadOfferDetailsAction(offerId));
     dispatch(loadOffersNearbyAction(offerId));
@@ -30,7 +32,11 @@ export default function OfferPage(): JSX.Element {
   const activeOffer = useAppSelector(selectOfferDetails);
   const offerLoadingStatus = useAppSelector(selectOfferStatus);
   const handleBookmarkClick = () => {
-    dispatch(addBookmarkAction({id: activeOffer?.id as string, status: favoriteStatusCode(!activeOffer?.isFavorite)}));
+    if (isAuth) {
+      dispatch(addBookmarkAction({id: activeOffer?.id as string, status: favoriteStatusCode(!activeOffer?.isFavorite)}));
+    } else {
+      dispatch(redirectToRoute(AppPath.Favorites));
+    }
   };
   return (
     <>
@@ -127,7 +133,7 @@ export default function OfferPage(): JSX.Element {
                 </div>
                 <section className="offer__reviews reviews">
                   <ReviewList/>
-                  {authorisationStatus === AuthorisationStatus.Auth && <Review />}
+                  {isAuth && <Review />}
                 </section>
               </div>
             </div>
@@ -141,5 +147,3 @@ export default function OfferPage(): JSX.Element {
     </>
   );
 }
-
-

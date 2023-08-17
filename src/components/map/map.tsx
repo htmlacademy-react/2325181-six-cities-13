@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
 import { useAppSelector } from '../../hooks';
 import { selectLocation } from '../../store/card-list/card-list.selectors';
-import { selectOfferId } from '../../store/offer-details/offer-details.selectors';
+import { selectOfferDetails, selectOfferId } from '../../store/offer-details/offer-details.selectors';
 import { OfferCoordinatesType } from '../../types/types';
 import { AppPath, MapDesign, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { getIconObject } from '../../helper';
@@ -23,11 +23,10 @@ export function Map({offers, classAdded, mapStyle}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const location = useAppSelector(selectLocation);
   const map = useMap(mapRef, location);
-  const selectedOfferId = useAppSelector(selectOfferId);
+  const selectedOfferId = useAppSelector(selectOfferDetails)?.id;
   useEffect(() => {
     const setIconStyle = (offer: OfferCoordinatesType) => {
-      if (offer.id === selectedOfferId
-            && classAdded !== MapDesign[AppPath.Offer].classAdded) {
+      if (offer.id === selectedOfferId) {
         return currentCustomIcon;
       }
       return defaultCustomIcon;

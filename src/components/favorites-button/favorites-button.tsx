@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import { addBookmarkAction } from '../../store/api-actions';
 import { favoriteStatusCode } from '../../helper';
-import { useAppDispatch} from '../../hooks';
+import { useAppDispatch, useAppSelector} from '../../hooks';
+import { selectAuthorisationStatus } from '../../store/user/user.selectors';
+import { AppPath, AuthorisationStatus } from '../../const';
+import { redirectToRoute } from '../../store/action';
+
 
 type FavoritesButtonProps = {
   offerId: string;
@@ -10,8 +14,14 @@ type FavoritesButtonProps = {
 
 export default function FavoritesButton({offerId, isFavorite}: FavoritesButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const authStatus = useAppSelector(selectAuthorisationStatus);
+  const isAuth = authStatus === AuthorisationStatus.Auth;
   const handleBookmarkClick = () => {
-    dispatch(addBookmarkAction({id: offerId, status: favoriteStatusCode(!isFavorite)}));
+    if (isAuth) {
+      dispatch(addBookmarkAction({id: offerId, status: favoriteStatusCode(!isFavorite)}));
+    } else {
+      dispatch(redirectToRoute(AppPath.Favorites));
+    }
   };
   return (
     <button

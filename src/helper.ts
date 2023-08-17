@@ -4,7 +4,7 @@ import { ActiveSortOrderType, OfferType, OffersType, RequestStatusType } from '.
 export const getRatingWidth = (rating: number | null | undefined): string => {
   const correctRating = rating ?? 0;
   if (correctRating >= 0 && correctRating <= 5) {
-    return `${correctRating * RATING_WIDTH_UNIT}%`;
+    return `${Math.round(correctRating) * RATING_WIDTH_UNIT}%`;
   }
   return '0%';
 };
