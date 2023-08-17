@@ -4,9 +4,9 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
 import { useAppSelector } from '../../hooks';
 import { selectLocation } from '../../store/card-list/card-list.selectors';
-import { selectOfferDetails, selectOfferId } from '../../store/offer-details/offer-details.selectors';
+import { selectOfferDetails} from '../../store/offer-details/offer-details.selectors';
 import { OfferCoordinatesType } from '../../types/types';
-import { AppPath, MapDesign, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { getIconObject } from '../../helper';
 
 export type MapProps = {
