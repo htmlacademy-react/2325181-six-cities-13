@@ -1,5 +1,5 @@
-import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX } from './const';
-import { ActiveSortOrderType, OfferType, OffersType, RequestStatusType } from './types/types';
+import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath } from './const';
+import { ActiveSortOrderType, AppPathType, OfferType, OffersType, RequestStatusType } from './types/types';
 
 export const getRatingWidth = (rating: number | null | undefined): string => {
   const correctRating = rating ?? 0;
@@ -59,3 +59,9 @@ export const isRejected = (status: RequestStatusType) => status === RequestStatu
 export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
 
 export const favoriteStatusCode = (isFavorite: boolean): number => isFavorite ? 1 : 0;
+
+export const isLoginPage = (pathName: AppPathType) => pathName === AppPath.Login;
+
+export const isMainPage = (pathName: AppPathType) => pathName === AppPath.Main;
+
+export const isFavoritesPage = (pathName: AppPathType) => pathName === AppPath.Favorites;

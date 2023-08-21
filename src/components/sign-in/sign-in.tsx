@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks';
 import { selectAuthorisationStatus } from '../../store/user/user.selectors';
 import { AuthorisationStatus } from '../../const';
-import UserLogin from '../user-login/user-login';
+import {UserLoginMemo} from '../user-login/user-login';
 import UserAccount from '../user-account/user-account';
 
 export default function SignIn(): JSX.Element {
@@ -11,7 +11,7 @@ export default function SignIn(): JSX.Element {
       <ul className="header__nav-list">
         {isAuthorised === AuthorisationStatus.Auth
           ? <UserAccount />
-          : <UserLogin />}
+          : <UserLoginMemo />}
       </ul>
     </nav>
   );

@@ -1,5 +1,4 @@
 import {useEffect} from 'react';
-import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import PremiumTag from '../../components/premium-tag/premium-tag';
@@ -8,19 +7,21 @@ import ReviewList from '../../components/review-list/review-list';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import MapOffer from '../../components/map-offer/map-offer';
-import { redirectToRoute } from '../../store/action';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
-import { addBookmarkAction, loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
+import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
 import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details/offer-details.selectors';
 import { selectAuthorisationStatus } from '../../store/user/user.selectors';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthorisationStatus, PremiumPrefix, AppPath} from '../../const';
-import { getRatingWidth, isRejected, isFulfilled, isPending, favoriteStatusCode } from '../../helper';
+import { AuthorisationStatus, PremiumPrefix} from '../../const';
+import { getRatingWidth, isRejected, isFulfilled, isPending } from '../../helper';
+import { setOfferId } from '../../store/offer-details/offer-details.slice';
+import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 
 
 export default function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = useParams().id as string;
+  dispatch(setOfferId(offerId));
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
   const isAuth = authorisationStatus === AuthorisationStatus.Auth;
   useEffect(() => {
@@ -31,13 +32,6 @@ export default function OfferPage(): JSX.Element {
   }, [offerId, dispatch]);
   const activeOffer = useAppSelector(selectOfferDetails);
   const offerLoadingStatus = useAppSelector(selectOfferStatus);
-  const handleBookmarkClick = () => {
-    if (isAuth) {
-      dispatch(addBookmarkAction({id: activeOffer?.id as string, status: favoriteStatusCode(!activeOffer?.isFavorite)}));
-    } else {
-      dispatch(redirectToRoute(AppPath.Favorites));
-    }
-  };
   return (
     <>
       {isPending(offerLoadingStatus) && <LoadingPage />}
@@ -64,16 +58,7 @@ export default function OfferPage(): JSX.Element {
                   <h1 className="offer__name">
                     {activeOffer.title}
                   </h1>
-                  <button
-                    className={classNames('offer__bookmark-button', {'offer__bookmark-button--active': activeOffer.isFavorite}, 'button')}
-                    onClick={handleBookmarkClick}
-                    type="button"
-                  >
-                    <svg className="offer__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark" />
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <BookmarkButton />
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">

@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { Link, generatePath } from 'react-router-dom';
 import PremiumTag from '../premium-tag/premium-tag';
 import { useAppDispatch } from '../../hooks';
-import { AppPath, PremiumPrefix} from '../../const';
-import { OfferType } from '../../types/types';
+import { AppPath, PremiumPrefix, PlaceCardDesign} from '../../const';
+import { OfferType, CardClassType } from '../../types/types';
 import { getRatingWidth} from '../../helper';
 import { setOfferId } from '../../store/offer-details/offer-details.slice';
 import FavoritesButton from '../favorites-button/favorites-button';
@@ -11,7 +11,7 @@ import FavoritesButton from '../favorites-button/favorites-button';
 
 type PlaceCardProps = {
   offer: OfferType;
-  cardClass: string;
+  cardClass: CardClassType;
   cardInfoClass: string;
   cardWidth: string;
   cardHeight: string;
@@ -21,8 +21,18 @@ export function PlaceCard({offer, cardClass, cardInfoClass, cardHeight, cardWidt
   const dispatch = useAppDispatch();
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
   const offerPath = generatePath(AppPath.Offer, {id: offer.id});
+  const handleMouseEnter = () => {
+    if(cardClass === PlaceCardDesign[AppPath.Main].cardClass) {
+      dispatch(setOfferId(offer.id));
+    }
+  };
+  const handleMouseLeave = () => {
+    if(cardClass === PlaceCardDesign[AppPath.Main].cardClass) {
+      dispatch(setOfferId(''));
+    }
+  };
   return (
-    <article className={classNames(`${cardClass}__card`, 'place-card')} onMouseEnter={() => dispatch(setOfferId(offer.id))} onMouseLeave={() => dispatch(setOfferId(''))}>
+    <article className={classNames(`${cardClass}__card`, 'place-card')} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {offer.isPremium && <PremiumTag prefix={PremiumPrefix.PlaceCard} />}
       <div className={classNames(`${cardClass}__image-wrapper`, 'place-card__image-wrapper')}>
         <Link to={offerPath}>

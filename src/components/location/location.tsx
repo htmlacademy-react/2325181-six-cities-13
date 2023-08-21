@@ -9,7 +9,11 @@ import { LocationType} from '../../types/types';
 export default function Location(): JSX.Element {
   const dispatch = useAppDispatch();
   const activeLocation = useAppSelector(selectLocation);
-  const handleLocationChange = (location: LocationType) => dispatch(updateLocation(location));
+  const handleLocationChange = (location: LocationType) => {
+    if (location !== activeLocation){
+      dispatch(updateLocation(location));
+    }
+  };
   return (
     <ul className="locations__list tabs__list">
       {Object.values(Locations).map((location: LocationType) => (

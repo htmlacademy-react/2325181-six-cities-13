@@ -1,7 +1,8 @@
+import {memo} from 'react';
 import { Link } from 'react-router-dom';
 import { AppPath } from '../../const';
 
-export default function UserLogin():JSX.Element {
+function UserLogin():JSX.Element {
   return (
     <li className="header__nav-item user">
       <Link className="header__nav-link header__nav-link--profile" to={AppPath.Login}>
@@ -12,3 +13,5 @@ export default function UserLogin():JSX.Element {
     </li>
   );
 }
+
+export const UserLoginMemo = memo(UserLogin);

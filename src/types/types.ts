@@ -1,5 +1,5 @@
 import { store } from '../store';
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders, AppPath, RequestStatus } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders, AppPath, RequestStatus, PlaceCardDesign } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -105,3 +105,5 @@ export type FavoriteStatusType = {
 }
 
 export type EmailType = string;
+
+export type CardClassType = typeof PlaceCardDesign[keyof typeof PlaceCardDesign]['cardClass'];

@@ -4,4 +4,7 @@ import { NameSpace } from '../../const';
 
 export const selectCommentPostingStatus = (state: State) => state[NameSpace.Review].commentPostingStatus;
 
-export const selectCommentErrorStatus = (state: State) => state[NameSpace.Review].hasCommentError;
+export const selectReviewRating = (state: State) => state[NameSpace.Review].rating;
+
+export const selectReviewComment = (state: State) => state[NameSpace.Review].comment;
+
