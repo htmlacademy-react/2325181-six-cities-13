@@ -10,6 +10,7 @@ import { setStatusIdle, setReviewRating, setReviewComment } from '../../store/co
 
 export default function Review ():JSX.Element {
   const dispatch = useAppDispatch();
+
   const offerId = useParams().id as string;
   const rating = useAppSelector(selectReviewRating);
   const comment = useAppSelector(selectReviewComment);

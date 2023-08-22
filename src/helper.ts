@@ -1,5 +1,5 @@
 import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath } from './const';
-import { ActiveSortOrderType, AppPathType, OfferType, OffersType, RequestStatusType } from './types/types';
+import { ActiveSortOrderType, AppPathType, LodgingType, OfferType, OffersType, RequestStatusType } from './types/types';
 
 export const getRatingWidth = (rating: number | null | undefined): string => {
   const correctRating = rating ?? 0;
@@ -65,3 +65,12 @@ export const isLoginPage = (pathName: AppPathType) => pathName === AppPath.Login
 export const isMainPage = (pathName: AppPathType) => pathName === AppPath.Main;
 
 export const isFavoritesPage = (pathName: AppPathType) => pathName === AppPath.Favorites;
+
+export const getUpperCaseType = (type: LodgingType) => {
+  if (type === undefined) {
+    return;
+  }
+  return type.slice(0, 1).toUpperCase().concat(type.slice(1));
+};
+
+export const isPlural = (count: number) => count > 1;

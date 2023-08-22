@@ -4,7 +4,7 @@ import PremiumTag from '../premium-tag/premium-tag';
 import { useAppDispatch } from '../../hooks';
 import { AppPath, PremiumPrefix, PlaceCardDesign} from '../../const';
 import { OfferType, CardClassType } from '../../types/types';
-import { getRatingWidth} from '../../helper';
+import { getRatingWidth, getUpperCaseType} from '../../helper';
 import { setOfferId } from '../../store/offer-details/offer-details.slice';
 import FavoritesButton from '../favorites-button/favorites-button';
 
@@ -21,6 +21,7 @@ export function PlaceCard({offer, cardClass, cardInfoClass, cardHeight, cardWidt
   const dispatch = useAppDispatch();
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
   const offerPath = generatePath(AppPath.Offer, {id: offer.id});
+  const offerType = getUpperCaseType(offer.type);
   const handleMouseEnter = () => {
     if(cardClass === PlaceCardDesign[AppPath.Main].cardClass) {
       dispatch(setOfferId(offer.id));
@@ -62,7 +63,7 @@ export function PlaceCard({offer, cardClass, cardInfoClass, cardHeight, cardWidt
         <h2 className="place-card__name">
           <Link to={offerPath}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{offerType}</p>
       </div>
     </article>
   );

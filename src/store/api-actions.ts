@@ -1,7 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { generatePath} from 'react-router-dom';
-import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType, State, FavoriteStatusType } from '../types/types';
+import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType, State, FavoriteStatusType, LoginType } from '../types/types';
 import { APIPath, Action, AuthorisationStatus, NameSpace, TIMEOUT_SHOW_ERROR, AppPath, OFFERS_NEARBY_COUNT } from '../const';
 import { redirectToRoute } from './action';
 import { setToken, removeToken } from '../services/token';
@@ -11,7 +11,6 @@ import { loadReviewsList } from './reviews/reviews.slice';
 import { loadOffersNearby } from './offers-nearby/offers-nearby.slice';
 import { addComment } from './reviews/reviews.slice';
 import { setEmail, updateAuthorisationStatus } from './user/user.slice';
-import { getLocalEmail, removeLocalEmail, setLocalEmail } from '../services/email';
 
 export const clearErrorAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -108,9 +107,9 @@ export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
   `${NameSpace.AuthorisationStatus}/${Action.Update}`,
   async (_arg, {dispatch, extra: axiosApi}) => {
     try {
-      await axiosApi.get(APIPath.Login);
+      const {data} = await axiosApi.get<LoginType>(APIPath.Login);
       dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
-      dispatch(setEmail(getLocalEmail()));
+      dispatch(setEmail(data.email));
     } catch {
       dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
     }
@@ -130,10 +129,9 @@ export const loginUserAction = createAsyncThunk<void, AuthDataType, {
     setToken(token);
     dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
     dispatch(setEmail(email));
-    setLocalEmail(email);
     dispatch(loadOffersAction());
     dispatch(loadFavoritesAction());
-    dispatch(redirectToRoute(AppPath.Favorites));
+    dispatch(redirectToRoute(AppPath.Main));
   },
 );
 
@@ -177,7 +175,7 @@ export const logoutUserAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: axiosApi}) => {
     await axiosApi.delete(APIPath.Logout);
     removeToken();
-    removeLocalEmail();
     dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
+    dispatch(redirectToRoute(AppPath.Login));
   },
 );

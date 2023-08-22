@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RequestStatusType } from '../../types/types';
 import { NameSpace, RequestStatus } from '../../const';
 import { postReviewAction } from '../api-actions';
-import { processErrorHandle } from '../../services/process-error-handle';
 
 
 export type CommentStateType = {
@@ -30,6 +29,10 @@ export const comment = createSlice({
     setReviewComment: (state, action: PayloadAction<string>) => {
       state.comment = action.payload;
     },
+    resetReviewData: (state) =>{
+      state.comment = '';
+      state.rating = 0;
+    }
   },
   extraReducers(builder) {
     builder
@@ -48,4 +51,4 @@ export const comment = createSlice({
   }
 });
 
-export const {setStatusIdle, setReviewRating, setReviewComment} = comment.actions;
+export const {setStatusIdle, setReviewRating, setReviewComment, resetReviewData} = comment.actions;

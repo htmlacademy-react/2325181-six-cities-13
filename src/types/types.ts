@@ -107,3 +107,11 @@ export type FavoriteStatusType = {
 export type EmailType = string;
 
 export type CardClassType = typeof PlaceCardDesign[keyof typeof PlaceCardDesign]['cardClass'];
+
+export type LoginType = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  email: string;
+  token: string;
+  };

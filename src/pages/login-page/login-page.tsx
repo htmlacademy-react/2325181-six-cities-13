@@ -38,7 +38,7 @@ export default function LoginPage(): React.ReactNode {
         <Helmet>
           <title>6 cities. Login page</title>
         </Helmet>
-        <main className="page__main page__main--login">
+        <main className="page--main page__main--login">
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>

@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
-// import Location from '../../components/location/location';
 import LocationContainer from '../../components/location-container/location-container';
 import MainList from '../../components/main-list/main-list';
 import { selectLocation } from '../../store/card-list/card-list.selectors';

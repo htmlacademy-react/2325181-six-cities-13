@@ -11,7 +11,7 @@ export default function ReviewList (): JSX.Element {
   const reviewsSortedSliced = reviews.slice(MAX_REVIEWS_QUANTITY).sort((a,b) => dayjs(b.date).diff(dayjs(a.date)));
   return (
     <>
-      <h2 className="reviews__title">Reviews {reviewsSortedSliced.length > 0 && <><span>&middot; </span><span className="reviews__amount">{reviewsSortedSliced.length}</span></>}</h2>
+      <h2 className="reviews__title">Reviews {reviews.length > 0 && <><span>&middot; </span><span className="reviews__amount">{reviews.length}</span></>}</h2>
       {isPending(reviewLoadingStatus) && <div><span>Reviews loading ...</span></div>}
       {isRejected(reviewLoadingStatus) && <div><span>Failed to load reviews. Try again?</span></div>}
       {isFulfilled(reviewLoadingStatus) && reviewsSortedSliced.length > 0 &&

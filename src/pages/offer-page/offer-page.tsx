@@ -13,15 +13,19 @@ import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details
 import { selectAuthorisationStatus } from '../../store/user/user.selectors';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorisationStatus, PremiumPrefix} from '../../const';
-import { getRatingWidth, isRejected, isFulfilled, isPending } from '../../helper';
+import { getRatingWidth, isRejected, isFulfilled, isPending, getUpperCaseType } from '../../helper';
 import { setOfferId } from '../../store/offer-details/offer-details.slice';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
+import { LodgingType } from '../../types/types';
+import classNames from 'classnames';
+import { resetReviewData } from '../../store/comment/comment.slice';
 
 
 export default function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = useParams().id as string;
   dispatch(setOfferId(offerId));
+  dispatch(resetReviewData());
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
   const isAuth = authorisationStatus === AuthorisationStatus.Auth;
   useEffect(() => {
@@ -31,6 +35,7 @@ export default function OfferPage(): JSX.Element {
 
   }, [offerId, dispatch]);
   const activeOffer = useAppSelector(selectOfferDetails);
+  const offerType = getUpperCaseType(activeOffer?.type as LodgingType);
   const offerLoadingStatus = useAppSelector(selectOfferStatus);
   return (
     <>
@@ -69,7 +74,7 @@ export default function OfferPage(): JSX.Element {
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {activeOffer.type}
+                    {offerType}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
                     {activeOffer.bedrooms} Bedroom{activeOffer.bedrooms > 1 && 's'}
@@ -94,7 +99,10 @@ export default function OfferPage(): JSX.Element {
                 <div className="offer__host">
                   <h2 className="offer__host-title">Meet the host</h2>
                   <div className="offer__host-user user">
-                    <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                    <div className={classNames('offer__avatar-wrapper', {
+                      'offer__avatar-wrapper--pro': activeOffer.host.isPro,
+                      'user__avatar-wrapper': !activeOffer.host.isPro})}
+                    >
                       <img
                         className="offer__avatar user__avatar"
                         src={activeOffer.host.avatarUrl}
@@ -106,9 +114,8 @@ export default function OfferPage(): JSX.Element {
                     <span className="offer__user-name">
                       {activeOffer.host.name}
                     </span>
-                    <span className="offer__user-status">
-                      {activeOffer.host.isPro && 'Pro'}
-                    </span>
+                    {activeOffer.host.isPro &&
+                    <span className="offer__user-status">Pro</span>}
                   </div>
                   <div className="offer__description">
                     <p className="offer__text">

@@ -17,7 +17,7 @@ export default function Layout ({logo, signin}: LayoutProps):JSX.Element {
   const isLogin = isLoginPage(currentPath);
   const isMain = isMainPage(currentPath);
   const isFavorites = isFavoritesPage(currentPath);
-  const isFavoritesEmpty = useAppSelector(selectFavorites).length && isFavorites;
+  const isFavoritesEmpty = Boolean(!useAppSelector(selectFavorites).length) && isFavorites;
   const isDataLoading = useAppSelector(selectDataLoadingStatus);
   if (isDataLoading) {
     return <LoadingPage />;
