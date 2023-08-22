@@ -1,13 +1,14 @@
+import classNames from 'classnames';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { LocationReducerType } from '../../types/types';
-import { selectOffers } from '../../selectors';
+import { selectFavorites } from '../../store/favorties/favorites-selectors';
 
 export default function FavoritesPage (): JSX.Element {
-  const offers = useAppSelector(selectOffers);
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  const favoriteOffers = useAppSelector(selectFavorites);
+  const isEmpty = favoriteOffers.length === 0;
   const groupByLocation = Object.entries(favoriteOffers.reduce<LocationReducerType>((location, offer) => {
     const { name } = offer.city;
     location[name] = location[name] ?? [];
@@ -20,7 +21,9 @@ export default function FavoritesPage (): JSX.Element {
         <title>6 cities. Favorite offers</title>
       </Helmet>
 
-      <main className="page__main page__main--favorites">
+      <main className={classNames('page__main page__main--favorites', {
+        'page__main--favorites-empty': isEmpty})}
+      >
         <div className="page__favorites-container container">
           {favoriteOffers.length
             ?

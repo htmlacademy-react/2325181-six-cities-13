@@ -10,7 +10,6 @@ import { AppPath } from '../../const';
 import Layout from '../layout/layout';
 import HistoryRouter from '../history-route/history-route';
 import { browserHistory } from '../../browser-history';
-
 export default function App (): JSX.Element {
 
 

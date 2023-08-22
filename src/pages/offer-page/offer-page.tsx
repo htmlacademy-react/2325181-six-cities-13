@@ -1,33 +1,41 @@
-
+import {useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import PremiumTag from '../../components/premium-tag/premium-tag';
 import Review from '../../components/review/review';
 import ReviewList from '../../components/review-list/review-list';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthorisationStatus, PremiumPrefix, } from '../../const';
-import { getRatingWidth, isRejected, isFulfilled, isPending } from '../../helper';
+import LoadingPage from '../loading-page/loading-page';
+import NotFoundPage from '../not-found-page/not-found-page';
 import MapOffer from '../../components/map-offer/map-offer';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
-import { selectAuthorisationStatus, selectOfferDetails, selectOffersNearby, selectOfferStatus} from '../../selectors';
-import {useEffect} from 'react';
-import LoadingPage from '../loading-page/loading-page';
 import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
-import NotFoundPage from '../not-found-page/not-found-page';
-import { useParams } from 'react-router-dom';
+import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details/offer-details-selectors';
+import { selectAuthorisationStatus } from '../../store/user/user-selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AuthorisationStatus, PremiumPrefix} from '../../const';
+import { getRatingWidth, isRejected, isFulfilled, isPending, getUpperCaseType } from '../../helper';
+import { setOfferId } from '../../store/offer-details/offer-details-slice';
+import { LodgingType } from '../../types/types';
+import classNames from 'classnames';
+import { resetReviewData } from '../../store/comment/comment-slice';
+import FavoritesButton from '../../components/favorites-button/favorites-button';
 
 
 export default function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = useParams().id as string;
+  dispatch(resetReviewData());
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
+  const isAuth = authorisationStatus === AuthorisationStatus.Auth;
   useEffect(() => {
+    dispatch(setOfferId(offerId));
     dispatch(loadOfferDetailsAction(offerId));
     dispatch(loadOffersNearbyAction(offerId));
     dispatch(loadReviewsListAction(offerId));
 
   }, [offerId, dispatch]);
   const activeOffer = useAppSelector(selectOfferDetails);
-  const offersNearby = useAppSelector(selectOffersNearby);
+  const offerType = getUpperCaseType(activeOffer?.type as LodgingType);
   const offerLoadingStatus = useAppSelector(selectOfferStatus);
   return (
     <>
@@ -55,12 +63,7 @@ export default function OfferPage(): JSX.Element {
                   <h1 className="offer__name">
                     {activeOffer.title}
                   </h1>
-                  <button className="offer__bookmark-button button" type="button">
-                    <svg className="offer__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark" />
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <FavoritesButton offerId={activeOffer.id} isFavorite={activeOffer.isFavorite} isOfferButton />
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
@@ -71,7 +74,7 @@ export default function OfferPage(): JSX.Element {
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {activeOffer.type}
+                    {offerType}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
                     {activeOffer.bedrooms} Bedroom{activeOffer.bedrooms > 1 && 's'}
@@ -96,7 +99,10 @@ export default function OfferPage(): JSX.Element {
                 <div className="offer__host">
                   <h2 className="offer__host-title">Meet the host</h2>
                   <div className="offer__host-user user">
-                    <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                    <div className={classNames('offer__avatar-wrapper', {
+                      'offer__avatar-wrapper--pro': activeOffer.host.isPro,
+                      'user__avatar-wrapper': !activeOffer.host.isPro})}
+                    >
                       <img
                         className="offer__avatar user__avatar"
                         src={activeOffer.host.avatarUrl}
@@ -108,9 +114,8 @@ export default function OfferPage(): JSX.Element {
                     <span className="offer__user-name">
                       {activeOffer.host.name}
                     </span>
-                    <span className="offer__user-status">
-                      {activeOffer.host.isPro && 'Pro'}
-                    </span>
+                    {activeOffer.host.isPro &&
+                    <span className="offer__user-status">Pro</span>}
                   </div>
                   <div className="offer__description">
                     <p className="offer__text">
@@ -120,19 +125,17 @@ export default function OfferPage(): JSX.Element {
                 </div>
                 <section className="offer__reviews reviews">
                   <ReviewList/>
-                  {authorisationStatus === AuthorisationStatus.Auth && <Review />}
+                  {isAuth && <Review />}
                 </section>
               </div>
             </div>
             <MapOffer />
           </section>
           <div className="container">
-            <NearbyList offers={offersNearby} />
+            <NearbyList />
           </div>
         </main>
       </div>}
     </>
   );
 }
-
-

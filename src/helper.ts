@@ -1,9 +1,15 @@
-import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders } from './const';
-import { ActiveSortOrderType, OfferType, OffersType, RequestStatusType } from './types/types';
+import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath } from './const';
+import { ActiveSortOrderType, AppPathType, LodgingType, OfferType, OffersType, RequestStatusType } from './types/types';
 
-export const getRatingWidth = (rating: number): string => `${rating * RATING_WIDTH_UNIT}%`;
+export const getRatingWidth = (rating: number | null | undefined): string => {
+  const correctRating = rating ?? 0;
+  if (correctRating >= 0 && correctRating <= 5) {
+    return `${Math.round(correctRating) * RATING_WIDTH_UNIT}%`;
+  }
+  return '0%';
+};
 
-export const getRandomNumber = (min: number, max: number): number => {
+const getRandomNumber = (min: number, max: number): number => {
   const from = Math.ceil(Math.min(min, max));
   const till = Math.floor(Math.max(min, max));
   const result = Math.random() * (till - from + 1) + from;
@@ -17,8 +23,6 @@ export function getRandomArrayElement<T> (arrayInput: T[]): T {
 export const getIconObject = (url: string): object => Object.assign({iconUrl: url}, {...IconDesign});
 
 export const getOffersCoordinates = (offers: OfferType[]) => offers.map((offer) => ({id: offer.id, latitude: offer.location.latitude, longitude: offer.location.longitude}));
-
-export const validateOfferPage = (page: string): boolean => RegExp('/offer/.*').test(page);
 
 export const sortOffers = (offers: OffersType, sortType: ActiveSortOrderType): OffersType => {
   switch (sortType) {
@@ -50,4 +54,21 @@ export const isIdle = (status: RequestStatusType) => status === RequestStatus.Id
 export const isFulfilled = (status: RequestStatusType) => status === RequestStatus.Fulfilled;
 export const isRejected = (status: RequestStatusType) => status === RequestStatus.Rejected;
 
+export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
 
+export const getFavoriteStatusCode = (isFavorite: boolean): number => isFavorite ? 1 : 0;
+
+export const isLoginPage = (pathName: AppPathType) => pathName === AppPath.Login;
+
+export const isMainPage = (pathName: AppPathType) => pathName === AppPath.Main;
+
+export const isFavoritesPage = (pathName: AppPathType) => pathName === AppPath.Favorites;
+
+export const getUpperCaseType = (type: LodgingType) => {
+  if (type === undefined) {
+    return;
+  }
+  return type.slice(0, 1).toUpperCase().concat(type.slice(1));
+};
+
+export const isPlural = (count: number) => count > 1;

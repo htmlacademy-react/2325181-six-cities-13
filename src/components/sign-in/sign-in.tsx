@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { selectAuthorisationStatus } from '../../selectors';
+import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { AuthorisationStatus } from '../../const';
 import UserLogin from '../user-login/user-login';
 import UserAccount from '../user-account/user-account';

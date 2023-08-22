@@ -1,5 +1,5 @@
 import { store } from '../store';
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, MapDesign, SortOrders, AppPath, RequestStatus } from '../const';
+import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, SortOrders, AppPath, RequestStatus, PlaceCardDesign } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
@@ -69,10 +69,6 @@ export type OfferCoordinatesType = {
   longitude: number;
 }
 
-export type MapPageType = keyof typeof MapDesign;
-
-export type StateType = ReturnType<typeof store.getState>;
-
 export type AppDispatchType = typeof store.dispatch;
 
 export type ActiveSortOrderType = typeof SortOrders[keyof typeof SortOrders]['order'];
@@ -96,3 +92,20 @@ export type ReviewFormType = {
   comment: string;
   rating: number;
 }
+
+export type StateType = ReturnType<typeof store.getState>;
+
+export type FavoriteStatusType = {
+  id: string;
+  status: number;
+}
+
+export type CardClassType = typeof PlaceCardDesign[keyof typeof PlaceCardDesign]['cardClass'];
+
+export type LoginType = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  email: string;
+  token: string;
+  };

@@ -3,18 +3,20 @@ import { Link, Navigate } from 'react-router-dom';
 import { AppPath, AuthorisationStatus, Locations, PASSWORD_REGEX } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRandomArrayElement } from '../../helper';
-import { selectAuthorisationStatus } from '../../selectors';
+import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { loginUserAction } from '../../store/api-actions';
 import { FormEvent, useRef, useState } from 'react';
-import styles from './loading-page.module.css';
+import styles from './login-page.module.css';
+import { updateLocation } from '../../store/card-list/card-list-slice';
 
 export default function LoginPage(): React.ReactNode {
+  const dispatch = useAppDispatch();
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
   const locationsList = Object.values(Locations);
   const randomLocation = getRandomArrayElement<typeof locationsList[number]>(locationsList);
+  const handleRandomClick = () => dispatch(updateLocation(randomLocation));
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const dispatch = useAppDispatch();
   const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -32,12 +34,11 @@ export default function LoginPage(): React.ReactNode {
     ? <Navigate to={AppPath.Main} />
     :
     (
-      <div className="page page--gray page--login">
+      <>
         <Helmet>
           <title>6 cities. Login page</title>
         </Helmet>
-
-        <main className="page__main page__main--login">
+        <main className="page--main page__main--login">
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
@@ -66,7 +67,7 @@ export default function LoginPage(): React.ReactNode {
             <section className="locations locations--login locations--current">
               <div className="locations__item">
                 <Link className="locations__item-link"
-                  to={AppPath.Main}
+                  to={AppPath.Main} onClick={handleRandomClick}
                 >
                   <span>{randomLocation}</span>
                 </Link>
@@ -74,7 +75,7 @@ export default function LoginPage(): React.ReactNode {
             </section>
           </div>
         </main>
-      </div>
+      </>
     );
 
 }

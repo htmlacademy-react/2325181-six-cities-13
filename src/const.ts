@@ -38,8 +38,6 @@ export const StarRatings = [
   },
 ] as const;
 
-export const AVATAR_URL = 'https://i.pravatar.cc/128';
-
 export const Locations = {
   Paris: 'Paris',
   Cologne: 'Cologne',
@@ -142,7 +140,7 @@ export const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voy
 
 export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
-export const MAX_REVIEWS_QUANTITY = -10;
+export const MAX_REVIEWS_QUANTITY = 10;
 
 export const MapDesign = {
   [AppPath.Main]:{
@@ -164,21 +162,17 @@ export const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 export const RATING_WIDTH_UNIT = 20;
 
 export const NameSpace = {
-  Location: 'location',
   Offers: 'offers',
   OffersNearby: 'offersNearby',
-  OfferId: 'offer',
-  Sorting: 'sorting',
-  LoadingStatus: 'loading',
   AuthorisationStatus: 'authorisation',
   User: 'user',
-  Offer: 'offer',
   Reviews: 'reviews',
   Review: 'review',
   Error: 'error',
   Route: 'route',
-  Email:'email',
-  ReviewLoading: 'reviewloading'
+  OfferDetails: 'offerDetails',
+  CardList: 'cardlist',
+  Favorites: 'favorites'
 } as const;
 
 export const Action = {
@@ -227,7 +221,8 @@ export const APIPath = {
   Login: '/login',
   OfferId: '/offers/:offerId',
   OffersNearby: '/offers/:offerId/nearby',
-  Logout: '/logout'
+  Logout: '/logout',
+  Favorite: '/favorite'
 } as const;
 
 export const CONTAINER_STYLE: CSSProperties = {
@@ -262,8 +257,6 @@ export const StatusCodeMapping: Record<number, boolean> = {
 };
 
 export const OFFERS_NEARBY_COUNT = 3;
-
-export const DEFAULT_RATING_NUMBER = 5;
 
 export const RequestStatus = {
   Idle: 'idle',
