@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { isValidForm, isPending, isRejected } from '../../helper';
-import { selectCommentPostingStatus, selectReviewComment, selectReviewRating } from '../../store/comment/comment.selectors';
+import { selectCommentPostingStatus, selectReviewComment, selectReviewRating } from '../../store/comment/comment-selectors';
 import { processErrorHandle } from '../../services/process-error-handle';
-import { setStatusIdle, setReviewRating, setReviewComment } from '../../store/comment/comment.slice';
+import { setStatusIdle, setReviewRating, setReviewComment } from '../../store/comment/comment-slice';
 
 export default function Review ():JSX.Element {
   const dispatch = useAppDispatch();

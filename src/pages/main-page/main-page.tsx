@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import LocationContainer from '../../components/location-container/location-container';
 import MainList from '../../components/main-list/main-list';
-import { selectLocation } from '../../store/card-list/card-list.selectors';
-import { selectOffers, selectDataErrorStatus } from '../../store/offers/offers.selectors';
+import { selectLocation } from '../../store/card-list/card-list-selectors';
+import { selectOffers, selectDataErrorStatus } from '../../store/offers/offers-selectors';
 import MainEmpty from '../../components/main-empty/main-empty';
 import ErrorPage from '../error-page/error-page';
 

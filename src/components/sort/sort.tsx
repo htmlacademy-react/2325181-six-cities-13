@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { updateSortOrder } from '../../store/card-list/card-list.slice';
+import { updateSortOrder } from '../../store/card-list/card-list-slice';
 import { SortOrders} from '../../const';
 import { ActiveSortOrderType } from '../../types/types';
-import { selectActiveSortOrder } from '../../store/card-list/card-list.selectors';
+import { selectActiveSortOrder } from '../../store/card-list/card-list-selectors';
 
 export default function Sort(): JSX.Element {
   const activeOrder: ActiveSortOrderType = useAppSelector(selectActiveSortOrder);

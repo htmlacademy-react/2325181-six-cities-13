@@ -9,7 +9,7 @@ export const getRatingWidth = (rating: number | null | undefined): string => {
   return '0%';
 };
 
-export const getRandomNumber = (min: number, max: number): number => {
+const getRandomNumber = (min: number, max: number): number => {
   const from = Math.ceil(Math.min(min, max));
   const till = Math.floor(Math.max(min, max));
   const result = Math.random() * (till - from + 1) + from;
@@ -23,8 +23,6 @@ export function getRandomArrayElement<T> (arrayInput: T[]): T {
 export const getIconObject = (url: string): object => Object.assign({iconUrl: url}, {...IconDesign});
 
 export const getOffersCoordinates = (offers: OfferType[]) => offers.map((offer) => ({id: offer.id, latitude: offer.location.latitude, longitude: offer.location.longitude}));
-
-export const validateOfferPage = (page: string): boolean => RegExp('/offer/.*').test(page);
 
 export const sortOffers = (offers: OffersType, sortType: ActiveSortOrderType): OffersType => {
   switch (sortType) {
@@ -58,7 +56,7 @@ export const isRejected = (status: RequestStatusType) => status === RequestStatu
 
 export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
 
-export const favoriteStatusCode = (isFavorite: boolean): number => isFavorite ? 1 : 0;
+export const getFavoriteStatusCode = (isFavorite: boolean): number => isFavorite ? 1 : 0;
 
 export const isLoginPage = (pathName: AppPathType) => pathName === AppPath.Login;
 

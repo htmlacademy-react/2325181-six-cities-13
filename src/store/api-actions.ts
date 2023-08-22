@@ -1,16 +1,16 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { generatePath} from 'react-router-dom';
-import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType, State, FavoriteStatusType, LoginType } from '../types/types';
+import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType, StateType, FavoriteStatusType, LoginType } from '../types/types';
 import { APIPath, Action, AuthorisationStatus, NameSpace, TIMEOUT_SHOW_ERROR, AppPath, OFFERS_NEARBY_COUNT } from '../const';
 import { redirectToRoute } from './action';
 import { setToken, removeToken } from '../services/token';
-import { setError } from './error/error.slice';
-import { loadOfferDetails } from './offer-details/offer-details.slice';
-import { loadReviewsList } from './reviews/reviews.slice';
-import { loadOffersNearby } from './offers-nearby/offers-nearby.slice';
-import { addComment } from './reviews/reviews.slice';
-import { setEmail, updateAuthorisationStatus } from './user/user.slice';
+import { setError } from './error/error-slice';
+import { loadOfferDetails } from './offer-details/offer-details-slice';
+import { loadReviewsList } from './reviews/reviews-slice';
+import { loadOffersNearby } from './offers-nearby/offers-nearby-slice';
+import { addComment } from './reviews/reviews-slice';
+import { setEmail, updateAuthorisationStatus } from './user/user-slice';
 
 export const clearErrorAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -28,7 +28,7 @@ export const clearErrorAction = createAsyncThunk<void, undefined, {
 
 export const loadOffersAction = createAsyncThunk<OffersType, undefined, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -42,7 +42,7 @@ export const loadOffersAction = createAsyncThunk<OffersType, undefined, {
 
 export const loadFavoritesAction = createAsyncThunk<OffersType, undefined, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -56,7 +56,7 @@ export const loadFavoritesAction = createAsyncThunk<OffersType, undefined, {
 
 export const loadOfferDetailsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -70,7 +70,7 @@ export const loadOfferDetailsAction = createAsyncThunk<void, string, {
 
 export const loadOffersNearbyAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -84,7 +84,7 @@ export const loadOffersNearbyAction = createAsyncThunk<void, string, {
 
 export const loadReviewsListAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -99,7 +99,7 @@ export const loadReviewsListAction = createAsyncThunk<void, string, {
 
 export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -118,7 +118,7 @@ export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
 
 export const loginUserAction = createAsyncThunk<void, AuthDataType, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -137,7 +137,7 @@ export const loginUserAction = createAsyncThunk<void, AuthDataType, {
 
 export const postReviewAction = createAsyncThunk<void, ReviewFormType, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -151,7 +151,7 @@ export const postReviewAction = createAsyncThunk<void, ReviewFormType, {
 
 export const addBookmarkAction = createAsyncThunk<OfferType, FavoriteStatusType, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >
@@ -166,7 +166,7 @@ export const addBookmarkAction = createAsyncThunk<OfferType, FavoriteStatusType,
 
 export const logoutUserAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
-  state: State;
+  state: StateType;
   extra: AxiosInstance;
   }
 >

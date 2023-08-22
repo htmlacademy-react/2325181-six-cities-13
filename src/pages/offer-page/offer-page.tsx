@@ -9,16 +9,16 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import MapOffer from '../../components/map-offer/map-offer';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
 import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
-import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details/offer-details.selectors';
-import { selectAuthorisationStatus } from '../../store/user/user.selectors';
+import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details/offer-details-selectors';
+import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorisationStatus, PremiumPrefix} from '../../const';
 import { getRatingWidth, isRejected, isFulfilled, isPending, getUpperCaseType } from '../../helper';
-import { setOfferId } from '../../store/offer-details/offer-details.slice';
-import BookmarkButton from '../../components/bookmark-button/bookmark-button';
+import { setOfferId } from '../../store/offer-details/offer-details-slice';
 import { LodgingType } from '../../types/types';
 import classNames from 'classnames';
-import { resetReviewData } from '../../store/comment/comment.slice';
+import { resetReviewData } from '../../store/comment/comment-slice';
+import FavoritesButton from '../../components/favorites-button/favorites-button';
 
 
 export default function OfferPage(): JSX.Element {
@@ -63,7 +63,7 @@ export default function OfferPage(): JSX.Element {
                   <h1 className="offer__name">
                     {activeOffer.title}
                   </h1>
-                  <BookmarkButton />
+                  <FavoritesButton offerId={activeOffer.id} isFavorite={activeOffer.isFavorite} isOfferButton />
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">

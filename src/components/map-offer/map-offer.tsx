@@ -2,8 +2,8 @@ import { Map } from '../map/map';
 import { MapDesign, AppPath } from '../../const';
 import { getOffersCoordinates } from '../../helper';
 import { useAppSelector } from '../../hooks';
-import { selectOffersNearby } from '../../store/offers-nearby/offers-nearby.selectors';
-import { selectOfferDetails } from '../../store/offer-details/offer-details.selectors';
+import { selectOffersNearby } from '../../store/offers-nearby/offers-nearby-selectors';
+import { selectOfferDetails } from '../../store/offer-details/offer-details-selectors';
 import { OfferType } from '../../types/types';
 
 

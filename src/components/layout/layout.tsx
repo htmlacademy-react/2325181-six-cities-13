@@ -1,18 +1,15 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import LoadingPage from '../../pages/loading-page/loading-page';
+import Logo from '../logo/logo';
+import SignIn from '../sign-in/sign-in';
 import { useAppSelector } from '../../hooks';
-import { selectDataLoadingStatus } from '../../store/offers/offers.selectors';
+import { selectDataLoadingStatus } from '../../store/offers/offers-selectors';
 import { isLoginPage, isMainPage, isFavoritesPage} from '../../helper';
-import { selectFavorites } from '../../store/favorties/favorites.selectors';
+import { selectFavorites } from '../../store/favorties/favorites-selectors';
 import { AppPathType } from '../../types/types';
 import classNames from 'classnames';
 
-type LayoutProps = {
-  logo: JSX.Element;
-  signin: JSX.Element;
-}
-
-export default function Layout ({logo, signin}: LayoutProps):JSX.Element {
+export default function Layout ():JSX.Element {
   const currentPath = useLocation().pathname as AppPathType;
   const isLogin = isLoginPage(currentPath);
   const isMain = isMainPage(currentPath);
@@ -32,9 +29,9 @@ export default function Layout ({logo, signin}: LayoutProps):JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              {logo}
+              <Logo />
             </div>
-            {!isLogin && signin}
+            {!isLogin && <SignIn />}
           </div>
         </div>
       </header>

@@ -1,7 +1,7 @@
 import {PlaceCard } from '../place-card/place-card';
 import { PlaceCardDesign, AppPath } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { selectOffersNearby } from '../../store/offers-nearby/offers-nearby.selectors';
+import { selectOffersNearby } from '../../store/offers-nearby/offers-nearby-selectors';
 
 
 export function NearbyList(): JSX.Element {

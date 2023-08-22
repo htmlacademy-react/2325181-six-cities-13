@@ -38,8 +38,6 @@ export const StarRatings = [
   },
 ] as const;
 
-export const AVATAR_URL = 'https://i.pravatar.cc/128';
-
 export const Locations = {
   Paris: 'Paris',
   Cologne: 'Cologne',
@@ -260,8 +258,6 @@ export const StatusCodeMapping: Record<number, boolean> = {
 
 export const OFFERS_NEARBY_COUNT = 3;
 
-export const DEFAULT_RATING_NUMBER = 5;
-
 export const RequestStatus = {
   Idle: 'idle',
   Pending: 'pending',
@@ -270,5 +266,3 @@ export const RequestStatus = {
 } as const;
 
 export const PASSWORD_REGEX = /^.*(?=.*\d)(?=.*[a-zA-Z]).*$|(^$)/;
-
-export const Email = 'email';
