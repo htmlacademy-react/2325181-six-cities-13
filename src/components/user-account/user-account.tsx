@@ -26,7 +26,7 @@ export default function UserAccount():JSX.Element {
             evt.preventDefault();
             dispatch(logoutUserAction());
           }}
-          to={AppPath.Main}
+          to={AppPath.Login}
         >
           <span className="header__signout">Sign out</span>
         </Link>

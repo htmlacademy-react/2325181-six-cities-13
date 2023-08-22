@@ -23,7 +23,7 @@ export const reviews = createSlice({
       state.reviews = action.payload;
     },
     addComment: (state, action: PayloadAction<ReviewType>) => {
-      state.reviews.push(action.payload);
+      state.reviews.unshift(action.payload);
     }
   },
   extraReducers(builder) {

@@ -8,7 +8,7 @@ import { selectReviewsStatus, selectReviewsList } from '../../store/reviews/revi
 export default function ReviewList (): JSX.Element {
   const reviews = useAppSelector(selectReviewsList);
   const reviewLoadingStatus = useAppSelector(selectReviewsStatus);
-  const reviewsSortedSliced = reviews.slice(MAX_REVIEWS_QUANTITY).sort((a,b) => dayjs(b.date).diff(dayjs(a.date)));
+  const reviewsSortedSliced = reviews.slice(0).sort((a,b) => dayjs(b.date).diff(dayjs(a.date))).slice(0, MAX_REVIEWS_QUANTITY);
   return (
     <>
       <h2 className="reviews__title">Reviews {reviews.length > 0 && <><span>&middot; </span><span className="reviews__amount">{reviews.length}</span></>}</h2>

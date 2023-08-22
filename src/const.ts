@@ -140,7 +140,7 @@ export const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voy
 
 export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
-export const MAX_REVIEWS_QUANTITY = -10;
+export const MAX_REVIEWS_QUANTITY = 10;
 
 export const MapDesign = {
   [AppPath.Main]:{
