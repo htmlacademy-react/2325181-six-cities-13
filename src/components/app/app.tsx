@@ -10,8 +10,6 @@ import { AppPath } from '../../const';
 import Layout from '../layout/layout';
 import HistoryRouter from '../history-route/history-route';
 import { browserHistory } from '../../browser-history';
-import {LogoMemo} from '../logo/logo';
-import SignIn from '../sign-in/sign-in';
 export default function App (): JSX.Element {
 
 
@@ -19,7 +17,7 @@ export default function App (): JSX.Element {
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
         <Routes>
-          <Route path='/' element={<Layout logo={<LogoMemo />} signin={<SignIn />} />}>
+          <Route path='/' element={<Layout />}>
             <Route
               index
               element={<MainPage />}

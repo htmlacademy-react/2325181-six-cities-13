@@ -17,7 +17,7 @@ type PlaceCardProps = {
   cardHeight: string;
 }
 
-export function PlaceCard({offer, cardClass, cardInfoClass, cardHeight, cardWidth}: PlaceCardProps): JSX.Element {
+export default function PlaceCard ({offer, cardClass, cardInfoClass, cardHeight, cardWidth}: PlaceCardProps): JSX.Element {
   const dispatch = useAppDispatch();
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
   const offerPath = generatePath(AppPath.Offer, {id: offer.id});

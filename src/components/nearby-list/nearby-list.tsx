@@ -1,4 +1,4 @@
-import {PlaceCard } from '../place-card/place-card';
+import PlaceCard from '../place-card/place-card';
 import { PlaceCardDesign, AppPath } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { selectOffersNearby } from '../../store/offers-nearby/offers-nearby-selectors';
