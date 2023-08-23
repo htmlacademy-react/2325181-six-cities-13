@@ -43,7 +43,7 @@ export const offerDetails = createSlice({
       })
       .addCase(addBookmarkAction.fulfilled, (state, action) => {
         const favoriteOffer = action.payload;
-        if (state.offerDetails) {
+        if (state.offerDetails && state.offerDetails.id === favoriteOffer.id) {
           state.offerDetails.isFavorite = favoriteOffer.isFavorite;
         }
       });

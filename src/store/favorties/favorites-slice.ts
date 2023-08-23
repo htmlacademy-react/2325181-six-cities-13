@@ -40,7 +40,7 @@ export const favorites = createSlice({
         if (favoriteOffer.isFavorite) {
           state.favorites.push(action.payload);
         } else {
-          state.favorites.filter((offer) => offer.id !== favoriteOffer.id);
+          state.favorites = state.favorites.filter((offer) => offer.id !== favoriteOffer.id);
         }
       });
   }
