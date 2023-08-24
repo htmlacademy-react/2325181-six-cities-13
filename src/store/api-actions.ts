@@ -1,8 +1,8 @@
-import {AxiosInstance} from 'axios';
+import {AxiosError, AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { generatePath} from 'react-router-dom';
 import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType, StateType, FavoriteStatusType, LoginType } from '../types/types';
-import { APIPath, Action, AuthorisationStatus, NameSpace, TIMEOUT_SHOW_ERROR, AppPath, OFFERS_NEARBY_COUNT } from '../const';
+import { APIPath, Action, AuthorisationStatus, NameSpace, TIMEOUT_SHOW_ERROR, AppPath, OFFERS_NEARBY_COUNT, ErrorMessage } from '../const';
 import { redirectToRoute } from './action';
 import { setToken, removeToken } from '../services/token';
 import { setError } from './error/error-slice';
@@ -11,6 +11,7 @@ import { loadReviewsList } from './reviews/reviews-slice';
 import { loadOffersNearby } from './offers-nearby/offers-nearby-slice';
 import { addComment } from './reviews/reviews-slice';
 import { setEmail, updateAuthorisationStatus } from './user/user-slice';
+
 
 export const clearErrorAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -34,8 +35,14 @@ export const loadOffersAction = createAsyncThunk<OffersType, undefined, {
 >
 (
   `${NameSpace.Offers}/${Action.Load}`,
-  async (_arg, {extra: axiosApi}) => {
-    const {data} = await axiosApi.get<OffersType>(APIPath.Offers);
+  async (_arg, {dispatch, extra: axiosApi}) => {
+    const {data} = await axiosApi
+      .get<OffersType>(APIPath.Offers)
+      .catch((err: AxiosError) => {
+        dispatch(setError(ErrorMessage.FailedLoadOffers));
+        dispatch(clearErrorAction());
+        throw err.message;
+      });
     return data;
   },
 );
@@ -48,8 +55,14 @@ export const loadFavoritesAction = createAsyncThunk<OffersType, undefined, {
 >
 (
   `${NameSpace.Favorites}/${Action.Load}`,
-  async (_arg, {extra: axiosApi}) => {
-    const {data} = await axiosApi.get<OffersType>(APIPath.Favorite);
+  async (_arg, {dispatch, extra: axiosApi}) => {
+    const {data} = await axiosApi
+      .get<OffersType>(APIPath.Favorite)
+      .catch((err: AxiosError) => {
+        dispatch(setError(ErrorMessage.FailedLoadFavorites));
+        dispatch(clearErrorAction());
+        throw err.message;
+      });
     return data;
   },
 );
@@ -63,8 +76,16 @@ export const loadOfferDetailsAction = createAsyncThunk<void, string, {
 (
   `${NameSpace.OfferDetails}/${Action.Load}`,
   async (offerId, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi.get<OfferType>(generatePath(APIPath.OfferId, {offerId: offerId}));
-    dispatch(loadOfferDetails(data));
+    try {
+      const {data} = await axiosApi.get<OfferType>(generatePath(APIPath.OfferId, {offerId: offerId}));
+      dispatch(loadOfferDetails(data));
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        dispatch(setError(ErrorMessage.FailedLoadOfferDetails));
+        dispatch(clearErrorAction());
+        throw error.message;
+      }
+    }
   },
 );
 
@@ -77,8 +98,16 @@ export const loadOffersNearbyAction = createAsyncThunk<void, string, {
 (
   `${NameSpace.OffersNearby}/${Action.Load}`,
   async (offerId, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi.get<OffersType>(generatePath(APIPath.OffersNearby, {offerId: offerId}));
-    dispatch(loadOffersNearby(data.slice(0, OFFERS_NEARBY_COUNT)));
+    try {
+      const {data} = await axiosApi.get<OffersType>(generatePath(APIPath.OffersNearby, {offerId: offerId}));
+      dispatch(loadOffersNearby(data.slice(0, OFFERS_NEARBY_COUNT)));
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        dispatch(setError(ErrorMessage.FailedLoadOffersNearby));
+        dispatch(clearErrorAction());
+        throw error.message;
+      }
+    }
   },
 );
 
@@ -91,8 +120,16 @@ export const loadReviewsListAction = createAsyncThunk<void, string, {
 (
   `${NameSpace.Reviews}/${Action.Load}`,
   async (offerId, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi.get<ReviewsType>(generatePath(APIPath.Reviews, {offerId: offerId}));
-    dispatch(loadReviewsList(data));
+    try {
+      const {data} = await axiosApi.get<ReviewsType>(generatePath(APIPath.Reviews, {offerId: offerId}));
+      dispatch(loadReviewsList(data));
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        dispatch(setError(ErrorMessage.FailedLoadReviewsList));
+        dispatch(clearErrorAction());
+        throw error.message;
+      }
+    }
   },
 );
 
@@ -110,8 +147,13 @@ export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
       const {data} = await axiosApi.get<LoginType>(APIPath.Login);
       dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
       dispatch(setEmail(data.email));
-    } catch {
+    } catch (error) {
       dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
+      if (error instanceof AxiosError) {
+        dispatch(setError(ErrorMessage.UserUnauthorised));
+        dispatch(clearErrorAction());
+        throw error.message;
+      }
     }
   },
 );
@@ -125,13 +167,22 @@ export const loginUserAction = createAsyncThunk<void, AuthDataType, {
 (
   `${NameSpace.AuthorisationStatus}/${Action.Update}`,
   async ({email, password}, {dispatch, extra: axiosApi}) => {
-    const {data: {token}} = await axiosApi.post<UserDataType>(APIPath.Login, {email, password});
-    setToken(token);
-    dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
-    dispatch(setEmail(email));
-    dispatch(loadOffersAction());
-    dispatch(loadFavoritesAction());
-    dispatch(redirectToRoute(AppPath.Main));
+    try {
+      const {data: {token}} = await axiosApi.post<UserDataType>(APIPath.Login, {email, password});
+      setToken(token);
+      dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
+      dispatch(setEmail(email));
+      dispatch(loadOffersAction());
+      dispatch(loadFavoritesAction());
+      dispatch(redirectToRoute(AppPath.Main));
+    } catch (error) {
+      dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
+      if (error instanceof AxiosError) {
+        dispatch(setError(ErrorMessage.FailedUserLogin));
+        dispatch(clearErrorAction());
+        throw error.message;
+      }
+    }
   },
 );
 
@@ -144,8 +195,16 @@ export const postReviewAction = createAsyncThunk<void, ReviewFormType, {
 (
   `${NameSpace.Review}/${Action.Add}`,
   async ({id, comment, rating}, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi.post<ReviewType>(generatePath(APIPath.Reviews, {offerId: id}), {comment, rating});
-    dispatch(addComment(data));
+    try {
+      const {data} = await axiosApi.post<ReviewType>(generatePath(APIPath.Reviews, {offerId: id}), {comment, rating});
+      dispatch(addComment(data));
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        dispatch(setError(ErrorMessage.FailedPostReview));
+        dispatch(clearErrorAction());
+        throw error.message;
+      }
+    }
   },
 );
 
@@ -157,9 +216,14 @@ export const addBookmarkAction = createAsyncThunk<OfferType, FavoriteStatusType,
 >
 (
   `${NameSpace.Favorites}/${Action.Update}`,
-  async ({id, status}, { dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi.post<OfferType>(`${APIPath.Favorite}/${id}/${status}`);
-    dispatch(loadFavoritesAction());
+  async ({id, status}, {dispatch, extra: axiosApi}) => {
+    const {data} = await axiosApi
+      .post<OfferType>(`${APIPath.Favorite}/${id}/${status}`)
+      .catch((err: AxiosError) => {
+        dispatch(setError(ErrorMessage.FailedAddBookmark));
+        dispatch(clearErrorAction());
+        throw err.message;
+      });
     return data;
   },
 );
@@ -173,8 +237,16 @@ export const logoutUserAction = createAsyncThunk<void, undefined, {
 (
   `${NameSpace.AuthorisationStatus}/${Action.Logout}`,
   async (_arg, {dispatch, extra: axiosApi}) => {
-    await axiosApi.delete(APIPath.Logout);
-    removeToken();
-    dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
+    try {
+      await axiosApi.delete(APIPath.Logout);
+      removeToken();
+      dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        dispatch(setError(ErrorMessage.FailedUserLogout));
+        dispatch(clearErrorAction());
+        throw error.message;
+      }
+    }
   },
 );

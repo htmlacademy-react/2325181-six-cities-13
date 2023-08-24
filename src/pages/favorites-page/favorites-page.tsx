@@ -1,12 +1,18 @@
+import {useEffect} from 'react';
 import classNames from 'classnames';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { LocationReducerType } from '../../types/types';
 import { selectFavorites } from '../../store/favorties/favorites-selectors';
+import { loadFavoritesAction } from '../../store/api-actions';
 
 export default function FavoritesPage (): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() =>{
+    dispatch(loadFavoritesAction());
+  },[dispatch]);
   const favoriteOffers = useAppSelector(selectFavorites);
   const isEmpty = favoriteOffers.length === 0;
   const groupByLocation = Object.entries(favoriteOffers.reduce<LocationReducerType>((location, offer) => {

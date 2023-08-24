@@ -4,7 +4,7 @@ import { RequestStatus } from '../../const';
 import { loadOffersNearbyAction, addBookmarkAction } from '../api-actions';
 import { getFavoriteStatusCode } from '../../helper';
 
-describe('Offer Details Slice', () => {
+describe('Offers Nearby Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
     const expectedState: OffersNearbyStateType = {

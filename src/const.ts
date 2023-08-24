@@ -266,3 +266,16 @@ export const RequestStatus = {
 } as const;
 
 export const PASSWORD_REGEX = /^.*(?=.*\d)(?=.*[a-zA-Z]).*$|(^$)/;
+
+export const ErrorMessage = {
+  UserUnauthorised: 'User is unauthorised',
+  FailedLoadOffers: 'Failed to load offers',
+  FailedLoadFavorites: 'Failed to load favorites',
+  FailedLoadOfferDetails: 'Failed to load offer details',
+  FailedLoadOffersNearby: 'Failed to load offers nearby',
+  FailedLoadReviewsList: 'Failed to load reviews list',
+  FailedPostReview: 'Failed to post review',
+  FailedAddBookmark: 'Failed to change favorite status',
+  FailedUserLogout: 'Failed to log user out',
+  FailedUserLogin: 'Failed to log user in',
+};

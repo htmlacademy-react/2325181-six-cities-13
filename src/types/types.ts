@@ -1,3 +1,6 @@
+import { Action } from '@reduxjs/toolkit';
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import { createApi } from '../services/api';
 import { store } from '../store';
 import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, SortOrders, AppPath, RequestStatus, PlaceCardDesign } from '../const';
 
@@ -109,3 +112,5 @@ export type LoginType = {
   email: string;
   token: string;
   };
+
+export type AppThunkDispatchType = ThunkDispatch<StateType, ReturnType<typeof createApi>, Action>;
