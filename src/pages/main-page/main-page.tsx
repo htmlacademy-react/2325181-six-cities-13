@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
-import LocationContainer from '../../components/location-container/location-container';
+import City from '../../components/location/location';
 import MainList from '../../components/main-list/main-list';
 import { selectLocation } from '../../store/card-list/card-list-selectors';
 import { selectOffers, selectDataErrorStatus } from '../../store/offers/offers-selectors';
@@ -26,7 +26,7 @@ export default function MainPage(): JSX.Element {
             <h1 className="visually-hidden">Cities</h1>
             <div className="tabs">
               <section className="locations container">
-                <LocationContainer />
+                <City />
               </section>
             </div>
             <div className="cities">

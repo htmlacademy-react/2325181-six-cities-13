@@ -24,10 +24,10 @@ import FavoritesButton from '../../components/favorites-button/favorites-button'
 export default function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = useParams().id as string;
-  dispatch(resetReviewData());
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
   const isAuth = authorisationStatus === AuthorisationStatus.Auth;
   useEffect(() => {
+    dispatch(resetReviewData());
     dispatch(setOfferId(offerId));
     dispatch(loadOfferDetailsAction(offerId));
     dispatch(loadOffersNearbyAction(offerId));

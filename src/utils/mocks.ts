@@ -1,5 +1,5 @@
 import { OffersType, ReviewsType } from '../types/types';
-import { LodgingKinds, Locations, LocationsCoordinates } from '../const';
+import { LodgingKind, Location, LocationsCoordinates } from '../const';
 import { Action } from '@reduxjs/toolkit';
 
 
@@ -7,11 +7,11 @@ export const makeFakeFavoritesOffers = (): OffersType => [
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Beautiful & luxurious studio at great location',
-    type: LodgingKinds.Aparment,
+    type: LodgingKind.Apartment,
     price: 120,
     previewImage: 'https://13.design.pages.academy/static/hotel/12.jpg',
     city: {
-      name: Locations.Amsterdam,
+      name: Location.Amsterdam,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13
@@ -43,11 +43,11 @@ export const makeFakeFavoritesOffers = (): OffersType => [
   {
     id: '34f50f68-803c-43a9-8d59-9556fb9c0eaa',
     title: 'The house among olive ',
-    type: LodgingKinds.Hotel,
+    type: LodgingKind.Hotel,
     price: 197,
     previewImage: 'https://13.design.pages.academy/static/hotel/10.jpg',
     city: {
-      name: Locations.Amsterdam,
+      name: Location.Amsterdam,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13
@@ -81,11 +81,11 @@ export const makeFakeFavoritesOffers = (): OffersType => [
   {
     id: '4b658388-7118-4e47-806a-fa5b0d41e8b0',
     title: 'Amazing and Extremely Central Flat',
-    type: LodgingKinds.Aparment,
+    type: LodgingKind.Apartment,
     price: 174,
     previewImage: 'https://13.design.pages.academy/static/hotel/18.jpg',
     city: {
-      name: Locations.Amsterdam,
+      name: Location.Amsterdam,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13
@@ -119,11 +119,11 @@ export const makeFakeFavoritesOffers = (): OffersType => [
   {
     id: 'c99c9239-7836-4115-a767-ee81c4b835ad',
     title: 'Amazing and Extremely Central Flat',
-    type: LodgingKinds.Room,
+    type: LodgingKind.Room,
     price: 224,
     previewImage: 'https://13.design.pages.academy/static/hotel/3.jpg',
     city: {
-      name: Locations.Amsterdam,
+      name: Location.Amsterdam,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13

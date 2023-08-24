@@ -2,13 +2,13 @@ import { Action } from '@reduxjs/toolkit';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { createApi } from '../services/api';
 import { store } from '../store';
-import { AuthorisationStatus, Locations, LodgingKinds, PremiumPrefix, SortOrders, AppPath, RequestStatus, PlaceCardDesign } from '../const';
+import { AuthorisationStatus, Location, LodgingKind, PremiumPrefix, SortOrders, AppPath, RequestStatus, PlaceCardDesign } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];
 
-export type LocationType = typeof Locations[keyof typeof Locations];
+export type LocationType = typeof Location[keyof typeof Location];
 
-export type LodgingType = typeof LodgingKinds[keyof typeof LodgingKinds];
+export type LodgingType = typeof LodgingKind[keyof typeof LodgingKind];
 
 export type OffersType = OfferType[];
 

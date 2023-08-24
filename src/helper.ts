@@ -28,16 +28,12 @@ export const sortOffers = (offers: OffersType, sortType: ActiveSortOrderType): O
   switch (sortType) {
     case SortOrders.Popular.order:
       return offers?.slice();
-      break;
     case SortOrders.PriceAscending.order:
       return offers?.slice().sort((offerA, offerB) => offerA.price - offerB.price);
-      break;
     case SortOrders.PriceDescending.order:
       return offers?.slice().sort((offerA, offerB) => offerB.price - offerA.price);
-      break;
     case SortOrders.RatedFirst.order:
       return offers?.slice().sort((offerA, offerB) => offerB.rating - offerA.rating);
-      break;
     default:
       return offers?.slice();
   }

@@ -38,7 +38,7 @@ export const StarRatings = [
   },
 ] as const;
 
-export const Locations = {
+export const Location = {
   Paris: 'Paris',
   Cologne: 'Cologne',
   Brussels: 'Brussels',
@@ -47,9 +47,9 @@ export const Locations = {
   Dusseldorf: 'Dusseldorf'
 } as const;
 
-export const LodgingKinds = {
+export const LodgingKind = {
   Room: 'Room',
-  Aparment: 'Apartment',
+  Apartment: 'Apartment',
   House: 'House',
   Hotel: 'Hotel'
 } as const;
@@ -108,27 +108,27 @@ export const IconDesign = {
 } as const;
 
 export const LocationsCoordinates = {
-  [Locations.Paris]: {
+  [Location.Paris]: {
     latitude: 48.85661,
     longitude: 2.351499
   },
-  [Locations.Cologne]: {
+  [Location.Cologne]: {
     latitude: 50.938361,
     longitude: 6.959974
   },
-  [Locations.Brussels]: {
+  [Location.Brussels]: {
     latitude: 50.846557,
     longitude: 4.351697
   },
-  [Locations.Amsterdam]: {
+  [Location.Amsterdam]: {
     latitude: 52.37454,
     longitude: 4.897976
   },
-  [Locations.Hamburg]: {
+  [Location.Hamburg]: {
     latitude: 53.550341,
     longitude: 10.000654
   },
-  [Locations.Dusseldorf]: {
+  [Location.Dusseldorf]: {
     latitude: 51.225402,
     longitude: 6.776314
   }
@@ -206,8 +206,6 @@ export const SortOrders = {
     title: 'Top rated first',
   }
 } as const;
-
-export const DEFAULT_SORT_ORDER = 'Popular';
 
 export const BASE_URL = 'https://13.design.pages.academy/six-cities';
 
