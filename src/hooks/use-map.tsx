@@ -11,7 +11,8 @@ export default function useMap(
   const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    let isMounted = true;
+    if (isMounted && mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
           lat: LocationsCoordinates[location].latitude,
@@ -33,6 +34,9 @@ export default function useMap(
       isRenderedRef.current = true;
     }
     map?.setView([LocationsCoordinates[location].latitude, LocationsCoordinates[location].longitude]);
+    return () => {
+      isMounted = false;
+    };
   }, [map, mapRef, location]);
 
   return map;

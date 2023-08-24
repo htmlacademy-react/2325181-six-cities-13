@@ -44,12 +44,12 @@ describe('Favorites Slice', () => {
       authorisationStatus: AuthorisationStatus.Unknown,
       email: ''
     };
-    const mockEmail = 'test@test.com';
+    const MOCK_EMAIL = 'test@test.com';
     const expectedState: UserStateType = {
       authorisationStatus: AuthorisationStatus.Unknown,
-      email: mockEmail
+      email: MOCK_EMAIL
     };
-    const result = user.reducer(initialState, setEmail(mockEmail));
+    const result = user.reducer(initialState, setEmail(MOCK_EMAIL));
     expect(result).toEqual(expectedState);
   });
 });

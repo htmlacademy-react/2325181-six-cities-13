@@ -46,8 +46,9 @@ export const isValidForm = (text: string, rating: number): boolean => text.lengt
   && rating <= FormValidation.MaxRating;
 
 export const isPending = (status: RequestStatusType) => status === RequestStatus.Pending;
-export const isIdle = (status: RequestStatusType) => status === RequestStatus.Idle;
+
 export const isFulfilled = (status: RequestStatusType) => status === RequestStatus.Fulfilled;
+
 export const isRejected = (status: RequestStatusType) => status === RequestStatus.Rejected;
 
 export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);

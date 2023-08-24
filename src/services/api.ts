@@ -10,7 +10,7 @@ type DetailMessageType = {
   message: string;
 }
 
-const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+const shouldDisplayError = (response: AxiosResponse): boolean => Boolean(StatusCodeMapping[response.status]);
 
 export const createApi = (): AxiosInstance => {
   const api = axios.create({

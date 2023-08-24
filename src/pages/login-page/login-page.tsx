@@ -1,15 +1,16 @@
+import { ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate } from 'react-router-dom';
-import { AppPath, AuthorisationStatus, Location, PASSWORD_REGEX } from '../../const';
+import { AppPath, AuthorisationStatus, Location } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getRandomArrayElement } from '../../helper';
+import { getRandomArrayElement, isPasswordValid } from '../../helper';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { loginUserAction } from '../../store/api-actions';
 import { FormEvent, useRef, useState } from 'react';
 import styles from './login-page.module.css';
 import { updateLocation } from '../../store/card-list/card-list-slice';
 
-export default function LoginPage(): React.ReactNode {
+export default function LoginPage(): ReactNode {
   const dispatch = useAppDispatch();
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
   const locationsList = Object.values(Location);
@@ -17,7 +18,6 @@ export default function LoginPage(): React.ReactNode {
   const handleRandomClick = () => dispatch(updateLocation(randomLocation));
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (emailRef.current !== null &&
