@@ -98,6 +98,17 @@ export const LogoSizes = {
   }
 } as const;
 
+export const FavoritesButtonSizes = {
+  Width : {
+    offerButton: '31',
+    notOfferButton: '18'
+  },
+  Height: {
+    offerButton: '33',
+    notOfferButton: '19'
+  }
+} as const;
+
 export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 
 export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
@@ -227,12 +238,12 @@ export const CONTAINER_STYLE: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around'
-};
+} as const;
 
 export const SPINNER_CSS_OVERRIDE: CSSProperties = {
   display: 'block',
   margin: '300px auto'
-};
+} as const;
 
 export const SPINNER_SIZE = 500;
 
@@ -244,7 +255,7 @@ export const LOADING_STYLE: CSSProperties = {
   color: '#4481C3',
   fontSize: 'x-large',
   fontWeight: '700'
-};
+} as const;
 
 export const TIMEOUT_SHOW_ERROR = 5000;
 
@@ -252,7 +263,7 @@ export const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
   [StatusCodes.NOT_FOUND]: true
-};
+} as const;
 
 export const OFFERS_NEARBY_COUNT = 3;
 
@@ -276,4 +287,8 @@ export const ErrorMessage = {
   FailedAddBookmark: 'Failed to change favorite status',
   FailedUserLogout: 'Failed to log user out',
   FailedUserLogin: 'Failed to log user in',
-};
+} as const;
+
+export const NULLED_RATING = '0%';
+
+export const MOCK_MESSAGE = 'Lorem ipsum dolor sit amet';

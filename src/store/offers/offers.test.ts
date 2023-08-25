@@ -1,7 +1,7 @@
 import { OffersStateType, offers } from './offers-slice';
 import { addBookmarkAction, loadOffersAction, logoutUserAction } from '../api-actions';
 import { makeFakeFavoritesOffers } from '../../utils/mocks';
-import { getFavoriteStatusCode } from '../../helper';
+import { getFavoriteStatusCode, getRandomArrayElement } from '../../helper';
 
 describe('Offers Slice', () => {
   it('should return initial state with empty action', () => {
@@ -102,7 +102,7 @@ describe('Offers Slice', () => {
       isDataLoading: false,
       hasDataError: false
     };
-    const fakeFavoriteOffer = initialMockOffers[1];
+    const fakeFavoriteOffer = getRandomArrayElement(initialMockOffers);
     const expectedMockOffers = initialMockOffers.map((offer) => {
       if (offer.id === fakeFavoriteOffer.id) {
         offer.isFavorite = fakeFavoriteOffer.isFavorite;

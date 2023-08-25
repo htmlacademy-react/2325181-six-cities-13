@@ -1,4 +1,5 @@
 import { ErrorStateType, error, setError } from './error-slice';
+import { MOCK_MESSAGE } from '../../const';
 
 describe('Error Slice', () => {
   it('should return initial state with empty action', () => {
@@ -25,10 +26,11 @@ describe('Error Slice', () => {
     const initialState: ErrorStateType = {
       error: null,
     };
+
     const expectedState: ErrorStateType = {
-      error: 'Lorem ipsum dolor sit amet',
+      error: MOCK_MESSAGE,
     };
-    const result = error.reducer(initialState, setError('Lorem ipsum dolor sit amet'));
+    const result = error.reducer(initialState, setError(MOCK_MESSAGE));
     expect(result.error).toBe(expectedState.error);
   });
 

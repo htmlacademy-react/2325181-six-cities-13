@@ -2,6 +2,7 @@ import { ReviewsStateType, loadReviewsList, addComment, reviews } from './review
 import { loadReviewsListAction } from '../api-actions';
 import { RequestStatus } from '../../const';
 import { makeFakeReviewsList } from '../../utils/mocks';
+import { getRandomArrayElement } from '../../helper';
 
 describe('Reviews Slice', () => {
   it('should return initial state with empty action', () => {
@@ -47,8 +48,7 @@ describe('Reviews Slice', () => {
 
   it('set "reviews" to add new review to array with "addComment" action', () => {
     const mockInitialReviewsList = makeFakeReviewsList();
-    const mockReview = structuredClone(makeFakeReviewsList()[1]);
-    mockReview.id = '1';
+    const mockReview = structuredClone(getRandomArrayElement(mockInitialReviewsList));
     const initialState: ReviewsStateType = {
       reviews: mockInitialReviewsList,
       reviewsLoadingStatus: RequestStatus.Idle,

@@ -4,14 +4,20 @@ import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
-import { LocationReducerType } from '../../types/types';
 import { selectFavorites } from '../../store/favorties/favorites-selectors';
 import { loadFavoritesAction } from '../../store/api-actions';
+import { LocationReducerType } from '../../types/types';
 
 export default function FavoritesPage (): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() =>{
-    dispatch(loadFavoritesAction());
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(loadFavoritesAction());
+    }
+    return () => {
+      isMounted = false;
+    };
   },[dispatch]);
   const favoriteOffers = useAppSelector(selectFavorites);
   const isEmpty = favoriteOffers.length === 0;

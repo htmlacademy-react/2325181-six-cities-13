@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
+import { selectReviewsStatus, selectReviewsList } from '../../store/reviews/reviews-selectors';
+import { useAppSelector } from '../../hooks';
 import { getRatingWidth, isFulfilled, isPending, isRejected } from '../../helper';
 import { REVIEW_DATE_FORMAT, MAX_REVIEWS_QUANTITY} from '../../const';
-import { useAppSelector } from '../../hooks';
-import { selectReviewsStatus, selectReviewsList } from '../../store/reviews/reviews-selectors';
 
 export default function ReviewList (): JSX.Element {
   const reviews = useAppSelector(selectReviewsList);

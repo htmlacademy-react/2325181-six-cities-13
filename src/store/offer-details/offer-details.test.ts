@@ -38,15 +38,15 @@ describe('Offer Details Slice', () => {
       offerLoadingStatus: RequestStatus.Idle,
       hasOfferDetailsError: false
     };
-    const mockOfferId = 'mockOfferId';
+    const MOCK_OFFER_ID = 'mockOfferId';
     const expectedState: OfferDetailsStateType = {
-      offerId: mockOfferId,
+      offerId: MOCK_OFFER_ID,
       offerDetails: null,
       offerLoadingStatus: RequestStatus.Idle,
       hasOfferDetailsError: false
     };
 
-    const result = offerDetails.reducer(initialState, setOfferId(mockOfferId));
+    const result = offerDetails.reducer(initialState, setOfferId(MOCK_OFFER_ID));
     expect(result).toEqual(expectedState);
   });
 

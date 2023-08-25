@@ -1,14 +1,13 @@
-import { ReactNode } from 'react';
+import { FormEvent, useRef, useState, ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate } from 'react-router-dom';
-import { AppPath, AuthorisationStatus, Location } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getRandomArrayElement, isPasswordValid } from '../../helper';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
-import { loginUserAction } from '../../store/api-actions';
-import { FormEvent, useRef, useState } from 'react';
-import styles from './login-page.module.css';
 import { updateLocation } from '../../store/card-list/card-list-slice';
+import { loginUserAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import styles from './login-page.module.css';
+import { AppPath, AuthorisationStatus, Location } from '../../const';
+import { getRandomArrayElement, isPasswordValid } from '../../helper';
 
 export default function LoginPage(): ReactNode {
   const dispatch = useAppDispatch();
@@ -18,7 +17,7 @@ export default function LoginPage(): ReactNode {
   const handleRandomClick = () => dispatch(updateLocation(randomLocation));
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (emailRef.current !== null &&
       passwordRef.current !== null &&
@@ -42,7 +41,7 @@ export default function LoginPage(): ReactNode {
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
-              <form className="login__form form" onSubmit={handleSubmit} action="#" method="post">
+              <form className="login__form form" onSubmit={handleFormSubmit} action="#" method="post">
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
                   <input className="login__input form__input" ref= {emailRef} type="email" name="email" placeholder="Email" required/>

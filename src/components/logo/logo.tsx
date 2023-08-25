@@ -1,6 +1,7 @@
 import { Link} from 'react-router-dom';
 import classNames from 'classnames';
 import { LogoSizes, AppPath } from '../../const';
+
 type LogoProps = {
   isFooterLogo?: boolean;
 }

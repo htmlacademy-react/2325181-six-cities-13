@@ -82,7 +82,6 @@ describe('Favorites Slice', () => {
   it('should add favorite offer to "favorites" if favorite offer is favorite with "addBookmarkAction.fulfilled"', () => {
     const initialFavorites = makeFakeFavoritesOffers();
     const favoriteOffer = structuredClone(initialFavorites[0]);
-    favoriteOffer.id = '1';
     const expectedFavorites = [...initialFavorites, favoriteOffer];
     const initialState: FavoritesStateType = {
       favorites: initialFavorites,

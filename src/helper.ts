@@ -1,4 +1,4 @@
-import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath } from './const';
+import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath, NULLED_RATING } from './const';
 import { ActiveSortOrderType, AppPathType, LodgingType, OfferType, OffersType, RequestStatusType } from './types/types';
 
 export const getRatingWidth = (rating: number | null | undefined): string => {
@@ -6,7 +6,7 @@ export const getRatingWidth = (rating: number | null | undefined): string => {
   if (correctRating >= 0 && correctRating <= 5) {
     return `${Math.round(correctRating) * RATING_WIDTH_UNIT}%`;
   }
-  return '0%';
+  return NULLED_RATING;
 };
 
 const getRandomNumber = (min: number, max: number): number => {

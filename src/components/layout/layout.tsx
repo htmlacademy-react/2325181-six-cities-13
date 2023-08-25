@@ -1,13 +1,13 @@
 import { Outlet, useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import Logo from '../logo/logo';
 import SignIn from '../sign-in/sign-in';
 import { useAppSelector } from '../../hooks';
 import { selectDataLoadingStatus } from '../../store/offers/offers-selectors';
-import { isLoginPage, isMainPage, isFavoritesPage} from '../../helper';
 import { selectFavorites } from '../../store/favorties/favorites-selectors';
+import { isLoginPage, isMainPage, isFavoritesPage} from '../../helper';
 import { AppPathType } from '../../types/types';
-import classNames from 'classnames';
 
 export default function Layout ():JSX.Element {
   const currentPath = useLocation().pathname as AppPathType;

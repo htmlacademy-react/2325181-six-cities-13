@@ -1,11 +1,11 @@
-import { useAppSelector } from '../../hooks';
 import PlaceCard from '../place-card/place-card';
 import Sort from '../../components/sort/sort';
+import MapMain from '../map-main/map-main';
+import { useAppSelector } from '../../hooks';
 import { selectLocation, selectActiveSortOrder } from '../../store/card-list/card-list-selectors';
 import { PlaceCardDesign, AppPath } from '../../const';
 import { OffersType, ActiveSortOrderType } from '../../types/types';
 import { isPlural, sortOffers } from '../../helper';
-import MapMain from '../map-main/map-main';
 
 
 type MainListProps = {offers: OffersType};

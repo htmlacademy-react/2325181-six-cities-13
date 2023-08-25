@@ -1,5 +1,5 @@
 import { CommentStateType, comment, setReviewRating, setStatusIdle, setReviewComment, resetReviewData } from './comment-slice';
-import { RequestStatus } from '../../const';
+import { RequestStatus, MOCK_MESSAGE } from '../../const';
 import { postReviewAction } from '../api-actions';
 
 describe('Comment Slice', () => {
@@ -63,12 +63,13 @@ describe('Comment Slice', () => {
       rating: 0,
       comment: ''
     };
+
     const expectedState: CommentStateType = {
       commentPostingStatus: RequestStatus.Idle,
       rating: 0,
-      comment: 'Lorem ipsum dolor sit amet'
+      comment: MOCK_MESSAGE
     };
-    const result = comment.reducer(initialState, setReviewComment('Lorem ipsum dolor sit amet'));
+    const result = comment.reducer(initialState, setReviewComment(MOCK_MESSAGE));
     expect(result.comment).toBe(expectedState.comment);
   });
 
@@ -76,7 +77,7 @@ describe('Comment Slice', () => {
     const initialState: CommentStateType = {
       commentPostingStatus: RequestStatus.Idle,
       rating: 3,
-      comment: 'Lorem ipsum dolor sit amet'
+      comment: MOCK_MESSAGE
     };
     const expectedState: CommentStateType = {
       commentPostingStatus: RequestStatus.Idle,

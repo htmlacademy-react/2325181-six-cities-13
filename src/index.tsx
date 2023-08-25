@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import { store } from './store';
 import ErrorMessage from './components/error-message/error-message';
+import { store } from './store';
 import { loadOffersAction, updateAuthStatusAction } from './store/api-actions';
 
 store.dispatch(loadOffersAction());
