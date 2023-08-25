@@ -44,7 +44,15 @@ export default function LoginPage(): ReactNode {
               <form className="login__form form" onSubmit={handleFormSubmit} action="#" method="post">
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" ref= {emailRef} type="email" name="email" placeholder="Email" required/>
+                  <input
+                    className="login__input form__input"
+                    ref= {emailRef}
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    data-testid="emailElement"
+                  />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
@@ -56,6 +64,7 @@ export default function LoginPage(): ReactNode {
                     name="password"
                     placeholder="Password"
                     required
+                    data-testid="passwordElement"
                   />
                   {!isPasswordValid(password) &&
                     <div className={styles.passwordNotValid}>Password must contain at least one digit and one letter sign.</div>}

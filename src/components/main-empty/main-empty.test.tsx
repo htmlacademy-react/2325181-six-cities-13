@@ -9,7 +9,7 @@ describe('Component: Main Empty', () => {
     const mainEmptyContainerTestId = 'main-empty-container';
     const mainEmptyDescriptionTestId = 'main-empty-description';
 
-    render(MainEmpty({location: expectedLocation}));
+    render(<MainEmpty location={expectedLocation} />);
     const mainEmptyContainer = screen.getByTestId(mainEmptyContainerTestId);
     const mainEmptyDescription = screen.getByTestId(mainEmptyDescriptionTestId);
 

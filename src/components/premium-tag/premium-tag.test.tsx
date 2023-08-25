@@ -8,7 +8,7 @@ describe('Component: Premium Tag', () => {
     const expectClassname = `${MOCK_PREFIX}__mark`;
     const expectedTagCount = 1;
 
-    const {container} = render(PremiumTag({prefix: MOCK_PREFIX}));
+    const {container} = render(<PremiumTag prefix={MOCK_PREFIX}/>);
 
     expect(screen.getByText(expectedText)).toBeInTheDocument();
     expect(container.getElementsByClassName(expectClassname).length).toBe(expectedTagCount);

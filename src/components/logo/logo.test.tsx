@@ -9,7 +9,7 @@ describe('Component: Logo',() => {
     const expectedClassname = 'header__logo-link';
     const expectedElementCount = 1;
 
-    const preparedComponent = withHistory(Logo({isFooterLogo: MOCK_IS_FOOTER_LOGO}));
+    const preparedComponent = withHistory(<Logo isFooterLogo={MOCK_IS_FOOTER_LOGO} />);
     const {container} = render(preparedComponent);
     expect(screen.getByAltText(expectedAltText)).toBeInTheDocument();
     expect(container.getElementsByClassName(expectedClassname).length).toBe(expectedElementCount);
