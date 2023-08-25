@@ -1,6 +1,6 @@
 import UserLogin from '../user-login/user-login';
 import UserAccount from '../user-account/user-account';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { AuthorisationStatus } from '../../const';
 

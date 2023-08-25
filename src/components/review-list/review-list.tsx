@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { selectReviewsStatus, selectReviewsList } from '../../store/reviews/reviews-selectors';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { getRatingWidth, isFulfilled, isPending, isRejected } from '../../helper';
 import { REVIEW_DATE_FORMAT, MAX_REVIEWS_QUANTITY} from '../../const';
 

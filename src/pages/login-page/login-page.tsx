@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { updateLocation } from '../../store/card-list/card-list-slice';
 import { loginUserAction } from '../../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import styles from './login-page.module.css';
 import { AppPath, AuthorisationStatus, Location } from '../../const';
 import { getRandomArrayElement, isPasswordValid } from '../../helper';

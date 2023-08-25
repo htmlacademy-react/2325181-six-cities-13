@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import Logo from '../logo/logo';
 import SignIn from '../sign-in/sign-in';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectDataLoadingStatus } from '../../store/offers/offers-selectors';
 import { selectFavorites } from '../../store/favorties/favorites-selectors';
 import { isLoginPage, isMainPage, isFavoritesPage} from '../../helper';

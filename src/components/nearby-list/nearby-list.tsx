@@ -1,6 +1,6 @@
 import PlaceCard from '../place-card/place-card';
 import { selectOffersNearby } from '../../store/offers-nearby/offers-nearby-selectors';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { PlaceCardDesign, AppPath } from '../../const';
 
 

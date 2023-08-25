@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { addBookmarkAction } from '../../store/api-actions';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { redirectToRoute } from '../../store/action';
-import { useAppDispatch, useAppSelector} from '../../hooks';
+import { useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import { AppPath, AuthorisationStatus, FavoritesButtonSizes } from '../../const';
 import { getFavoriteStatusCode } from '../../helper';
 

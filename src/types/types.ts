@@ -1,7 +1,7 @@
 import { Action } from '@reduxjs/toolkit';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { createApi } from '../services/api';
-import { store } from '../store';
+import { store } from '../store/store';
 import { AuthorisationStatus, Location, LodgingKind, PremiumPrefix, SortOrders, AppPath, RequestStatus, PlaceCardDesign } from '../const';
 
 export type AuthorisationStatusType = typeof AuthorisationStatus[keyof typeof AuthorisationStatus];

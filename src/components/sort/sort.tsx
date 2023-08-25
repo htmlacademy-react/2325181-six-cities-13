@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { updateSortOrder } from '../../store/card-list/card-list-slice';
 import { selectActiveSortOrder } from '../../store/card-list/card-list-selectors';
 import { SortOrders} from '../../const';

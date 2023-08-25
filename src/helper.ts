@@ -61,11 +61,6 @@ export const isMainPage = (pathName: AppPathType) => pathName === AppPath.Main;
 
 export const isFavoritesPage = (pathName: AppPathType) => pathName === AppPath.Favorites;
 
-export const getUpperCaseType = (type: LodgingType) => {
-  if (type === undefined) {
-    return;
-  }
-  return type.slice(0, 1).toUpperCase().concat(type.slice(1));
-};
+export const getUpperCase = (word: string) => `${word[0].toUpperCase()}${(word.slice(1))}`;
 
-export const isPlural = (count: number) => count > 1;
+export const getPlural = (noun: string, count: number) => count > 1 ? `${noun}s` : noun;

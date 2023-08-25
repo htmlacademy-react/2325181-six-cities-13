@@ -2,7 +2,7 @@ import { AuthorisationStatus } from '../../const';
 import { AuthorisationStatusType } from '../../types/types';
 import { UserStateType, user, updateAuthorisationStatus, setEmail } from './user-slice';
 
-describe('Favorites Slice', () => {
+describe('User Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
     const expectedState: UserStateType = {

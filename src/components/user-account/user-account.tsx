@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logoutUserAction } from '../../store/api-actions';
 import { selectFavorites } from '../../store/favorties/favorites-selectors';
 import { selectEmail } from '../../store/user/user-selectors';

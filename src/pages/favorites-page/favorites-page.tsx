@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import classNames from 'classnames';
 import { Helmet } from 'react-helmet-async';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Logo from '../../components/logo/logo';
 import { selectFavorites } from '../../store/favorties/favorites-selectors';

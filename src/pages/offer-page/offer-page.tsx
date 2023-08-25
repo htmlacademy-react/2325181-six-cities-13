@@ -15,10 +15,10 @@ import { resetReviewData } from '../../store/comment/comment-slice';
 import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details/offer-details-selectors';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { setOfferId } from '../../store/offer-details/offer-details-slice';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthorisationStatus, PremiumPrefix} from '../../const';
-import { LodgingType } from '../../types/types';
-import { getRatingWidth, isRejected, isFulfilled, isPending, getUpperCaseType } from '../../helper';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { AuthorisationStatus, ErrorMessage, PremiumPrefix} from '../../const';
+import { getRatingWidth, isRejected, isFulfilled, isPending, getUpperCase, getPlural } from '../../helper';
+import { processErrorHandle } from '../../services/process-error-handle';
 
 
 export default function OfferPage(): JSX.Element {
@@ -40,7 +40,6 @@ export default function OfferPage(): JSX.Element {
     };
   }, [offerId, dispatch]);
   const activeOffer = useAppSelector(selectOfferDetails);
-  const offerType = getUpperCaseType(activeOffer?.type as LodgingType);
   const offerLoadingStatus = useAppSelector(selectOfferStatus);
   return (
     <>
@@ -79,13 +78,13 @@ export default function OfferPage(): JSX.Element {
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {offerType}
+                    {getUpperCase(activeOffer.type)}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {activeOffer.bedrooms} Bedroom{activeOffer.bedrooms > 1 && 's'}
+                    {activeOffer.bedrooms} {getPlural('Bedroom', activeOffer.bedrooms)}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {activeOffer.maxAdults} adult{activeOffer.maxAdults > 1 && 's'}
+                    Max {activeOffer.maxAdults} {getPlural('adult', activeOffer.maxAdults)}
                   </li>
                 </ul>
                 <div className="offer__price">

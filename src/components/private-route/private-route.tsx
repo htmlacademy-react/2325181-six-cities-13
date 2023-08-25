@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { ReactNode, PropsWithChildren } from 'react';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import LoadingPage from '../../pages/loading-page/loading-page';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { AppPath, AuthorisationStatus } from '../../const';
 
 type PrivateRouteProps = PropsWithChildren;

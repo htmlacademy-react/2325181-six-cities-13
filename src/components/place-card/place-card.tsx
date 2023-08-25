@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import { Link, generatePath } from 'react-router-dom';
 import PremiumTag from '../premium-tag/premium-tag';
 import FavoritesButton from '../favorites-button/favorites-button';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 import { setOfferId } from '../../store/offer-details/offer-details-slice';
 import { AppPath, PremiumPrefix, PlaceCardDesign} from '../../const';
 import { OfferType, CardClassType } from '../../types/types';
-import { getRatingWidth, getUpperCaseType} from '../../helper';
+import { getRatingWidth, getUpperCase} from '../../helper';
 
 
 type PlaceCardProps = {
@@ -21,7 +21,7 @@ export default function PlaceCard ({offer, cardClass, cardInfoClass, cardHeight,
   const dispatch = useAppDispatch();
   const ratingWidth = `${getRatingWidth(offer.rating)}`;
   const offerPath = generatePath(AppPath.Offer, {id: offer.id});
-  const offerType = getUpperCaseType(offer.type);
+  const offerType = getUpperCase(offer.type);
   const handleMouseEnter = () => {
     if(cardClass === PlaceCardDesign[AppPath.Main].cardClass) {
       dispatch(setOfferId(offer.id));
