@@ -1,11 +1,10 @@
 import { Fragment, FormEvent} from 'react';
 import { useParams } from 'react-router-dom';
-import { postReviewAction } from '../../store/api-actions';
+import { clearErrorAction, postReviewAction } from '../../store/api-actions';
 import { selectCommentPostingStatus, selectReviewComment, selectReviewRating } from '../../store/comment/comment-selectors';
 import { setStatusIdle, setReviewRating, setReviewComment } from '../../store/comment/comment-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import {ErrorMessage, FormValidation, StarRatings} from '../../const';
-import { processErrorHandle } from '../../services/process-error-handle';
 import { isValidForm, isPending, isRejected } from '../../helper';
 
 export default function Review ():JSX.Element {
@@ -18,7 +17,7 @@ export default function Review ():JSX.Element {
   const isButtonDisabled = !isValidForm(comment, rating) || isPending(reviewPostingStatus);
   const isBlockedForm = isPending(reviewPostingStatus);
   if (isRejected(reviewPostingStatus)) {
-    processErrorHandle(ErrorMessage.FailedPostReview);
+    dispatch(clearErrorAction(ErrorMessage.FailedPostReview));
     dispatch(setStatusIdle());
   }
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {

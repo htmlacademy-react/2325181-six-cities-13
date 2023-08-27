@@ -1,5 +1,4 @@
 import {render, screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { withHistory, withStore } from '../../utils/mock-component';
 import LoginPage from './login-page';
 

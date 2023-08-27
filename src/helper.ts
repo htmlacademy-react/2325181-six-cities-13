@@ -1,5 +1,5 @@
 import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath, NULLED_RATING } from './const';
-import { ActiveSortOrderType, AppPathType, LodgingType, OfferType, OffersType, RequestStatusType } from './types/types';
+import { ActiveSortOrderType, AppPathType, OfferType, OffersType, RequestStatusType } from './types/types';
 
 export const getRatingWidth = (rating: number | null | undefined): string => {
   const correctRating = rating ?? 0;

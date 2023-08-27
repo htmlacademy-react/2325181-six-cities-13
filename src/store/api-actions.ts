@@ -1,4 +1,4 @@
-import {AxiosError, AxiosInstance} from 'axios';
+import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { generatePath} from 'react-router-dom';
 import { AppDispatchType, OffersType, UserDataType, AuthDataType, OfferType, ReviewsType, ReviewType, ReviewFormType, StateType, FavoriteStatusType, LoginType } from '../types/types';
@@ -13,12 +13,13 @@ import { addComment } from './reviews/reviews-slice';
 import { setEmail, updateAuthorisationStatus } from './user/user-slice';
 
 
-export const clearErrorAction = createAsyncThunk<void, undefined, {
+export const clearErrorAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
   }
 >(
   `${NameSpace.Error}/${Action.Delete}`,
-  (_, {dispatch}) => {
+  (errorMessage, {dispatch}) => {
+    setError(errorMessage);
     setTimeout(
       () => dispatch(setError(null)),
       TIMEOUT_SHOW_ERROR,
@@ -27,7 +28,7 @@ export const clearErrorAction = createAsyncThunk<void, undefined, {
 );
 
 
-export const loadOffersAction = createAsyncThunk<OffersType, undefined, {
+export const loadOffersAction = createAsyncThunk<OffersType | undefined, undefined, {
   dispatch: AppDispatchType;
   state: StateType;
   extra: AxiosInstance;
@@ -36,18 +37,16 @@ export const loadOffersAction = createAsyncThunk<OffersType, undefined, {
 (
   `${NameSpace.Offers}/${Action.Load}`,
   async (_arg, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi
-      .get<OffersType>(APIPath.Offers)
-      .catch((err: AxiosError) => {
-        dispatch(setError(ErrorMessage.FailedLoadOffers));
-        dispatch(clearErrorAction());
-        throw err.message;
-      });
-    return data;
+    try {
+      const {data} = await axiosApi.get<OffersType>(APIPath.Offers);
+      return data;
+    } catch {
+      dispatch(clearErrorAction(ErrorMessage.FailedLoadOffers));
+    }
   },
 );
 
-export const loadFavoritesAction = createAsyncThunk<OffersType, undefined, {
+export const loadFavoritesAction = createAsyncThunk<OffersType | undefined, undefined, {
   dispatch: AppDispatchType;
   state: StateType;
   extra: AxiosInstance;
@@ -56,14 +55,12 @@ export const loadFavoritesAction = createAsyncThunk<OffersType, undefined, {
 (
   `${NameSpace.Favorites}/${Action.Load}`,
   async (_arg, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi
-      .get<OffersType>(APIPath.Favorite)
-      .catch((err: AxiosError) => {
-        dispatch(setError(ErrorMessage.FailedLoadFavorites));
-        dispatch(clearErrorAction());
-        throw err.message;
-      });
-    return data;
+    try {
+      const {data} = await axiosApi.get<OffersType>(APIPath.Favorite);
+      return data;
+    } catch {
+      dispatch(clearErrorAction(ErrorMessage.FailedLoadFavorites));
+    }
   },
 );
 
@@ -79,12 +76,8 @@ export const loadOfferDetailsAction = createAsyncThunk<void, string, {
     try {
       const {data} = await axiosApi.get<OfferType>(generatePath(APIPath.OfferId, {offerId: offerId}));
       dispatch(loadOfferDetails(data));
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        dispatch(setError(ErrorMessage.FailedLoadOfferDetails));
-        dispatch(clearErrorAction());
-        throw error.message;
-      }
+    } catch {
+      dispatch(clearErrorAction(ErrorMessage.FailedLoadOfferDetails));
     }
   },
 );
@@ -101,14 +94,10 @@ export const loadOffersNearbyAction = createAsyncThunk<void, string, {
     try {
       const {data} = await axiosApi.get<OffersType>(generatePath(APIPath.OffersNearby, {offerId: offerId}));
       dispatch(loadOffersNearby(data.slice(0, OFFERS_NEARBY_COUNT)));
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        dispatch(setError(ErrorMessage.FailedLoadOffersNearby));
-        dispatch(clearErrorAction());
-        throw error.message;
-      }
+    } catch {
+      dispatch(clearErrorAction(ErrorMessage.FailedLoadOffersNearby));
     }
-  },
+  }
 );
 
 export const loadReviewsListAction = createAsyncThunk<void, string, {
@@ -123,12 +112,8 @@ export const loadReviewsListAction = createAsyncThunk<void, string, {
     try {
       const {data} = await axiosApi.get<ReviewsType>(generatePath(APIPath.Reviews, {offerId: offerId}));
       dispatch(loadReviewsList(data));
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        dispatch(setError(ErrorMessage.FailedLoadReviewsList));
-        dispatch(clearErrorAction());
-        throw error.message;
-      }
+    } catch {
+      dispatch(clearErrorAction(ErrorMessage.FailedLoadReviewsList));
     }
   },
 );
@@ -147,13 +132,9 @@ export const updateAuthStatusAction = createAsyncThunk<void, undefined, {
       const {data} = await axiosApi.get<LoginType>(APIPath.Login);
       dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
       dispatch(setEmail(data.email));
-    } catch (error) {
+    } catch {
       dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
-      if (error instanceof AxiosError) {
-        dispatch(setError(ErrorMessage.UserUnauthorised));
-        dispatch(clearErrorAction());
-        throw error.message;
-      }
+      dispatch(clearErrorAction(ErrorMessage.UserUnauthorised));
     }
   },
 );
@@ -165,23 +146,17 @@ export const loginUserAction = createAsyncThunk<void, AuthDataType, {
   }
 >
 (
-  `${NameSpace.AuthorisationStatus}/${Action.Update}`,
+  `${NameSpace.User}/${Action.Login}`,
   async ({email, password}, {dispatch, extra: axiosApi}) => {
     try {
       const {data: {token}} = await axiosApi.post<UserDataType>(APIPath.Login, {email, password});
       setToken(token);
       dispatch(updateAuthorisationStatus(AuthorisationStatus.Auth));
       dispatch(setEmail(email));
-      dispatch(loadOffersAction());
-      dispatch(loadFavoritesAction());
       dispatch(redirectToRoute(AppPath.Main));
-    } catch (error) {
+    } catch {
       dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
-      if (error instanceof AxiosError) {
-        dispatch(setError(ErrorMessage.FailedUserLogin));
-        dispatch(clearErrorAction());
-        throw error.message;
-      }
+      dispatch(clearErrorAction(ErrorMessage.FailedUserLogin));
     }
   },
 );
@@ -198,17 +173,14 @@ export const postReviewAction = createAsyncThunk<void, ReviewFormType, {
     try {
       const {data} = await axiosApi.post<ReviewType>(generatePath(APIPath.Reviews, {offerId: id}), {comment, rating});
       dispatch(addComment(data));
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        dispatch(setError(ErrorMessage.FailedPostReview));
-        dispatch(clearErrorAction());
-        throw error.message;
-      }
+    } catch {
+      dispatch(clearErrorAction(ErrorMessage.FailedPostReview));
+      throw Error;
     }
   },
 );
 
-export const addBookmarkAction = createAsyncThunk<OfferType, FavoriteStatusType, {
+export const addBookmarkAction = createAsyncThunk<OfferType | undefined, FavoriteStatusType, {
   dispatch: AppDispatchType;
   state: StateType;
   extra: AxiosInstance;
@@ -217,14 +189,12 @@ export const addBookmarkAction = createAsyncThunk<OfferType, FavoriteStatusType,
 (
   `${NameSpace.Favorites}/${Action.Update}`,
   async ({id, status}, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi
-      .post<OfferType>(`${APIPath.Favorite}/${id}/${status}`)
-      .catch((err: AxiosError) => {
-        dispatch(setError(ErrorMessage.FailedAddBookmark));
-        dispatch(clearErrorAction());
-        throw err.message;
-      });
-    return data;
+    try {
+      const {data} = await axiosApi.post<OfferType>(`${APIPath.Favorite}/${id}/${status}`);
+      return data;
+    } catch {
+      dispatch(clearErrorAction(ErrorMessage.FailedAddBookmark));
+    }
   },
 );
 
@@ -235,18 +205,14 @@ export const logoutUserAction = createAsyncThunk<void, undefined, {
   }
 >
 (
-  `${NameSpace.AuthorisationStatus}/${Action.Logout}`,
+  `${NameSpace.User}/${Action.Logout}`,
   async (_arg, {dispatch, extra: axiosApi}) => {
     try {
       await axiosApi.delete(APIPath.Logout);
       removeToken();
       dispatch(updateAuthorisationStatus(AuthorisationStatus.NoAuth));
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        dispatch(setError(ErrorMessage.FailedUserLogout));
-        dispatch(clearErrorAction());
-        throw error.message;
-      }
+    } catch {
+      dispatch(clearErrorAction(ErrorMessage.FailedUserLogout));
     }
   },
 );

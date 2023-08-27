@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { OffersType, RequestStatusType} from '../../types/types';
+import { OffersType, OfferType, RequestStatusType} from '../../types/types';
 import { NameSpace, RequestStatus } from '../../const';
 import { loadOffersNearbyAction, addBookmarkAction } from '../api-actions';
 
@@ -37,7 +37,7 @@ export const offersNearby = createSlice({
         state.hasNearbyError = true;
       })
       .addCase(addBookmarkAction.fulfilled, (state, action) => {
-        const favoriteOffer = action.payload;
+        const favoriteOffer = action.payload as OfferType;
         state.offersNearby.forEach((offer) => {
           if (offer.id === favoriteOffer.id) {
             offer.isFavorite = favoriteOffer.isFavorite;

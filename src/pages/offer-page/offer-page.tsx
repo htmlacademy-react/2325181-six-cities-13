@@ -16,9 +16,8 @@ import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
 import { setOfferId } from '../../store/offer-details/offer-details-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { AuthorisationStatus, ErrorMessage, PremiumPrefix} from '../../const';
+import { AuthorisationStatus, PremiumPrefix} from '../../const';
 import { getRatingWidth, isRejected, isFulfilled, isPending, getUpperCase, getPlural } from '../../helper';
-import { processErrorHandle } from '../../services/process-error-handle';
 
 
 export default function OfferPage(): JSX.Element {

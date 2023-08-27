@@ -3,6 +3,6 @@ import { NameSpace } from '../../const';
 
 export const selectOffers = (state: StateType) => state[NameSpace.Offers].offers;
 
-export const selectDataLoadingStatus = (state: StateType) => state[NameSpace.Offers].isDataLoading;
+export const selectOffersLoadingStatus = (state: StateType) => state[NameSpace.Offers].offersLoadingStatus;
 
 export const selectDataErrorStatus = (state: StateType) => state[NameSpace.Offers].hasDataError;

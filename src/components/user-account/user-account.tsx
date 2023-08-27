@@ -8,7 +8,8 @@ import { AppPath } from '../../const';
 export default function UserAccount():JSX.Element {
   const dispatch = useAppDispatch();
   const email = useAppSelector(selectEmail);
-  const favoritesCount = useAppSelector(selectFavorites).length;
+  const favoritesList = useAppSelector(selectFavorites) ?? [];
+  const favoritesCount = favoritesList.length;
   return (
     <>
       <li className="header__nav-item user">
