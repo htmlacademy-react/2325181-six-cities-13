@@ -42,8 +42,8 @@ export const offerDetails = createSlice({
         state.hasOfferDetailsError = true;
       })
       .addCase(addBookmarkAction.fulfilled, (state, action) => {
-        const favoriteOffer = action.payload;
-        if (state.offerDetails) {
+        const favoriteOffer = action.payload as OfferType;
+        if (state.offerDetails && state.offerDetails.id === favoriteOffer.id) {
           state.offerDetails.isFavorite = favoriteOffer.isFavorite;
         }
       });

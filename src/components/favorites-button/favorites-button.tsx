@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { addBookmarkAction } from '../../store/api-actions';
-import { getFavoriteStatusCode } from '../../helper';
-import { useAppDispatch, useAppSelector} from '../../hooks';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
-import { AppPath, AuthorisationStatus } from '../../const';
 import { redirectToRoute } from '../../store/action';
+import { useAppDispatch, useAppSelector} from '../../hooks/hooks';
+import { AppPath, AuthorisationStatus, FavoritesButtonSizes } from '../../const';
+import { getFavoriteStatusCode } from '../../helper';
 
 
 type FavoritesButtonProps = {
@@ -37,10 +37,17 @@ export default function FavoritesButton({offerId, isFavorite, isOfferButton}: Fa
       onClick={handleBookmarkClick}
       type="button"
     >
-      <svg className={classNames({
-        'place-card__bookmark-icon': !isOfferButton,
-        'offer__bookmark-icon': isOfferButton
-      })} width={isOfferButton ? '31' : '18'} height={isOfferButton ? '33' : '19'}
+      <svg
+        className={classNames({
+          'place-card__bookmark-icon': !isOfferButton,
+          'offer__bookmark-icon': isOfferButton
+        })}
+        width={isOfferButton ?
+          FavoritesButtonSizes.Width.offerButton :
+          FavoritesButtonSizes.Width.notOfferButton}
+        height={isOfferButton ?
+          FavoritesButtonSizes.Height.offerButton :
+          FavoritesButtonSizes.Height.notOfferButton}
       >
         <use xlinkHref="#icon-bookmark" />
       </svg>

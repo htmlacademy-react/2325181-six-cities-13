@@ -6,5 +6,3 @@ export const selectOfferId = (state: StateType) => state[NameSpace.OfferDetails]
 export const selectOfferDetails = (state: StateType) => state[NameSpace.OfferDetails].offerDetails;
 
 export const selectOfferStatus = (state: StateType) => state[NameSpace.OfferDetails].offerLoadingStatus;
-
-export const selectOfferDetailsErrorStatus = (state: StateType) => state[NameSpace.OfferDetails].hasOfferDetailsError;

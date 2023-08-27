@@ -1,12 +1,12 @@
-import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath } from './const';
-import { ActiveSortOrderType, AppPathType, LodgingType, OfferType, OffersType, RequestStatusType } from './types/types';
+import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath, NULLED_RATING } from './const';
+import { ActiveSortOrderType, AppPathType, OfferType, OffersType, RequestStatusType } from './types/types';
 
 export const getRatingWidth = (rating: number | null | undefined): string => {
   const correctRating = rating ?? 0;
   if (correctRating >= 0 && correctRating <= 5) {
     return `${Math.round(correctRating) * RATING_WIDTH_UNIT}%`;
   }
-  return '0%';
+  return NULLED_RATING;
 };
 
 const getRandomNumber = (min: number, max: number): number => {
@@ -28,16 +28,12 @@ export const sortOffers = (offers: OffersType, sortType: ActiveSortOrderType): O
   switch (sortType) {
     case SortOrders.Popular.order:
       return offers?.slice();
-      break;
     case SortOrders.PriceAscending.order:
       return offers?.slice().sort((offerA, offerB) => offerA.price - offerB.price);
-      break;
     case SortOrders.PriceDescending.order:
       return offers?.slice().sort((offerA, offerB) => offerB.price - offerA.price);
-      break;
     case SortOrders.RatedFirst.order:
       return offers?.slice().sort((offerA, offerB) => offerB.rating - offerA.rating);
-      break;
     default:
       return offers?.slice();
   }
@@ -50,8 +46,9 @@ export const isValidForm = (text: string, rating: number): boolean => text.lengt
   && rating <= FormValidation.MaxRating;
 
 export const isPending = (status: RequestStatusType) => status === RequestStatus.Pending;
-export const isIdle = (status: RequestStatusType) => status === RequestStatus.Idle;
+
 export const isFulfilled = (status: RequestStatusType) => status === RequestStatus.Fulfilled;
+
 export const isRejected = (status: RequestStatusType) => status === RequestStatus.Rejected;
 
 export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
@@ -64,11 +61,6 @@ export const isMainPage = (pathName: AppPathType) => pathName === AppPath.Main;
 
 export const isFavoritesPage = (pathName: AppPathType) => pathName === AppPath.Favorites;
 
-export const getUpperCaseType = (type: LodgingType) => {
-  if (type === undefined) {
-    return;
-  }
-  return type.slice(0, 1).toUpperCase().concat(type.slice(1));
-};
+export const getUpperCase = (word: string) => `${word[0].toUpperCase()}${(word.slice(1))}`;
 
-export const isPlural = (count: number) => count > 1;
+export const getPlural = (noun: string, count: number) => count > 1 ? `${noun}s` : noun;

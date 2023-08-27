@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { OfferType, OffersType, RequestStatusType} from '../../types/types';
 import { NameSpace, RequestStatus } from '../../const';
 import { addBookmarkAction, loadFavoritesAction, logoutUserAction } from '../api-actions';
@@ -26,7 +26,7 @@ export const favorites = createSlice({
       })
       .addCase(loadFavoritesAction.fulfilled, (state, action) => {
         state.favoritesLoadingStatus = RequestStatus.Fulfilled;
-        state.favorites = action.payload;
+        state.favorites = action.payload as OffersType;
       })
       .addCase(loadFavoritesAction.rejected, (state) => {
         state.favoritesLoadingStatus = RequestStatus.Rejected;
@@ -35,12 +35,12 @@ export const favorites = createSlice({
       .addCase(logoutUserAction.fulfilled, (state) =>{
         state.favorites = [];
       })
-      .addCase(addBookmarkAction.fulfilled, (state, action: PayloadAction<OfferType>) => {
-        const favoriteOffer = action.payload;
+      .addCase(addBookmarkAction.fulfilled, (state, action) => {
+        const favoriteOffer = action.payload as OfferType;
         if (favoriteOffer.isFavorite) {
-          state.favorites.push(action.payload);
+          state.favorites.push(action.payload as OfferType);
         } else {
-          state.favorites.filter((offer) => offer.id !== favoriteOffer.id);
+          state.favorites = state.favorites.filter((offer) => offer.id !== favoriteOffer.id);
         }
       });
   }

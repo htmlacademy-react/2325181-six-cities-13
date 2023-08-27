@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -8,34 +9,36 @@ import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import MapOffer from '../../components/map-offer/map-offer';
 import { NearbyList } from '../../components/nearby-list/nearby-list';
+import FavoritesButton from '../../components/favorites-button/favorites-button';
 import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
+import { resetReviewData } from '../../store/comment/comment-slice';
 import { selectOfferDetails, selectOfferStatus } from '../../store/offer-details/offer-details-selectors';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthorisationStatus, PremiumPrefix} from '../../const';
-import { getRatingWidth, isRejected, isFulfilled, isPending, getUpperCaseType } from '../../helper';
 import { setOfferId } from '../../store/offer-details/offer-details-slice';
-import { LodgingType } from '../../types/types';
-import classNames from 'classnames';
-import { resetReviewData } from '../../store/comment/comment-slice';
-import FavoritesButton from '../../components/favorites-button/favorites-button';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { AuthorisationStatus, PremiumPrefix} from '../../const';
+import { getRatingWidth, isRejected, isFulfilled, isPending, getUpperCase, getPlural } from '../../helper';
 
 
 export default function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = useParams().id as string;
-  dispatch(resetReviewData());
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
   const isAuth = authorisationStatus === AuthorisationStatus.Auth;
   useEffect(() => {
-    dispatch(setOfferId(offerId));
-    dispatch(loadOfferDetailsAction(offerId));
-    dispatch(loadOffersNearbyAction(offerId));
-    dispatch(loadReviewsListAction(offerId));
-
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(resetReviewData());
+      dispatch(setOfferId(offerId));
+      dispatch(loadOfferDetailsAction(offerId));
+      dispatch(loadOffersNearbyAction(offerId));
+      dispatch(loadReviewsListAction(offerId));
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [offerId, dispatch]);
   const activeOffer = useAppSelector(selectOfferDetails);
-  const offerType = getUpperCaseType(activeOffer?.type as LodgingType);
   const offerLoadingStatus = useAppSelector(selectOfferStatus);
   return (
     <>
@@ -74,13 +77,13 @@ export default function OfferPage(): JSX.Element {
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {offerType}
+                    {getUpperCase(activeOffer.type)}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {activeOffer.bedrooms} Bedroom{activeOffer.bedrooms > 1 && 's'}
+                    {activeOffer.bedrooms} {getPlural('Bedroom', activeOffer.bedrooms)}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {activeOffer.maxAdults} adult{activeOffer.maxAdults > 1 && 's'}
+                    Max {activeOffer.maxAdults} {getPlural('adult', activeOffer.maxAdults)}
                   </li>
                 </ul>
                 <div className="offer__price">

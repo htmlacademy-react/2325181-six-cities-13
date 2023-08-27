@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectEmail } from '../../store/user/user-selectors';
-import { AppPath } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logoutUserAction } from '../../store/api-actions';
 import { selectFavorites } from '../../store/favorties/favorites-selectors';
+import { selectEmail } from '../../store/user/user-selectors';
+import { AppPath } from '../../const';
 
 export default function UserAccount():JSX.Element {
   const dispatch = useAppDispatch();
   const email = useAppSelector(selectEmail);
-  const favoritesCount = useAppSelector(selectFavorites).length;
+  const favoritesList = useAppSelector(selectFavorites) ?? [];
+  const favoritesCount = favoritesList.length;
   return (
     <>
       <li className="header__nav-item user">

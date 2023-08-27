@@ -38,7 +38,7 @@ export const StarRatings = [
   },
 ] as const;
 
-export const Locations = {
+export const Location = {
   Paris: 'Paris',
   Cologne: 'Cologne',
   Brussels: 'Brussels',
@@ -47,9 +47,9 @@ export const Locations = {
   Dusseldorf: 'Dusseldorf'
 } as const;
 
-export const LodgingKinds = {
+export const LodgingKind = {
   Room: 'Room',
-  Aparment: 'Apartment',
+  Apartment: 'Apartment',
   House: 'House',
   Hotel: 'Hotel'
 } as const;
@@ -98,6 +98,17 @@ export const LogoSizes = {
   }
 } as const;
 
+export const FavoritesButtonSizes = {
+  Width : {
+    offerButton: '31',
+    notOfferButton: '18'
+  },
+  Height: {
+    offerButton: '33',
+    notOfferButton: '19'
+  }
+} as const;
+
 export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 
 export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
@@ -108,27 +119,27 @@ export const IconDesign = {
 } as const;
 
 export const LocationsCoordinates = {
-  [Locations.Paris]: {
+  [Location.Paris]: {
     latitude: 48.85661,
     longitude: 2.351499
   },
-  [Locations.Cologne]: {
+  [Location.Cologne]: {
     latitude: 50.938361,
     longitude: 6.959974
   },
-  [Locations.Brussels]: {
+  [Location.Brussels]: {
     latitude: 50.846557,
     longitude: 4.351697
   },
-  [Locations.Amsterdam]: {
+  [Location.Amsterdam]: {
     latitude: 52.37454,
     longitude: 4.897976
   },
-  [Locations.Hamburg]: {
+  [Location.Hamburg]: {
     latitude: 53.550341,
     longitude: 10.000654
   },
-  [Locations.Dusseldorf]: {
+  [Location.Dusseldorf]: {
     latitude: 51.225402,
     longitude: 6.776314
   }
@@ -207,8 +218,6 @@ export const SortOrders = {
   }
 } as const;
 
-export const DEFAULT_SORT_ORDER = 'Popular';
-
 export const BASE_URL = 'https://13.design.pages.academy/six-cities';
 
 export const REQUEST_TIMEOUT = 5000;
@@ -229,12 +238,12 @@ export const CONTAINER_STYLE: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around'
-};
+} as const;
 
 export const SPINNER_CSS_OVERRIDE: CSSProperties = {
   display: 'block',
   margin: '300px auto'
-};
+} as const;
 
 export const SPINNER_SIZE = 500;
 
@@ -246,7 +255,7 @@ export const LOADING_STYLE: CSSProperties = {
   color: '#4481C3',
   fontSize: 'x-large',
   fontWeight: '700'
-};
+} as const;
 
 export const TIMEOUT_SHOW_ERROR = 5000;
 
@@ -254,7 +263,7 @@ export const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
   [StatusCodes.NOT_FOUND]: true
-};
+} as const;
 
 export const OFFERS_NEARBY_COUNT = 3;
 
@@ -266,3 +275,20 @@ export const RequestStatus = {
 } as const;
 
 export const PASSWORD_REGEX = /^.*(?=.*\d)(?=.*[a-zA-Z]).*$|(^$)/;
+
+export const ErrorMessage = {
+  UserUnauthorised: 'User is unauthorised',
+  FailedLoadOffers: 'Failed to load offers',
+  FailedLoadFavorites: 'Failed to load favorites',
+  FailedLoadOfferDetails: 'Failed to load offer details',
+  FailedLoadOffersNearby: 'Failed to load offers nearby',
+  FailedLoadReviewsList: 'Failed to load reviews list',
+  FailedPostReview: 'Failed to post review',
+  FailedAddBookmark: 'Failed to change favorite status',
+  FailedUserLogout: 'Failed to log user out',
+  FailedUserLogin: 'Failed to log user in',
+} as const;
+
+export const NULLED_RATING = '0%';
+
+export const MOCK_MESSAGE = 'Lorem ipsum dolor sit amet';

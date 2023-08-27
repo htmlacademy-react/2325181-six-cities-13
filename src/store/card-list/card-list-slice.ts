@@ -1,5 +1,5 @@
 import { ActiveSortOrderType, LocationType } from '../../types/types';
-import { Locations, NameSpace, SortOrders } from '../../const';
+import { Location, NameSpace, SortOrders } from '../../const';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export type CardListStateType = {
@@ -8,11 +8,11 @@ export type CardListStateType = {
 }
 
 export const cardListState: CardListStateType = {
-  location: Locations.Paris,
+  location: Location.Paris,
   activeSortOrder: SortOrders.Popular.order,
 };
 
-export const cardlist = createSlice({
+export const cardList = createSlice({
   name: NameSpace.CardList,
   initialState: cardListState,
   reducers: {
@@ -25,4 +25,4 @@ export const cardlist = createSlice({
   },
 });
 
-export const {updateLocation, updateSortOrder} = cardlist.actions;
+export const {updateLocation, updateSortOrder} = cardList.actions;

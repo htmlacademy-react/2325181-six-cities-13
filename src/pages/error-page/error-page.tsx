@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 import {loadOffersAction} from '../../store/api-actions';
 
 function ErrorPage(): JSX.Element {

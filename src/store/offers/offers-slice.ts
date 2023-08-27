@@ -1,17 +1,17 @@
 import {createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
-import { OffersType } from '../../types/types';
+import { NameSpace, RequestStatus } from '../../const';
+import { OfferType, OffersType, RequestStatusType } from '../../types/types';
 import { loadOffersAction, addBookmarkAction, logoutUserAction } from '../api-actions';
 
 export type OffersStateType = {
   offers: OffersType;
-  isDataLoading: boolean;
+  offersLoadingStatus: RequestStatusType;
   hasDataError: boolean;
 }
 
 const offersState: OffersStateType = {
   offers: [],
-  isDataLoading: false,
+  offersLoadingStatus: RequestStatus.Idle,
   hasDataError: false
 };
 
@@ -22,15 +22,15 @@ export const offers = createSlice({
   extraReducers(builder) {
     builder
       .addCase(loadOffersAction.pending, (state) => {
-        state.isDataLoading = true;
+        state.offersLoadingStatus = RequestStatus.Pending;
         state.hasDataError = false;
       })
       .addCase(loadOffersAction.fulfilled, (state, action) => {
-        state.isDataLoading = false;
-        state.offers = action.payload;
+        state.offersLoadingStatus = RequestStatus.Fulfilled;
+        state.offers = action.payload as OffersType;
       })
       .addCase(loadOffersAction.rejected, (state) => {
-        state.isDataLoading = false;
+        state.offersLoadingStatus = RequestStatus.Rejected;
         state.hasDataError = true;
       })
       .addCase(logoutUserAction.fulfilled, (state) => {
@@ -41,7 +41,7 @@ export const offers = createSlice({
         });
       })
       .addCase(addBookmarkAction.fulfilled, (state, action) => {
-        const favoriteOffer = action.payload;
+        const favoriteOffer = action.payload as OfferType;
         state.offers.forEach((offer) => {
           if (offer.id === favoriteOffer.id) {
             offer.isFavorite = favoriteOffer.isFavorite;

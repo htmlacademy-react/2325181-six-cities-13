@@ -1,24 +1,23 @@
+import { FormEvent, useRef, useState, ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate } from 'react-router-dom';
-import { AppPath, AuthorisationStatus, Locations, PASSWORD_REGEX } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getRandomArrayElement } from '../../helper';
 import { selectAuthorisationStatus } from '../../store/user/user-selectors';
-import { loginUserAction } from '../../store/api-actions';
-import { FormEvent, useRef, useState } from 'react';
-import styles from './login-page.module.css';
 import { updateLocation } from '../../store/card-list/card-list-slice';
+import { loginUserAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import styles from './login-page.module.css';
+import { AppPath, AuthorisationStatus, Location } from '../../const';
+import { getRandomArrayElement, isPasswordValid } from '../../helper';
 
-export default function LoginPage(): React.ReactNode {
+export default function LoginPage(): ReactNode {
   const dispatch = useAppDispatch();
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
-  const locationsList = Object.values(Locations);
+  const locationsList = Object.values(Location);
   const randomLocation = getRandomArrayElement<typeof locationsList[number]>(locationsList);
   const handleRandomClick = () => dispatch(updateLocation(randomLocation));
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (emailRef.current !== null &&
       passwordRef.current !== null &&
@@ -38,14 +37,22 @@ export default function LoginPage(): React.ReactNode {
         <Helmet>
           <title>6 cities. Login page</title>
         </Helmet>
-        <main className="page--main page__main--login">
+        <main className="page__main page__main--login">
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
-              <form className="login__form form" onSubmit={handleSubmit} action="#" method="post">
+              <form className="login__form form" onSubmit={handleFormSubmit} action="#" method="post">
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" ref= {emailRef} type="email" name="email" placeholder="Email" required/>
+                  <input
+                    className="login__input form__input"
+                    ref= {emailRef}
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    data-testid="emailElement"
+                  />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
@@ -57,6 +64,7 @@ export default function LoginPage(): React.ReactNode {
                     name="password"
                     placeholder="Password"
                     required
+                    data-testid="passwordElement"
                   />
                   {!isPasswordValid(password) &&
                     <div className={styles.passwordNotValid}>Password must contain at least one digit and one letter sign.</div>}

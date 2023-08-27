@@ -1,12 +1,11 @@
 import { Fragment, FormEvent} from 'react';
-import {FormValidation, StarRatings} from '../../const';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { postReviewAction } from '../../store/api-actions';
-import { isValidForm, isPending, isRejected } from '../../helper';
+import { clearErrorAction, postReviewAction } from '../../store/api-actions';
 import { selectCommentPostingStatus, selectReviewComment, selectReviewRating } from '../../store/comment/comment-selectors';
-import { processErrorHandle } from '../../services/process-error-handle';
 import { setStatusIdle, setReviewRating, setReviewComment } from '../../store/comment/comment-slice';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import {ErrorMessage, FormValidation, StarRatings} from '../../const';
+import { isValidForm, isPending, isRejected } from '../../helper';
 
 export default function Review ():JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,7 +17,7 @@ export default function Review ():JSX.Element {
   const isButtonDisabled = !isValidForm(comment, rating) || isPending(reviewPostingStatus);
   const isBlockedForm = isPending(reviewPostingStatus);
   if (isRejected(reviewPostingStatus)) {
-    processErrorHandle('Failed to post review. Please try again later');
+    dispatch(clearErrorAction(ErrorMessage.FailedPostReview));
     dispatch(setStatusIdle());
   }
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
