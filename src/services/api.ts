@@ -1,16 +1,12 @@
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
-import { store } from '../store/store';
-import { clearErrorAction } from '../store/api-actions';
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosError} from 'axios';
 import { getToken } from './token';
-import { BASE_URL, REQUEST_TIMEOUT, StatusCodeMapping } from '../const';
+import { BASE_URL, REQUEST_TIMEOUT, } from '../const';
 
 
 type DetailMessageType = {
   type: string;
   message: string;
 }
-
-const shouldDisplayError = (response: AxiosResponse): boolean => Boolean(StatusCodeMapping[response.status]);
 
 export const createApi = (): AxiosInstance => {
   const api = axios.create({
@@ -31,12 +27,7 @@ export const createApi = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
-      if (error.response && shouldDisplayError(error.response)) {
-        const detailMessage = (error.response.data);
-        store.dispatch(clearErrorAction(detailMessage.message));
-      }
-
-      throw error;
+      throw error.message;
     }
   );
 
