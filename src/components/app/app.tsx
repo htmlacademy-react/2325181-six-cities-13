@@ -1,7 +1,7 @@
 import {Route, Routes} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import HistoryRouter from '../history-route/history-route';
-import { browserHistory } from '../../browser-history';
+import browserHistory from '../../browser-history';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
