@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import {useEffect} from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import City from '../../components/location/location';
+import City from '../../components/city/city';
 import MainList from '../../components/main-list/main-list';
 import LoadingPage from '../loading-page/loading-page';
 import { loadOffersAction, loadFavoritesAction } from '../../store/api-actions';
