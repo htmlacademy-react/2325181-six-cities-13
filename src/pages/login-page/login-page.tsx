@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate } from 'react-router-dom';
 import UserAuthentication from '../../components/user-authentication/user-authentication';
@@ -8,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { AppPath, AuthorisationStatus, Location } from '../../const';
 import { getRandomArrayElement } from '../../helper';
 
-export default function LoginPage(): ReactNode {
+export default function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const authorisationStatus = useAppSelector(selectAuthorisationStatus);
   const locationsList = Object.values(Location);

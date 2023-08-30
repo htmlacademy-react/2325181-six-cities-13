@@ -1,5 +1,4 @@
 import { CSSProperties } from 'react';
-import { StatusCodes } from 'http-status-codes/build/cjs/status-codes';
 
 export const AppPath = {
   Main: '/',
@@ -258,12 +257,6 @@ export const LOADING_STYLE: CSSProperties = {
 } as const;
 
 export const TIMEOUT_SHOW_ERROR = 5000;
-
-export const StatusCodeMapping: Record<number, boolean> = {
-  [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true
-} as const;
 
 export const OFFERS_NEARBY_COUNT = 3;
 
