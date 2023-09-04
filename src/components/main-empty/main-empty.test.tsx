@@ -6,12 +6,12 @@ describe('Component: Main Empty', () => {
   it('should render correctly', () => {
     const expectedLocation = Location.Paris;
     const expectedText = new RegExp(`.+${expectedLocation}`,'i');
-    const mainEmptyContainerTestId = 'main-empty-container';
-    const mainEmptyDescriptionTestId = 'main-empty-description';
+    const MAIN_EMPTY_CONTAINER_TEST_ID = 'main-empty-container';
+    const MAIN_EMPTY_DESCRIPTION_TEST_ID = 'main-empty-description';
 
     render(<MainEmpty location={expectedLocation} />);
-    const mainEmptyContainer = screen.getByTestId(mainEmptyContainerTestId);
-    const mainEmptyDescription = screen.getByTestId(mainEmptyDescriptionTestId);
+    const mainEmptyContainer = screen.getByTestId(MAIN_EMPTY_CONTAINER_TEST_ID);
+    const mainEmptyDescription = screen.getByTestId(MAIN_EMPTY_DESCRIPTION_TEST_ID);
 
     expect(mainEmptyContainer).toBeInTheDocument();
     expect(mainEmptyDescription).toBeInTheDocument();

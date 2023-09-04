@@ -1,5 +1,5 @@
 import { OffersNearbyStateType, offersNearby, loadOffersNearby } from './offers-nearby-slice';
-import { makeFakeFavoritesOffers } from '../../utils/mocks';
+import { makeFakeOffersList } from '../../utils/mocks';
 import { RequestStatus } from '../../const';
 import { loadOffersNearbyAction, addBookmarkAction } from '../api-actions';
 import { getFavoriteStatusCode } from '../../helper';
@@ -35,7 +35,7 @@ describe('Offers Nearby Slice', () => {
       nearbyLoadingStatus: RequestStatus.Idle,
       hasNearbyError: false
     };
-    const mockOffersNearby = makeFakeFavoritesOffers();
+    const mockOffersNearby = makeFakeOffersList();
     const expectedState: OffersNearbyStateType = {
       offersNearby: mockOffersNearby,
       nearbyLoadingStatus: RequestStatus.Idle,
@@ -91,7 +91,7 @@ describe('Offers Nearby Slice', () => {
   });
 
   it('should  set offer from "offersNearby" if its id equals to favorite offer id to opposite is favorite status with "addBookmarkAction.fulfilled" action', () => {
-    const initialMockOffers = makeFakeFavoritesOffers();
+    const initialMockOffers = makeFakeOffersList();
     const initialState: OffersNearbyStateType = {
       offersNearby: initialMockOffers,
       nearbyLoadingStatus: RequestStatus.Idle,

@@ -1,5 +1,5 @@
 import { FormValidation, IconDesign, RATING_WIDTH_UNIT, RequestStatus, SortOrders, PASSWORD_REGEX, AppPath, NULLED_RATING } from './const';
-import { ActiveSortOrderType, AppPathType, OfferType, OffersType, RequestStatusType } from './types/types';
+import { ActiveSortOrderType, AppPathType, GroupByLocationType, OfferType, OffersType, RequestStatusType, LocationReducerType } from './types/types';
 
 export const getRatingWidth = (rating: number | null | undefined): string => {
   const correctRating = rating ?? 0;
@@ -64,3 +64,10 @@ export const isFavoritesPage = (pathName: AppPathType) => pathName === AppPath.F
 export const getUpperCase = (word: string) => `${word[0].toUpperCase()}${(word.slice(1))}`;
 
 export const getPlural = (noun: string, count: number) => count > 1 ? `${noun}s` : noun;
+
+export const groupByCity = (offersList: OffersType): GroupByLocationType => Object.entries(offersList.reduce<LocationReducerType>((location, offer) => {
+  const { name } = offer.city;
+  location[name] = location[name] ?? [];
+  location[name].push(offer);
+  return location;
+}, {}));

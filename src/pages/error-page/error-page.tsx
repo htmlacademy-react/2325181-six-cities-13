@@ -5,7 +5,7 @@ function ErrorPage(): JSX.Element {
   const dispatch = useAppDispatch();
   return (
     <>
-      <p className="error__text">Не удалось загрузить предложения. Попробуйте еще раз.</p>
+      <p className="error__text" data-testid='Error Page Element'>Не удалось загрузить предложения. Попробуйте еще раз.</p>
       <button
         onClick={() => {
           dispatch(loadOffersAction());

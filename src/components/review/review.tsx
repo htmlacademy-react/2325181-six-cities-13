@@ -34,7 +34,7 @@ export default function Review ():JSX.Element {
   return (
     <form className="reviews__form form" onSubmit={handleFormSubmit} action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating">
+      <div className="reviews__rating-form form__rating" data-testid='ratingElement'>
         {StarRatings.map(
           ({star, description}) => {
             const inputId = `${star}-stars`;
@@ -63,13 +63,15 @@ export default function Review ():JSX.Element {
       </div>
       <textarea
         className="reviews__textarea form__textarea"
-        id="review" value={comment}
+        id="review"
+        value={comment}
         onChange={(evt) => dispatch(setReviewComment(evt.target.value))}
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         minLength={FormValidation.MinLength}
         maxLength={FormValidation.MaxLength}
         disabled={isBlockedForm}
+        data-testid='commentElement'
       >
       </textarea>
       <div className="reviews__button-wrapper">

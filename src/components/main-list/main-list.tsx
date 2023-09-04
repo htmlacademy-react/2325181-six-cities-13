@@ -17,7 +17,7 @@ export default function MainList({offers}: MainListProps): JSX.Element {
   const sortedOffers: OffersType = sortOffers(offers, activeOrder);
   return (
     <>
-      <section className="cities__places places">
+      <section className="cities__places places" data-testid='main-list-container'>
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{sortedOffers.length} {getPlural('place', sortedOffers.length)} to stay in {activeLocation}</b>
         <Sort />

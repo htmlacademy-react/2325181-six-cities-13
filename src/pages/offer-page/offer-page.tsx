@@ -8,7 +8,7 @@ import ReviewList from '../../components/review-list/review-list';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import MapOffer from '../../components/map-offer/map-offer';
-import { NearbyList } from '../../components/nearby-list/nearby-list';
+import NearbyList from '../../components/nearby-list/nearby-list';
 import FavoritesButton from '../../components/favorites-button/favorites-button';
 import { loadOfferDetailsAction, loadOffersNearbyAction, loadReviewsListAction } from '../../store/api-actions';
 import { resetReviewData } from '../../store/comment/comment-slice';
@@ -45,7 +45,7 @@ export default function OfferPage(): JSX.Element {
       {isPending(offerLoadingStatus) && <LoadingPage />}
       {isRejected(offerLoadingStatus) && <NotFoundPage />}
       {isFulfilled(offerLoadingStatus) && activeOffer !== null &&
-      <div className="page">
+      <div className="page" data-testid="offer page element">
         <Helmet>
           <title>6 cities. {activeOffer.title}</title>
         </Helmet>

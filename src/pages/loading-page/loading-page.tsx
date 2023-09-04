@@ -4,7 +4,7 @@ import { CONTAINER_STYLE, SPINNER_CSS_OVERRIDE, SPINNER_SIZE, SPINNER_COLOR, LOA
 export default function LoadingPage(): JSX.Element {
 
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main" data-testid='loading-page-element'>
       <main>
         <div style={CONTAINER_STYLE}>
           <CircleLoader

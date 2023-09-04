@@ -36,6 +36,7 @@ export default function FavoritesButton({offerId, isFavorite, isOfferButton}: Fa
       }, 'button')}
       onClick={handleBookmarkClick}
       type="button"
+      data-testid='bookmark-container'
     >
       <svg
         className={classNames({

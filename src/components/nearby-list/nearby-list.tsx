@@ -4,11 +4,11 @@ import { useAppSelector } from '../../hooks/hooks';
 import { PlaceCardDesign, AppPath } from '../../const';
 
 
-export function NearbyList(): JSX.Element {
+export default function NearbyList(): JSX.Element {
   const designProps = PlaceCardDesign[AppPath.Offer];
   const offers = useAppSelector(selectOffersNearby);
   return (
-    <section className="near-places places">
+    <section className="near-places places" data-testid='nearby-list-container'>
       <h2 className="near-places__title">{offers.length === 0 && 'No '}Other places in the neighbourhood</h2>
       <div className="near-places__list places__list">
         {offers.map(

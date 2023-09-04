@@ -114,3 +114,5 @@ export type LoginType = {
   };
 
 export type AppThunkDispatchType = ThunkDispatch<StateType, ReturnType<typeof createApi>, Action>;
+
+export type GroupByLocationType = [string, OffersType][];
