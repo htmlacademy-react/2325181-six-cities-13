@@ -15,10 +15,12 @@ export default function Layout ():JSX.Element {
   const favoritesCount = useAppSelector(selectFavorites) ?? [];
   const isFavoritesEmpty = Boolean(!favoritesCount?.length) && isFavorites;
   return (
-    <div className={classNames('page', {
-      'page--gray page--login': isLogin,
-      'page--gray page--main': isMain,
-      'page--favorites-empty': isFavoritesEmpty})}
+    <div
+      className={classNames('page', {
+        'page--gray page--login': isLogin,
+        'page--gray page--main': isMain,
+        'page--favorites-empty': isFavoritesEmpty})}
+      data-testid='layout-container'
     >
       <header className="header">
         <div className="container">

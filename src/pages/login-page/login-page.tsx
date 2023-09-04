@@ -23,7 +23,7 @@ export default function LoginPage(): JSX.Element {
         </Helmet>
         <main className="page__main page__main--login">
           <div className="page__login-container container">
-            <section className="login">
+            <section className="login" data-testid='login-page-container'>
               <h1 className="login__title">Sign in</h1>
               <UserAuthentication />
             </section>

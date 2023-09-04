@@ -23,7 +23,10 @@ export default function Sort(): JSX.Element {
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={classNames('places__options', 'places__options--custom', {'places__options--opened': isOpened, 'places__options--closed': !isOpened})}>
+      <ul
+        className={classNames('places__options', 'places__options--custom', {'places__options--opened': isOpened, 'places__options--closed': !isOpened})}
+        data-testid='sortElement'
+      >
         {Object.entries(SortOrders).map(([, {order, title}]) =>
           <li key={order} className={classNames('places__option', {'places__option--active': activeOrder === order})} onClick={() => handleSortTypeClick(order)} tabIndex={0}>{title}</li>
         )}

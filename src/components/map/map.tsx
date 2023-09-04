@@ -60,6 +60,7 @@ export function Map({offers, classAdded, mapStyle}: MapProps): JSX.Element {
       className={classAdded}
       ref={mapRef}
       style={mapStyle}
+      data-testid='map-element'
     />
   );
 }

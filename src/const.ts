@@ -153,9 +153,8 @@ export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyri
 export const MAX_REVIEWS_QUANTITY = 10;
 
 export const MapDesign = {
-  [AppPath.Main]:{
+  [AppPath.Main]: {
     classAdded: 'cities__map map',
-
   },
   [AppPath.Offer]: {
     classAdded: 'offer__map map',

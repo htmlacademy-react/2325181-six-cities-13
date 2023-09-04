@@ -39,7 +39,10 @@ export default function MainPage(): JSX.Element {
           <Helmet>
             <title>6 cities. Rental offers in European capitals</title>
           </Helmet>
-          <main className={classNames('page__main page__main--index', {'page__main--index-empty': isEmptyList})}>
+          <main
+            className={classNames('page__main page__main--index', {'page__main--index-empty': isEmptyList})}
+            data-testid='main-page-element'
+          >
             <h1 className="visually-hidden">Cities</h1>
             <div className="tabs">
               <section className="locations container">

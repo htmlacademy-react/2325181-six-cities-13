@@ -8,7 +8,7 @@ export default function SignIn(): JSX.Element {
   const isAuthorised = useAppSelector(selectAuthorisationStatus);
   return (
     <nav className="header__nav">
-      <ul className="header__nav-list">
+      <ul className="header__nav-list" data-testid='SignInElement'>
         {isAuthorised === AuthorisationStatus.Auth
           ? <UserAccount />
           : <UserLogin />}

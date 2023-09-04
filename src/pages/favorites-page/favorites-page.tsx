@@ -7,9 +7,8 @@ import Logo from '../../components/logo/logo';
 import LoadingPage from '../loading-page/loading-page';
 import { selectFavorites, selectFavoritesLoadingStatus, } from '../../store/favorties/favorites-selectors';
 import { loadFavoritesAction } from '../../store/api-actions';
-import { LocationReducerType } from '../../types/types';
 import ErrorPage from '../error-page/error-page';
-import { isPending, isFulfilled, isRejected } from '../../helper';
+import { isPending, isFulfilled, isRejected, groupByCity } from '../../helper';
 
 export default function FavoritesPage (): JSX.Element {
   const dispatch = useAppDispatch();
@@ -25,12 +24,7 @@ export default function FavoritesPage (): JSX.Element {
   const favoritesLoadingStatus = useAppSelector(selectFavoritesLoadingStatus);
   const favoriteOffers = useAppSelector(selectFavorites);
   const isEmpty = favoriteOffers.length === 0;
-  const groupByLocation = Object.entries(favoriteOffers.reduce<LocationReducerType>((location, offer) => {
-    const { name } = offer.city;
-    location[name] = location[name] ?? [];
-    location[name].push(offer);
-    return location;
-  }, {}));
+  const groupByLocation = groupByCity(favoriteOffers);
   return (
     <>
       {isPending(favoritesLoadingStatus) && <LoadingPage />}
@@ -40,8 +34,10 @@ export default function FavoritesPage (): JSX.Element {
         <Helmet>
           <title>6 cities. Favorite offers</title>
         </Helmet>
-        <main className={classNames('page__main page__main--favorites', {
-          'page__main--favorites-empty': isEmpty})}
+        <main
+          className={classNames('page__main page__main--favorites', {
+            'page__main--favorites-empty': isEmpty})}
+          data-testid='favorites-page-element'
         >
           <div className="page__favorites-container container">
             {favoriteOffers.length

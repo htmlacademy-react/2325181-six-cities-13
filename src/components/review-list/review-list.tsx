@@ -14,7 +14,7 @@ export default function ReviewList (): JSX.Element {
       {isPending(reviewLoadingStatus) && <div><span>Reviews loading ...</span></div>}
       {isRejected(reviewLoadingStatus) && <div><span>Failed to load reviews. Try again?</span></div>}
       {isFulfilled(reviewLoadingStatus) && reviewsSortedSliced.length > 0 &&
-      <ul className="reviews__list">
+      <ul className="reviews__list" data-testid='review-list-container'>
         {reviewsSortedSliced.map((review) => (
           <li className="reviews__item" key={review.date}>
             <div className="reviews__user user">

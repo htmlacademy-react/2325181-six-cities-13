@@ -1,13 +1,15 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
+import { generatePath } from 'react-router-dom';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
 import { createApi } from '../services/api';
 import { StateType, AppThunkDispatchType } from '../types/types';
-import { APIPath, AuthorisationStatus } from '../const';
+import { APIPath } from '../const';
 import { extractActionsTypes } from '../utils/mocks';
-import { clearErrorAction, loadFavoritesAction, loadOfferDetailsAction, loadOffersAction, updateAuthStatusAction, loadOffersNearbyAction, loadReviewsListAction, loginUserAction } from './api-actions';
+import { clearErrorAction, loadFavoritesAction, loadOfferDetailsAction, loadOffersAction, updateAuthStatusAction, loadOffersNearbyAction, loadReviewsListAction, loginUserAction, postReviewAction, logoutUserAction } from './api-actions';
 import { updateAuthorisationStatus } from './user/user-slice';
+import { addComment } from './reviews/reviews-slice';
 
 
 describe('Async actions', () => {
@@ -18,7 +20,7 @@ describe('Async actions', () => {
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {
-    store = mockStoreCreator({user: {authorisationStatus: AuthorisationStatus.Unknown, email: ''}});
+    store = mockStoreCreator({});
   });
 
   it('should dispatch "updateAuthStatusAction.pending.type" and "updateAuthorisationStatus.type" and "updateAuthorisationStatus.type" and "clearErrorAction.pending.type" and "clearErrorAction.fulfilled.type" and "updateAuthStatusAction.fulfilled.type" with thunk "updateAuthStatusAction" when server response 200', async () => {
@@ -213,5 +215,62 @@ describe('Async actions', () => {
       loginUserAction.fulfilled.type
     ]);
   });
+
+  it('should dispatch "postReviewAction.pending.type" and  "clearErrorAction.pending.type" and  "clearErrorAction.fulfilled.type" and "postReviewAction.rejected.type" with thunk "postReviewAction" when server response 200', async () => {
+    const mockOfferId = '1';
+    const mockComment = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ';
+    const mockRating = 4;
+    mockAxiosAdapter.onPost(generatePath(APIPath.Reviews, {offerId: mockOfferId})).reply(200);
+    await store.dispatch(postReviewAction({id: mockOfferId, comment: mockComment, rating: mockRating}));
+    const actions = extractActionsTypes(store.getActions());
+
+    expect(actions).toEqual([
+      postReviewAction.pending.type,
+      addComment.type,
+      postReviewAction.fulfilled.type,
+    ]);
+  });
+
+  it('should dispatch "postReviewAction.pending.type" and  "clearErrorAction.pending.type" and  "clearErrorAction.fulfilled.type" and "postReviewAction.rejected.type" with thunk "postReviewAction" when server response 400', async () => {
+    const mockOfferId = '1';
+    const mockComment = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ';
+    const mockRating = 4;
+    mockAxiosAdapter.onPost(generatePath(APIPath.Reviews, {offerId: mockOfferId})).reply(400);
+    await store.dispatch(postReviewAction({id: mockOfferId, comment: mockComment, rating: mockRating}));
+    const actions = extractActionsTypes(store.getActions());
+
+    expect(actions).toEqual([
+      postReviewAction.pending.type,
+      clearErrorAction.pending.type,
+      clearErrorAction.fulfilled.type,
+      postReviewAction.rejected.type,
+    ]);
+  });
+
+  it('should dispatch "logoutUserAction.pending.type" and  "clearErrorAction.pending.type" and "clearErrorAction.fulfilled.type" and "logoutUserAction.fulfilled.type", with thunk "logoutUserAction" when server response 200', async () => {
+    mockAxiosAdapter.onDelete(APIPath.Logout).reply(200);
+    await store.dispatch(logoutUserAction());
+    const actions = extractActionsTypes(store.getActions());
+
+    expect(actions).toEqual([
+      logoutUserAction.pending.type,
+      updateAuthorisationStatus.type,
+      logoutUserAction.fulfilled.type,
+    ]);
+  });
+
+  it('should dispatch "logoutUserAction.pending.type" and  "clearErrorAction.pending.type" and "clearErrorAction.fulfilled.type" and "logoutUserAction.fulfilled.type", with thunk "logoutUserAction" when server response 400', async () => {
+    mockAxiosAdapter.onDelete(APIPath.Logout).reply(400);
+    await store.dispatch(logoutUserAction());
+    const actions = extractActionsTypes(store.getActions());
+
+    expect(actions).toEqual([
+      logoutUserAction.pending.type,
+      clearErrorAction.pending.type,
+      clearErrorAction.fulfilled.type,
+      logoutUserAction.fulfilled.type,
+    ]);
+  });
+
 });
 

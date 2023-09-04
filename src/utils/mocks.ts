@@ -1,9 +1,9 @@
-import { OffersType, ReviewsType } from '../types/types';
-import { LodgingKind, Location, LocationsCoordinates } from '../const';
+import { OffersType, ReviewsType, StateType } from '../types/types';
+import { LodgingKind, Location, LocationsCoordinates, NameSpace, RequestStatus, AuthorisationStatus, SortOrders } from '../const';
 import { Action } from '@reduxjs/toolkit';
 
 
-export const makeFakeFavoritesOffers = (): OffersType => [
+export const makeFakeOffersList = (): OffersType => [
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Beautiful & luxurious studio at great location',
@@ -47,7 +47,7 @@ export const makeFakeFavoritesOffers = (): OffersType => [
     price: 197,
     previewImage: 'https://13.design.pages.academy/static/hotel/10.jpg',
     city: {
-      name: Location.Amsterdam,
+      name: Location.Paris,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13
@@ -85,7 +85,7 @@ export const makeFakeFavoritesOffers = (): OffersType => [
     price: 174,
     previewImage: 'https://13.design.pages.academy/static/hotel/18.jpg',
     city: {
-      name: Location.Amsterdam,
+      name: Location.Brussels,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13
@@ -123,7 +123,7 @@ export const makeFakeFavoritesOffers = (): OffersType => [
     price: 224,
     previewImage: 'https://13.design.pages.academy/static/hotel/3.jpg',
     city: {
-      name: Location.Amsterdam,
+      name: Location.Hamburg,
       location: {
         ...LocationsCoordinates.Amsterdam,
         zoom: 13
@@ -226,3 +226,48 @@ export const makeFakeReviewsList = (): ReviewsType => [
 ];
 
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({type}) => type);
+
+export const makeFakeStore = (): StateType => ({
+  [NameSpace.CardList]: {
+    location: Location.Paris,
+    activeSortOrder: SortOrders.Popular.order,
+  },
+  [NameSpace.Error]: {
+    error: null,
+  },
+  [NameSpace.OfferDetails]: {
+    offerId: '',
+    offerDetails: null,
+    offerLoadingStatus: RequestStatus.Idle,
+    hasOfferDetailsError: false
+  },
+  [NameSpace.Offers]: {
+    offers: [],
+    offersLoadingStatus: RequestStatus.Idle,
+    hasDataError: false
+  },
+  [NameSpace.User]: {
+    authorisationStatus: AuthorisationStatus.Unknown,
+    email: ''
+  },
+  [NameSpace.Review]: {
+    commentPostingStatus: RequestStatus.Idle,
+    rating: 0,
+    comment: ''
+  },
+  [NameSpace.OffersNearby]: {
+    offersNearby: [],
+    nearbyLoadingStatus: RequestStatus.Idle,
+    hasNearbyError: false
+  },
+  [NameSpace.Reviews]: {
+    reviews: [],
+    reviewsLoadingStatus: RequestStatus.Idle,
+    hasReviewsError: false
+  },
+  [NameSpace.Favorites]: {
+    favorites: [],
+    favoritesLoadingStatus: RequestStatus.Idle,
+    hasFavoritesError: false
+  },
+});

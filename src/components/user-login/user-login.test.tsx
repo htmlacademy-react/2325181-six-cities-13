@@ -4,10 +4,10 @@ import { withHistory } from '../../utils/mock-component';
 
 describe('Component: User Login',() => {
   it('should render correctly', () => {
-    const expectedText = 'Sign in';
+    const EXPECTED_TEXT = 'Sign in';
     const preparedComponent = withHistory(<UserLogin />);
     render(preparedComponent);
-    expect(screen.getByText(expectedText)).toBeInTheDocument();
+    expect(screen.getByText(EXPECTED_TEXT)).toBeInTheDocument();
   });
 });
 

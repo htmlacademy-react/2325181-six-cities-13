@@ -1,7 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -14,36 +12,34 @@ import { AppPath } from '../../const';
 export default function App (): JSX.Element {
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route
-              index
-              element={<MainPage />}
-            />
-            <Route
-              path={AppPath.Favorites}
-              element={
-                <PrivateRoute>
-                  <FavoritesPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={AppPath.Login}
-              element={<LoginPage />}
-            />
-            <Route
-              path={AppPath.Offer}
-              element={<OfferPage />}
-            />
-            <Route
-              path={AppPath.NotFound}
-              element={<NotFoundPage />}
-            />
-          </Route>
-        </Routes>
-      </HistoryRouter>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route
+            index
+            element={<MainPage />}
+          />
+          <Route
+            path={AppPath.Favorites}
+            element={
+              <PrivateRoute>
+                <FavoritesPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppPath.Login}
+            element={<LoginPage />}
+          />
+          <Route
+            path={AppPath.Offer}
+            element={<OfferPage />}
+          />
+          <Route
+            path={AppPath.NotFound}
+            element={<NotFoundPage />}
+          />
+        </Route>
+      </Routes>
     </HelmetProvider>
   );
 }

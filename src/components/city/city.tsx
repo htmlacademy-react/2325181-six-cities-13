@@ -15,13 +15,18 @@ export default function City(): JSX.Element {
     }
   };
   return (
-    <ul className="locations__list tabs__list">
+    <ul className="locations__list tabs__list" data-testid='locations-container'>
       {Object.values(Location).map((location: LocationType) => (
-        <li className="locations__item" key={location}>
+        <li
+          className="locations__item"
+          key={location}
+
+        >
           <Link
             className={classNames('locations__item-link tabs__item', {'tabs__item--active': location === activeLocation})}
             onClick={() => handleLocationChange(location)}
             to={AppPath.Main}
+            data-testid={location}
           >
             <span>{location}</span>
           </Link>

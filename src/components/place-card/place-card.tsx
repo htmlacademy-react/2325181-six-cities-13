@@ -46,7 +46,7 @@ export default function PlaceCard ({offer, cardClass, cardInfoClass, cardHeight,
           />
         </Link>
       </div>
-      <div className={`${cardInfoClass} place-card__info`}>
+      <div className={`${cardInfoClass} place-card__info`} data-testid="place-card-container">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>

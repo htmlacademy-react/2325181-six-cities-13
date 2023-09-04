@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import HistoryRouter from './components/history-router/history-router';
+import browserHistory from './browser-history';
 import App from './components/app/app';
 import ErrorMessage from './components/error-message/error-message';
 import { store } from './store/store';
@@ -15,8 +17,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ErrorMessage />
-      <App />
+      <HistoryRouter history={browserHistory}>
+        <ErrorMessage />
+        <App />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );

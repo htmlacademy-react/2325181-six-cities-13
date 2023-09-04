@@ -1,7 +1,7 @@
 import { FavoritesStateType, favorites } from './favorites-slice';
 import { RequestStatus } from '../../const';
 import { addBookmarkAction, loadFavoritesAction, logoutUserAction } from '../api-actions';
-import { makeFakeFavoritesOffers } from '../../utils/mocks';
+import { makeFakeOffersList } from '../../utils/mocks';
 import { getFavoriteStatusCode } from '../../helper';
 
 describe('Favorites Slice', () => {
@@ -41,7 +41,7 @@ describe('Favorites Slice', () => {
   });
 
   it('should set "favoritesLoadingStatus" to "RequestStatus.Fulfilled", set "favorites" to array with favorite offers with "loadFavoritesAction.fulfilled"', () => {
-    const mockFavoritesOffers = makeFakeFavoritesOffers();
+    const mockFavoritesOffers = makeFakeOffersList();
     const expectedState: FavoritesStateType = {
       favorites: mockFavoritesOffers,
       favoritesLoadingStatus: RequestStatus.Fulfilled,
@@ -64,7 +64,7 @@ describe('Favorites Slice', () => {
   });
 
   it('should set "favorites" to empty array with "logoutUserAction.fulfilled"', () => {
-    const mockFavoritesOffers = makeFakeFavoritesOffers();
+    const mockFavoritesOffers = makeFakeOffersList();
     const initialState: FavoritesStateType = {
       favorites: mockFavoritesOffers,
       favoritesLoadingStatus: RequestStatus.Idle,
@@ -80,7 +80,7 @@ describe('Favorites Slice', () => {
   });
 
   it('should add favorite offer to "favorites" if favorite offer is favorite with "addBookmarkAction.fulfilled"', () => {
-    const initialFavorites = makeFakeFavoritesOffers();
+    const initialFavorites = makeFakeOffersList();
     const favoriteOffer = structuredClone(initialFavorites[0]);
     const expectedFavorites = [...initialFavorites, favoriteOffer];
     const initialState: FavoritesStateType = {
@@ -98,7 +98,7 @@ describe('Favorites Slice', () => {
   });
 
   it('should remove favorite offer from "favorites" if favorite offer is not favorite with "addBookmarkAction.fulfilled"', () => {
-    const initialFavorites = makeFakeFavoritesOffers();
+    const initialFavorites = makeFakeOffersList();
     const initialState: FavoritesStateType = {
       favorites: initialFavorites,
       favoritesLoadingStatus: RequestStatus.Idle,

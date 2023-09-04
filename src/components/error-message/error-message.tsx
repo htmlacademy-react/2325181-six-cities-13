@@ -6,7 +6,7 @@ import './error-message.css';
 export default function ErrorMessage(): JSX.Element | null {
   const error = useAppSelector(selectError);
   return (error)
-    ? <div className='error-message' data-test-id="error-message-text">{error}</div>
+    ? <div className='error-message' data-testid='error-message-text'>{error}</div>
     : null;
 
 }

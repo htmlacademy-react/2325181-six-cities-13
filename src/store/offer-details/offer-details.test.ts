@@ -1,6 +1,6 @@
 import { OfferDetailsStateType, loadOfferDetails, offerDetails, setOfferId } from './offer-details-slice';
 import { RequestStatus } from '../../const';
-import { makeFakeFavoritesOffers } from '../../utils/mocks';
+import { makeFakeOffersList } from '../../utils/mocks';
 import { addBookmarkAction, loadOfferDetailsAction } from '../api-actions';
 import { getFavoriteStatusCode } from '../../helper';
 
@@ -57,7 +57,7 @@ describe('Offer Details Slice', () => {
       offerLoadingStatus: RequestStatus.Idle,
       hasOfferDetailsError: false
     };
-    const mockOffer = makeFakeFavoritesOffers()[0];
+    const mockOffer = makeFakeOffersList()[0];
     const expectedState: OfferDetailsStateType = {
       offerId: '',
       offerDetails: mockOffer,
@@ -119,7 +119,7 @@ describe('Offer Details Slice', () => {
     expect(result).toEqual(expectedState);
   });
   it('should set "offerDetails.isFavorite" to the value of "favoriteOffer.isFavorite" if "offerDetails" is not null and if "offerDetails.id" equals to "favoriteOffer.id" with "addBookmarkAction.fulfilled"', () => {
-    const mockOffer = structuredClone(makeFakeFavoritesOffers()[0]);
+    const mockOffer = structuredClone(makeFakeOffersList()[0]);
     const mockFavoriteOffer = structuredClone(mockOffer);
     mockFavoriteOffer.isFavorite = !mockFavoriteOffer.isFavorite;
 
